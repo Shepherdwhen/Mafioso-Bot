@@ -1,0 +1,14 @@
+{
+  "author": [
+    "Ethan."
+  ],
+  "description": "Longer description of what the cog does",
+  "hidden": false,
+  "install_msg": "Thank you for installing Mafioso. Get started with `[p]load mafioso`, then `[p]help Mafioso`",
+  "short": "Short description",
+  "end_user_data_statement": "This cog does not store any End User Data",
+  "tags": [
+    "mafia",
+    "werewolf"
+  ]
+}
