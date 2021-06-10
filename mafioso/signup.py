@@ -1,4 +1,4 @@
- import logging
+import logging
 
 import discord
 from redbot.core import Config, commands
@@ -10,6 +10,7 @@ log = logging.getLogger("red.Mafioso-Bot.mafioso")
 class Mafioso(commands.Cog):
     """
     Cog Description
+
     Less important information about the cog
     """
 
