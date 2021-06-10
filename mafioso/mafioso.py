@@ -46,5 +46,5 @@ class Mafioso(commands.Cog):
         await ctx.send("Hello world")
 
     @commands.command()
-    async def signup(self, ctx: commands.Context, emoji: commands.RealEmojiConverter):
+    async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
         await ctx.send(f"Successfully Signed Up with {emoji}")
