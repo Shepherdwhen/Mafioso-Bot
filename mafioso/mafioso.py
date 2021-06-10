@@ -57,6 +57,7 @@ class Mafioso(commands.Cog):
         
     @commands.command()
     async def signedup(self, ctx: commands.Context):
-        to_print = '\n'.join(f'{member.mention}  f"({member.display_name})"  {emoji}' for member, emoji in self.current_game)
-        await ctx.send(to_print, allowed_mentions=discord.AllowedMentions(users=False))
+        to_print = '\n'.join(f'{member.mention}  f'({member.display_name})'  {emoji}' for member, emoji in self.current_game)
+        message = await ctx.send('.')
+        await message.edit(content=to_send)
         #lists all signed up players in current_game list
