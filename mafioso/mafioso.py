@@ -6,7 +6,7 @@ from redbot.core.bot import Red
 
 log = logging.getLogger("red.Mafioso-Bot.mafioso")
 
-class RealEmojiConverter(command.EmojiConverter):
+class RealEmojiConverter(commands.EmojiConverter):
     async def convert(self, ctx: commands.Context, argument: str) -> Union[discord.Emoji, str]:
         try:
             emoji = await super().convert(ctx, argument)
