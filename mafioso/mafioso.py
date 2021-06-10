@@ -55,5 +55,5 @@ class Mafioso(commands.Cog):
         
     @commands.command() #here is the problem
     async def signedup(self, ctx: commands.Context):
-        await ctx.send(current_game)
+        await ctx.send(self.current_game)
         
