@@ -27,7 +27,7 @@ class Mafioso(commands.Cog):
         """Nothing to delete"""
         return
 
-    @commands.command()
+    @commands.command() #here is the problem
     async def mafioso(self, ctx: commands.Context):
         await ctx.send("Hello world")
         
