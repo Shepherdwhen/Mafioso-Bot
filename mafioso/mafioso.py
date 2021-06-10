@@ -3,6 +3,7 @@ import logging
 import discord
 from redbot.core import Config, commands
 from redbot.core.bot import Red
+from redbot.core.commands import BadArgument
 from typing import Union
 
 log = logging.getLogger("red.Mafioso-Bot.mafioso")
