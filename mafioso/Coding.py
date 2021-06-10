@@ -32,6 +32,7 @@ class Mafioso(commands.Cog):
 
     def __init__(self, bot: Red):
         super().__init__()
+        self.current_game = []
         self.bot = bot
         self.config = Config.get_conf(self, identifier=0, force_registration=True)
 
@@ -49,4 +50,10 @@ class Mafioso(commands.Cog):
 
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
+        self.current_game.append( (ctx.author, emoji) )
         await ctx.send(f"Successfully Signed Up with {emoji}")
+        
+    @commands.command() #here is the problem
+    async def signedup(self, ctx: commands.Context):
+        await ctx.send(current_game)
+        
