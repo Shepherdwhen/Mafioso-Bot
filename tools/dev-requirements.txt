@@ -1,3 +1,0 @@
-packaging
-tox
--e .[dev]
