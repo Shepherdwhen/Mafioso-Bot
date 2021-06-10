@@ -47,13 +47,16 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def mafioso(self, ctx: commands.Context):
         await ctx.send("Hello world")
+        #hello world command to test bot
 
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
         self.current_game.append( (ctx.author, emoji) )
         await ctx.send(f"Successfully Signed Up with {emoji}")
+        #signup command takes name and emoji and stores it in current_game list
         
     @commands.command()
     async def signedup(self, ctx: commands.Context):
-        await ctx.send(self.current_game)
-        
+        to_print = '/n'.join(f'{member.name}: {emoji}' for member, emoji in self.current_game)
+        await ctx.send(to_print)
+        #lists all signed up players in current_game list
