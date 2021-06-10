@@ -57,6 +57,6 @@ class Mafioso(commands.Cog):
         
     @commands.command()
     async def signedup(self, ctx: commands.Context):
-        to_print = '\n'.join(f'{member.mention}: {member.display_name}: {emoji}' for member, emoji in self.current_game)
+        to_print = '\n'.join(f'{member.mention}  {"("member.display_name")"}  {emoji}' for member, emoji in self.current_game)
         await ctx.send(to_print)
         #lists all signed up players in current_game list
