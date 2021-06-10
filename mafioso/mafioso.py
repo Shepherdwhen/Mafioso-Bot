@@ -19,7 +19,7 @@ class RealEmojiConverter(command.EmojiConverter):
                 emoji = argument
         return emoji
 
-#This part was made by <Name of author>
+#This part was made by phenom4n4n
 
 class Mafioso(commands.Cog):
     """
