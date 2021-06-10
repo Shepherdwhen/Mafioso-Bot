@@ -50,4 +50,10 @@ class Mafioso(commands.Cog):
 
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
+        self.current_game.append( (ctx.author, emoji) )
         await ctx.send(f"Successfully Signed Up with {emoji}")
+        
+    @commands.command() #here is the problem
+    async def signedup(self, ctx: commands.Context):
+        await ctx.send(current_game)
+        
