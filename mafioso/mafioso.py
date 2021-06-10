@@ -31,6 +31,6 @@ class Mafioso(commands.Cog):
     async def mafioso(self, ctx: commands.Context):
         await ctx.send("Hello world")
         
-     @commands.command()
+    @commands.command()
     async def signup(self, ctx: commands.Context):
         await ctx.send("Successfully Signed Up")
