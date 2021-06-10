@@ -44,7 +44,7 @@ class Mafioso(commands.Cog):
         """Nothing to delete"""
         return
 
-    @commands.command() #here is the problem
+    @commands.command()
     async def mafioso(self, ctx: commands.Context):
         await ctx.send("Hello world")
 
@@ -53,7 +53,7 @@ class Mafioso(commands.Cog):
         self.current_game.append( (ctx.author, emoji) )
         await ctx.send(f"Successfully Signed Up with {emoji}")
         
-    @commands.command() #here is the problem
+    @commands.command()
     async def signedup(self, ctx: commands.Context):
         await ctx.send(self.current_game)
         
