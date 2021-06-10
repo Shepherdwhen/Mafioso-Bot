@@ -6,6 +6,20 @@ from redbot.core.bot import Red
 
 log = logging.getLogger("red.Mafioso-Bot.mafioso")
 
+class RealEmojiConverter(command.EmojiConverter):
+    async def convert(self, ctx: commands.Context, argument: str) -> Union[discord.Emoji, str]:
+        try:
+            emoji = await super().convert(ctx, argument)
+        except BadArgument:
+            try:
+                await ctx.message.add_reaction(argument)
+            except discord.HTTPException:
+                raise commands.EmojiNotFound(argument)
+            else:
+                emoji = argument
+        return emoji
+
+#This part was made by phenom4n4n
 
 class Mafioso(commands.Cog):
     """
@@ -32,5 +46,5 @@ class Mafioso(commands.Cog):
         await ctx.send("Hello world")
 
     @commands.command()
-    async def signup(self, ctx: commands.Context, emoji: commands.EmojiConverter):
+    async def signup(self, ctx: commands.Context, emoji: commands.RealEmojiConverter):
         await ctx.send(f"Successfully Signed Up with {emoji}")
