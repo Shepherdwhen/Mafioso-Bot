@@ -57,9 +57,9 @@ class Mafioso(commands.Cog):
         await ctx.send(f"Successfully Signed Up with {emoji}")
         #signup command takes name and emoji and stores it in players list
         
-    @commands.command()
+    @commands.command() #here is the problem
     async def sl(self, ctx: commands.Context):
-        to_print = (f'**Signed up** | {x}) \n'.join(f'{member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players)
+        to_print = '/n'.join(f'{member.name}: {emoji}' for member, emoji in self.Players)
         message = await ctx.send('.')
         await message.edit(content=to_print)
         #lists all signed up players in players list
