@@ -85,8 +85,8 @@ class Mafioso(commands.Cog):
         for member, emoji in self.players.values():
             role = ctx.guild.get_role(self.signed_up_role)
             await member.remove_roles(role, reason="Resetting")
-            await ctx.send(f"siging out {member.display_name}")
-        await ctx.send("Signed out all players")
+            await ctx.send(f"Signing out {member.display_name}")
+        await ctx.send("Signed out all players successfully")
     #command to reset the list of signed up players
 
     @commands.command()
