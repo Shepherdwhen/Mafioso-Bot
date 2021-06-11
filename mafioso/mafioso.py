@@ -40,10 +40,17 @@ class Mafioso(commands.Cog):
         default_guild = {}
 
         self.config.register_guild(**default_guild)
+    
 
     async def red_delete_data_for_user(self, **kwargs):
         """Nothing to delete"""
         return
+
+    def check_for_duplicates(self, new_member, new_emote):
+        for member, emote in self.players:
+            if member == new_member or emote == new_emote:
+                return False  # Member/emote already in use
+        return True  # good to go
 
     @commands.command()
     async def mafioso(self, ctx: commands.Context):
@@ -52,6 +59,9 @@ class Mafioso(commands.Cog):
 
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
+        if not self.check_for_duplicates(ctx.author, emoji):
+            await ctx.send("Member or emote invalid")
+            return
         self.players.append( (ctx.author, emoji) )
         self.nosu = (self.nosu+1)
         await ctx.send(f"Successfully Signed Up with {emoji}")
@@ -60,7 +70,7 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def sl(self, ctx: commands.Context):
         
-        to_print = f'**Signed up** | {self.nosu}\n'
+        to_print = f'**Signed up** | {self.nosu}\n' #title for the list
 
         to_print += '\n'.join(f'{member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players)
         message = await ctx.send('.')
