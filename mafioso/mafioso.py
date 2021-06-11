@@ -73,7 +73,7 @@ class Mafioso(commands.Cog):
         self.players.remove( (ctx.author, emoji) )
         self.nosu = (self.nosu-1)
         await ctx.send(f"Successfully Signed Out")
-        #hello world command to test bot
+        #Signout command
         
     @commands.command()
     async def sl(self, ctx: commands.Context):
