@@ -32,7 +32,7 @@ class Mafioso(commands.Cog):
 
     def __init__(self, bot: Red):
         super().__init__()
-        self.players = []
+        self.players = {}
         self.nosu = (0)
         self.bot = bot
         self.config = Config.get_conf(self, identifier=0, force_registration=True)
@@ -40,7 +40,7 @@ class Mafioso(commands.Cog):
         default_guild = {}
 
         self.config.register_guild(**default_guild)
-    
+
 
     async def red_delete_data_for_user(self, **kwargs):
         """Nothing to delete"""
@@ -63,25 +63,24 @@ class Mafioso(commands.Cog):
         if not self.check_for_duplicates(ctx.author, emoji):
             await ctx.send("Member or emote invalid")
             return
-        self.players.append( (ctx.author, emoji) )
+        self.players[ctx.author.id] = (ctx.author, emoji)
         self.nosu = (self.nosu+1)
         await ctx.send(f"Successfully Signed Up with {emoji}")
         #signup command takes name and emoji and stores it in players list
-        
-        
+
     @commands.command()
-    async def signout(self, ctx: commands.Context, emoji: RealEmojiConverter):
-        self.players[ctx.author.id] = (ctx.author, emoji)
+    async def signout(self, ctx: commands.Context):
+        del self.players[ctx.author.id]
         self.nosu = (self.nosu-1)
         await ctx.send(f"Successfully Signed Out")
         #Signout command
-        
+
     @commands.command()
     async def sl(self, ctx: commands.Context):
-        
+
         to_print = f'**Signed up** | {self.nosu}\n' #title for the list
 
-        to_print += '\n'.join(f'{member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players)
+        to_print += '\n'.join(f'{member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players.values())
         message = await ctx.send('.')
         await message.edit(content=to_print)
         #lists all signed up players in players list
