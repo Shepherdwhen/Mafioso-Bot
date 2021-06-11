@@ -53,7 +53,7 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
         self.players.append( (ctx.author, emoji) )
-        self.nosu = (nosu+1)
+        self.nosu = (self.nosu+1)
         await ctx.send(f"Successfully Signed Up with {emoji}")
         #signup command takes name and emoji and stores it in players list
         
