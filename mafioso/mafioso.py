@@ -79,6 +79,12 @@ class Mafioso(commands.Cog):
         await ctx.author.remove_roles(role, reason="Signed out")
         await ctx.send(f"Successfully Signed Out")
         #Signout command
+        
+    @commands.command()
+    async def resetsl(self, ctx: commands.Context):    
+        for member, emoji in self.players.values():
+            await member.remove_roles(role, reason="Resetting")
+    #command to reset the list of signed up players
 
     @commands.command()
     async def sl(self, ctx: commands.Context):
