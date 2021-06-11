@@ -83,6 +83,7 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def resetsl(self, ctx: commands.Context):    
         for member, emoji in self.players.values():
+            role = ctx.guild.get_role(self.signed_up_role)
             await member.remove_roles(role, reason="Resetting")
     #command to reset the list of signed up players
 
