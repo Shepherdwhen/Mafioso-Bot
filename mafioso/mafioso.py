@@ -59,7 +59,7 @@ class Mafioso(commands.Cog):
         
     @commands.command() #here is the problem
     async def sl(self, ctx: commands.Context):
-        to_print = '/n'.join(f'{member.name}: {emoji}' for member, emoji in self.Players)
+        to_print = (f'**Signed up** | {x}) ','\n'.join({member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players)
         message = await ctx.send('.')
         await message.edit(content=to_print)
         #lists all signed up players in players list
