@@ -35,6 +35,7 @@ class Mafioso(commands.Cog):
         self.players = {}
         self.nosu = (0)
         self.bot = bot
+        self.signed_up_role = 810988151476453477
         self.config = Config.get_conf(self, identifier=0, force_registration=True)
 
         default_guild = {}
@@ -65,6 +66,8 @@ class Mafioso(commands.Cog):
             return
         self.players[ctx.author.id] = (ctx.author, emoji)
         self.nosu = (self.nosu+1)
+        role = ctx.guild.get_role(self.signed_up_role)
+        await ctx.author.add_roles(role, reason="Signed up")
         await ctx.send(f"Successfully Signed Up with {emoji}")
         #signup command takes name and emoji and stores it in players list
 
@@ -72,6 +75,8 @@ class Mafioso(commands.Cog):
     async def signout(self, ctx: commands.Context):
         del self.players[ctx.author.id]
         self.nosu = (self.nosu-1)
+        role = ctx.guild.get_role(self.signed_up_role)
+        await ctx.author.remove_roles(role, reason="Signed out")
         await ctx.send(f"Successfully Signed Out")
         #Signout command
 
