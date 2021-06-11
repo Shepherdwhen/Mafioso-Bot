@@ -59,18 +59,20 @@ class Mafioso(commands.Cog):
 
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
-        if not self.check_for_duplicates(ctx.author, emoji):
-            await ctx.send("Member or emote invalid")
-            return
-        self.players.append( (ctx.author, emoji) )
-        self.nosu = (self.nosu+1)
-        await ctx.send(f"Successfully Signed Up with {emoji}")
+        if new_member.id in self.players:
+            return 1  # Player already signed up
+        if new_emoji in [emoji for member, emoji in self.players.values()]:
+            return 2  # Emoji already in use
+        return 0  # neither in use, good to go
+            self.players.append( (ctx.author, emoji) )
+            self.nosu = (self.nosu+1)
+            await ctx.send(f"Successfully Signed Up with {emoji}")
         #signup command takes name and emoji and stores it in players list
         
         
     @commands.command()
     async def signout(self, ctx: commands.Context, emoji: RealEmojiConverter):
-        self.players.remove( (ctx.author, emoji) )
+        self.players[ctx.author.id] = (ctx.author, emoji)
         self.nosu = (self.nosu-1)
         await ctx.send(f"Successfully Signed Out")
         #Signout command
