@@ -53,13 +53,16 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
         self.players.append( (ctx.author, emoji) )
-        self.nosu = players.count(emoji)
+        self.nosu = (nosu+1)
         await ctx.send(f"Successfully Signed Up with {emoji}")
         #signup command takes name and emoji and stores it in players list
         
     @commands.command()
     async def sl(self, ctx: commands.Context):
-        to_print = (f'**Signed up** | {x}'),('\n'.join(f'{member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players)
-        message = await ('.')
+        
+    to_print = f'**Signed up** | {nosu}\n'
+
+    to_print += '\n'.join(f'{member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players)
+        message = await ctx.send('.')
         await message.edit(content=to_print)
         #lists all signed up players in players list
