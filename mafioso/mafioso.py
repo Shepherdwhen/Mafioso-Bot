@@ -67,6 +67,14 @@ class Mafioso(commands.Cog):
         await ctx.send(f"Successfully Signed Up with {emoji}")
         #signup command takes name and emoji and stores it in players list
         
+        
+    @commands.command()
+    async def signout(self, ctx: commands.Context):
+        self.players.remove( (ctx.author, emoji) )
+        self.nosu = (self.nosu+1)
+        await ctx.send(f"Successfully Signed Out")
+        #hello world command to test bot
+        
     @commands.command()
     async def sl(self, ctx: commands.Context):
         
