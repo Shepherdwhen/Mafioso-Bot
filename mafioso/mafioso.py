@@ -60,7 +60,7 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def sl(self, ctx: commands.Context):
         
-        to_print = f'**Signed up** | {nosu}\n'
+        to_print = f'**Signed up** | {self.nosu}\n'
 
         to_print += '\n'.join(f'{member.mention}  ({member.display_name})  {emoji}' for member, emoji in self.players)
         message = await ctx.send('.')
