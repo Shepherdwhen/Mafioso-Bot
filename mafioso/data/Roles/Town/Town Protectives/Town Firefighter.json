@@ -1,0 +1,8 @@
+{
+  "name": "Town Firefighter",
+  "description": [
+    "- Can target a player each night and attempt to undouse them",
+    "- Undoused players cannot be ignited unless redoused",
+    "- Wins when all threats to the town are dead"
+  ]
+}

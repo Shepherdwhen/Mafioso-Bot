@@ -1,0 +1,9 @@
+{
+  "name": "Town Stalker",
+  "description": [
+    "- Can check a player each night to see who they visited",
+    "- Cannot see the actions of Mafia",
+    "- Is affected by (Universal Hirstute, Stealth, Alpha(with Stealth qualities))",
+    "- Wins when all threats to the town are dead"
+  ]
+}

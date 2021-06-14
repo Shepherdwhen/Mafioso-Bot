@@ -1,0 +1,9 @@
+{
+  "name": "Town PI",
+  "description": [
+    "- Can check a player each night to see if they are Cult aligned or not",
+    "- Is affected by (Evangelical, Atheist)",
+    "- The PI cannot be converted",
+    "- Wins when all threats to the town are dead"
+  ]
+}
