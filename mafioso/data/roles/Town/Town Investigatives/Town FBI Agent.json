@@ -2,7 +2,7 @@
   "name": "Town, FBI Agent",
   "description": [
     "- Can check a player each night to see if they are a Killer or not",
-    "- Killers are (Serial Killer, Arsonist, Double Agent, Demon Wolf)",
+    "- Killers are (Serial Killer, Arsonist, Double Agent, Demon Wolf, Hell-Raiser)",
     "- Is affected by (Watchlisted, Copycat Killer, Fire-Raiser)",
     "- Wins when all threats to the Town are dead"
   ]
