@@ -1,10 +1,10 @@
 {
   "name": "Town Magicsmith",
   "description": [
-    "- Can check a player each night to see if they resonate magic"
-    "- All Wolves except Archangel, Doctor and Town Defector resonate magic"
-    "- Seers, Magicsmiths, Priests and Universal Hirstutes resonate magic"
-    "- PIs, Sheriffs, Vigilantes and Demon Wolves all resonate magic"
+    "- Can check a player each night to see if they resonate magic",
+    "- All Wolves except Archangel, Doctor and Town Defector resonate magic",
+    "- Seers, Magicsmiths, Priests and Universal Hirstutes resonate magic",
+    "- PIs, Sheriffs, Vigilantes and Demon Wolves all resonate magic",
     "- Wins when all threats to the town are dead"
   ]
 }
