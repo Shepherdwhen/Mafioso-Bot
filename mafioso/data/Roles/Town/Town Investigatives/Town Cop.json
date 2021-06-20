@@ -1,0 +1,8 @@
+{
+  "name": "Town Cop",
+  "description": [
+    "- Can check a player each night to see if they are Mafia aligned or not",
+    "- Is affected by (Miller, Godfather, Mole, Framer, Lawyer, Banker)",
+    "- Wins when all threats to the town are dead"
+  ]
+}
