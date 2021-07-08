@@ -55,7 +55,7 @@ class Mafioso(commands.Cog):
         self.nosu = await self.config.nosu()
         config_players = await self.config.players()
         for member_id, emoji_id in config_players.items():
-            emoji = emoji if emoji_id is not int else self.bot.get_emoji(emoji_id)
+            emoji = emoji_id if emoji_id is not int else self.bot.get_emoji(emoji_id)
             member = self.bot.get_user(member_id)
             self.players[member_id] = (member, emoji)
 
