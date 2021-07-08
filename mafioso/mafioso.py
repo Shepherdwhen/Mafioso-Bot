@@ -62,7 +62,8 @@ class Mafioso(commands.Cog):
     async def save_to_config(self):
         await self.config.nosu.set(self.nosu)
         saveable_players = {}
-        for member_id, member, emoji in self.players.items():
+        for member_id, member_emoji_tuple in self.players.items():
+            member, emoji = member_emoji_tuple
             if emoji is discord.Emoji:  # Check if the emoji is a custom emoji
                 saveable_players[member_id] = emoji.id  # Save the custom emoji ID
             else:
