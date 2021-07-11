@@ -104,7 +104,17 @@ class Mafioso(commands.Cog):
     async def resetlist(self, ctx: commands.Context):
         for member, emoji in self.players.values():
             role = ctx.guild.get_role(self.signed_up_role)
+            del self.players[ctx.author.id]
             await member.remove_roles(role, reason="Resetting")
+            await self.save_to_config()
+            await ctx.send(f"Signing out {member.display_name}")
+        await ctx.send("Signed out all players successfully")
+    #command to reset the list of signed up players
+
+    @commands.command()
+    async def debuglist(self, ctx: commands.Context):
+        for member, emoji in self.players.values():
+            del self.players[ctx.author.id]
             await self.save_to_config()
             await ctx.send(f"Signing out {member.display_name}")
         await ctx.send("Signed out all players successfully")
