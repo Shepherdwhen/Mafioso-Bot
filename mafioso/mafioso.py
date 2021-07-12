@@ -56,6 +56,7 @@ class Mafioso(commands.Cog):
         return
     
     async def load_from_config(self):
+        log.debug("Starting load from config")
         self.nosu = await self.config.nosu()
         config_players = await self.config.players()
         for member_id, emoji_id in config_players.items():
