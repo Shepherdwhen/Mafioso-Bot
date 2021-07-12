@@ -26,6 +26,7 @@ class RealEmojiConverter(commands.EmojiConverter):
 
 # This part was made by phenom4n4n
 
+
 class Mafioso(commands.Cog):
     """
     Cog Description
@@ -37,7 +38,7 @@ class Mafioso(commands.Cog):
         super().__init__()
         self.players = {}
         self.killqueue = []
-        self.nosu = (0)
+        self.nosu = 0
         self.bot = bot
         self.signed_up_role = 810988151476453477
         self.spectator_role = 797155577154633728
@@ -45,18 +46,9 @@ class Mafioso(commands.Cog):
         self.alive_role = 796806682344161320
         self.dead_role = 796806821490589796
         self.config = Config.get_conf(self, identifier=6, force_registration=True)
-        self.default_player = {
-            "obj": None,
-            "emoji": None,
-            "alive": False,
-            "role": None
-        }
+        self.default_player = {"obj": None, "emoji": None, "alive": False, "role": None}
 
-        default_global = {
-            "players": {},
-            "nosu": 0,
-            "guild_id": 0
-        }
+        default_global = {"players": {}, "nosu": 0, "guild_id": 0}
 
         self.config.register_global(**default_global)
 
@@ -77,7 +69,8 @@ class Mafioso(commands.Cog):
             member_id = int(member_id)  # <----------------- Add this, converts string back to int
             log.debug(member_id)
             member = guild.get_member(member_id)
-            if member is not None:  # None is failed to get the user. (Quit the server, programming error)
+            if member is not None:  # None is failed to get the user.
+                # (Quit the server, programming error)
                 self.players[member_id] = (member, emoji)
             else:
                 log.warning(f"Failed to get id: {member_id}")
@@ -109,7 +102,7 @@ class Mafioso(commands.Cog):
             await ctx.send("Member or emote invalid")
             return
         self.players[ctx.author.id] = (ctx.author, emoji)
-        self.nosu = (self.nosu + 1)
+        self.nosu = self.nosu + 1
         role = ctx.guild.get_role(self.signed_up_role)
         spec = ctx.guild.get_role(self.spectator_role)
         back = ctx.guild.get_role(self.backup_role)
@@ -123,7 +116,7 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def signout(self, ctx: commands.Context):
         del self.players[ctx.author.id]
-        self.nosu = (self.nosu - 1)
+        self.nosu = self.nosu - 1
         role = ctx.guild.get_role(self.signed_up_role)
         await ctx.author.remove_roles(role, reason="Signed out")
         await self.save_to_config()
@@ -150,7 +143,7 @@ class Mafioso(commands.Cog):
     async def resetlist(self, ctx: commands.Context):
         for member, emoji in self.players.values():
             role = ctx.guild.get_role(self.signed_up_role)
-            self.nosu = (self.nosu - 1)
+            self.nosu = self.nosu - 1
             await member.remove_roles(role, reason="Resetting")
             await ctx.send(f"Signing out {member.display_name}")
         self.players = {}
@@ -162,7 +155,7 @@ class Mafioso(commands.Cog):
     @commands.command()
     async def debuglist(self, ctx: commands.Context):
         self.players = {}
-        self.nosu = (0)
+        self.nosu = 0
         await self.save_to_config()
         await ctx.send("Debugged List")
 
@@ -176,32 +169,34 @@ class Mafioso(commands.Cog):
     @list.command()
     async def signed_up(self, ctx: commands.Context):
 
-        to_print = f'**Signed up** | {self.nosu}\n'  # title for the list
+        to_print = f"**Signed up** | {self.nosu}\n"  # title for the list
 
         for member_id, player_dict in self.players.items():
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
 
-        to_print += '\n'.join(
-            f'{player_dict["emoji"]}  {player_dict["obj"].mention}  ({player_dict["obj"].name})' for player_dict in
-            self.players.values())
-        message = await ctx.send('.')
+        to_print += "\n".join(
+            f'{player_dict["emoji"]}  {player_dict["obj"].mention}  ({player_dict["obj"].name})'
+            for player_dict in self.players.values()
+        )
+        message = await ctx.send(".")
         await message.edit(content=to_print)
         # lists all signed up players in players list
 
     @list.command()
     async def alive(self, ctx: commands.Context):
         alive_count = sum(player_dict["alive"] for player_dict in self.players.values())
-        to_print = f'**Alive** | {alive_count}\n'  # title for the list
+        to_print = f"**Alive** | {alive_count}\n"  # title for the list
         for member_id, player_dict in self.players.items():
             if not player_dict["alive"]:  # Checks if they're dead
                 continue  # Skips this entry
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
-        to_print += '\n'.join(
-            f'{player_dict["emoji"]}  {player_dict["obj"].mention}  ({player_dict["obj"].name})' for player_dict in
-            self.players.values())
-        message = await ctx.send('.')
+        to_print += "\n".join(
+            f'{player_dict["emoji"]}  {player_dict["obj"].mention}  ({player_dict["obj"].name})'
+            for player_dict in self.players.values()
+        )
+        message = await ctx.send(".")
         await message.edit(content=to_print)
         # lists all signed up players in players list
 
@@ -210,7 +205,7 @@ class Mafioso(commands.Cog):
         for member, emoji in self.players.values():
             role = ctx.guild.get_role(self.signed_up_role)
             alive = ctx.guild.get_role(self.alive_role)
-            self.nosu = (self.nosu - 1)
+            self.nosu = self.nosu - 1
             await member.remove_roles(role, reason="starting game")
             await member.add_roles(alive, reason="starting game")
             await ctx.send(f"Adding alive role to {member.display_name}")
