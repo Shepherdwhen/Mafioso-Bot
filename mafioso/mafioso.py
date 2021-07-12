@@ -46,7 +46,7 @@ class Mafioso(commands.Cog):
         self.alive_role = 796806682344161320
         self.dead_role = 796806821490589796
         self.config = Config.get_conf(self, identifier=6, force_registration=True)
-        self.default_player = {"obj": None, "emoji": None, "alive": False, "role": None}
+        self.default_player = {"obj": None, "emoji": 'None', "alive": False, "role": None}
 
         default_global = {"players": {}, "nosu": 0, "guild_id": 0}
 
@@ -60,14 +60,18 @@ class Mafioso(commands.Cog):
         guild_id = await self.config.guild_id()
         guild = self.bot.get_guild(int(guild_id))
         if guild is None:
-            log.debug("Failed to load guild from config")
+            log.warning("Failed to load guild from config")
             return
         self.nosu = await self.config.nosu()
         config_players = await self.config.players()
-        for member_id, emoji_id in config_players.items():
+        for member_id, this_player in config_players.items():
+            emoji_id = this_player['emoji']
+            alive = this_player['alive']
+            role = this_player['role']
+
             emoji = emoji_id if emoji_id is not int else self.bot.get_emoji(emoji_id)
-            member_id = int(member_id)  # <----------------- Add this, converts string back to int
-            log.debug(member_id)
+            member_id = int(member_id)  # Converts string back to int
+
             member = guild.get_member(member_id)
             if member is not None:  # None is failed to get the user.
                 # (Quit the server, programming error)
@@ -80,12 +84,17 @@ class Mafioso(commands.Cog):
         saveable_players = {}
         guild_id = 0
         for member_id, player_dict in self.players.items():
-            member, emoji = player_dict
+            member = player_dict["member"]
+            emoji = player_dict["emoji"]
             guild_id = member.guild.id  # Fetch the guild ID for this batch of members
             if emoji is discord.Emoji:  # Check if the emoji is a custom emoji
-                saveable_players[member_id] = emoji.id  # Save the custom emoji ID
-            else:
-                saveable_players[member_id] = emoji  # Save the regular emoji string
+                emoji = emoji.id  # Save the custom emoji ID
+
+            # This is the structure of the config file now. Only emoji (as id), alive status, and role (tbd)
+            this_player = {"emoji": emoji, "alive": player_dict["alive"], "role": player_dict["role"]}
+
+            saveable_players[member.id] = this_player
+
         await self.config.players.set(saveable_players)
         await self.config.guild_id.set(guild_id)  # Save the guild_id
 
@@ -101,7 +110,12 @@ class Mafioso(commands.Cog):
         if not self.check_for_duplicates(ctx.author, emoji):
             await ctx.send("Member or emote invalid")
             return
-        self.players[ctx.author.id] = (ctx.author, emoji)
+
+        player_dict = self.default_player.copy()
+        player_dict['obj'] = ctx.author
+        player_dict['emoji'] = emoji
+
+        self.players[ctx.author.id] = player_dict
         self.nosu = self.nosu + 1
         role = ctx.guild.get_role(self.signed_up_role)
         spec = ctx.guild.get_role(self.spectator_role)
@@ -171,14 +185,11 @@ class Mafioso(commands.Cog):
 
         to_print = f"**Signed up** | {self.nosu}\n"  # title for the list
 
-        for member_id, player_dict in self.players.items():
+        for player_dict in self.players.values():
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
+            to_print += f'{emoji}  {member.mention}  ({member.name})'
 
-        to_print += "\n".join(
-            f'{player_dict["emoji"]}  {player_dict["obj"].mention}  ({player_dict["obj"].name})'
-            for player_dict in self.players.values()
-        )
         message = await ctx.send(".")
         await message.edit(content=to_print)
         # lists all signed up players in players list
@@ -192,17 +203,15 @@ class Mafioso(commands.Cog):
                 continue  # Skips this entry
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
-        to_print += "\n".join(
-            f'{player_dict["emoji"]}  {player_dict["obj"].mention}  ({player_dict["obj"].name})'
-            for player_dict in self.players.values()
-        )
+            to_print += f'{emoji}  {member.mention}  ({member.name})'
+
         message = await ctx.send(".")
         await message.edit(content=to_print)
         # lists all signed up players in players list
 
     @commands.command()
     async def startgame(self, ctx: commands.Context):
-        for member, emoji in self.players.values():
+        for member, player_dict in self.players.values():
             role = ctx.guild.get_role(self.signed_up_role)
             alive = ctx.guild.get_role(self.alive_role)
             self.nosu = self.nosu - 1
