@@ -1,6 +1,3 @@
-.idea/
-.idea/*
-/**/.idea/*
 *.pyc
 venv/
 /.venv/
