@@ -84,7 +84,7 @@ class Mafioso(commands.Cog):
         saveable_players = {}
         guild_id = 0
         for member_id, player_dict in self.players.items():
-            member = player_dict["member"]
+            member = player_dict["obj"]
             emoji = player_dict["emoji"]
             guild_id = member.guild.id  # Fetch the guild ID for this batch of members
             if emoji is discord.Emoji:  # Check if the emoji is a custom emoji
@@ -101,7 +101,7 @@ class Mafioso(commands.Cog):
     def check_for_duplicates(self, new_member, new_emote):
         if new_member.id in self.players:
             return False
-        if new_emote in [emoji for member, emoji in self.players.values()]:
+        if new_emote in [player_dict['emoji'] for player_dict in self.players.values()]:
             return False
         return True
 
@@ -188,7 +188,7 @@ class Mafioso(commands.Cog):
         for player_dict in self.players.values():
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
-            to_print += f'{emoji}  {member.mention}  ({member.name})'
+            to_print += f'{emoji}  {member.mention}  ({member.name})\n'
 
         message = await ctx.send(".")
         await message.edit(content=to_print)
@@ -203,7 +203,7 @@ class Mafioso(commands.Cog):
                 continue  # Skips this entry
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
-            to_print += f'{emoji}  {member.mention}  ({member.name})'
+            to_print += f'{emoji}  {member.mention}  ({member.name})\n'
 
         message = await ctx.send(".")
         await message.edit(content=to_print)
@@ -211,7 +211,7 @@ class Mafioso(commands.Cog):
 
     @commands.command()
     async def startgame(self, ctx: commands.Context):
-        for member, player_dict in self.players.values():
+        for member, player_dict in self.players.items():
             role = ctx.guild.get_role(self.signed_up_role)
             alive = ctx.guild.get_role(self.alive_role)
             self.nosu = self.nosu - 1
