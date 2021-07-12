@@ -37,6 +37,10 @@ class Mafioso(commands.Cog):
         self.nosu = (0)
         self.bot = bot
         self.signed_up_role = 810988151476453477
+        self.spectator_role = 797155577154633728
+        self.backup_role = 797377006659436576
+        self.alive_role = 796806682344161320
+        self.dead_role = 796806821490589796
         self.config = Config.get_conf(self, identifier=6, force_registration=True)
 
         default_global = {
@@ -85,6 +89,10 @@ class Mafioso(commands.Cog):
         self.players[ctx.author.id] = (ctx.author, emoji)
         self.nosu = (self.nosu+1)
         role = ctx.guild.get_role(self.signed_up_role)
+        spec = ctx.guild.get_role(self.spectator_role)
+        back = ctx.guild.get_role(self.backup_role)
+        await ctx.author.remove_roles(back, reason="Signed up")
+        await ctx.author.remove_roles(spec, reason="Signed up")
         await ctx.author.add_roles(role, reason="Signed up")
         await self.save_to_config()
         await ctx.send(f"Successfully Signed Up with {emoji}")
@@ -99,26 +107,42 @@ class Mafioso(commands.Cog):
         await self.save_to_config()
         await ctx.send(f"Successfully Signed Out")
         #Signout command
-        
+
+    @commands.command()
+    async def spectate(self, ctx: commands.Context):
+        spec = ctx.guild.get_role(self.spectator_role)
+        back = ctx.guild.get_role(self.backup_role)
+        await ctx.author.remove_roles(back, reason="Spectating")
+        await ctx.author.add_roles(spec, reason="Spectating")
+        #spectate command
+
+    @commands.command()
+    async def backup(self, ctx: commands.Context):
+        spec = ctx.guild.get_role(self.spectator_role)
+        back = ctx.guild.get_role(self.backup_role)
+        await ctx.author.add_roles(back, reason="Backup")
+        await ctx.author.remove_roles(spec, reason="Backup")
+        #backup command
+
     @commands.command()
     async def resetlist(self, ctx: commands.Context):
         for member, emoji in self.players.values():
             role = ctx.guild.get_role(self.signed_up_role)
-            del self.players[ctx.author.id]
+            self.nosu = (self.nosu - 1)
             await member.remove_roles(role, reason="Resetting")
-            await self.save_to_config()
             await ctx.send(f"Signing out {member.display_name}")
+        self.players = {}
+        await self.save_to_config()
         await ctx.send("Signed out all players successfully")
     #command to reset the list of signed up players
 
     @commands.command()
     async def debuglist(self, ctx: commands.Context):
-        for member, emoji in self.players.values():
-            del self.players[ctx.author.id]
-            await self.save_to_config()
-            await ctx.send(f"Signing out {member.display_name}")
-        await ctx.send("Signed out all players successfully")
-    #command to reset the list of signed up players
+        self.players = {}
+        self.nosu = (0)
+        await self.save_to_config()
+        await ctx.send("Debugged List")
+    #command to debug the list of signed up players
 
     @commands.command()
     async def list(self, ctx: commands.Context):
@@ -129,3 +153,17 @@ class Mafioso(commands.Cog):
         message = await ctx.send('.')
         await message.edit(content=to_print)
         #lists all signed up players in players list
+
+    @commands.command()
+    async def startgame(self, ctx: commands.Context):
+        for member, emoji in self.players.values():
+            role = ctx.guild.get_role(self.signed_up_role)
+            alive = ctx.guild.get_role(self.alive_role)
+            self.nosu = (self.nosu - 1)
+            await member.remove_roles(role, reason="starting game")
+            await member.add_roles(alive, reason="starting game")
+            await ctx.send(f"Adding alive role to {member.display_name}")
+        self.players = {}
+        await self.save_to_config()
+        await ctx.send("Game started")
+        #the command to make all players alive and start the game
