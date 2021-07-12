@@ -75,7 +75,7 @@ class Mafioso(commands.Cog):
             member = guild.get_member(member_id)
             if member is not None:  # None is failed to get the user.
                 # (Quit the server, programming error)
-                self.players[member_id] = (member, emoji)
+                self.players[member_id] = {"obj": member, "emoji": 'emoji', "alive": alive, "role": role}
             else:
                 log.warning(f"Failed to get id: {member_id}")
 
@@ -143,6 +143,7 @@ class Mafioso(commands.Cog):
         back = ctx.guild.get_role(self.backup_role)
         await ctx.author.remove_roles(back, reason="Spectating")
         await ctx.author.add_roles(spec, reason="Spectating")
+        await ctx.send(f"You are now Spectating the Game")
         # spectate command
 
     @commands.command()
@@ -151,11 +152,13 @@ class Mafioso(commands.Cog):
         back = ctx.guild.get_role(self.backup_role)
         await ctx.author.add_roles(back, reason="Backup")
         await ctx.author.remove_roles(spec, reason="Backup")
+        await ctx.send(f"You are now a Substitute for the game")
         # backup command
 
     @commands.command()
     async def resetlist(self, ctx: commands.Context):
-        for member, emoji in self.players.values():
+        for player_dict in self.players.values():
+            member = player_dict['obj']
             role = ctx.guild.get_role(self.signed_up_role)
             self.nosu = self.nosu - 1
             await member.remove_roles(role, reason="Resetting")
@@ -200,6 +203,7 @@ class Mafioso(commands.Cog):
         to_print = f"**Alive** | {alive_count}\n"  # title for the list
         for member_id, player_dict in self.players.items():
             if not player_dict["alive"]:  # Checks if they're dead
+                log.debug(player_dict)
                 continue  # Skips this entry
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
@@ -211,12 +215,14 @@ class Mafioso(commands.Cog):
 
     @commands.command()
     async def startgame(self, ctx: commands.Context):
-        for member, player_dict in self.players.items():
+        for player_dict in self.players.values():
+            member = player_dict['obj']
             role = ctx.guild.get_role(self.signed_up_role)
             alive = ctx.guild.get_role(self.alive_role)
             self.nosu = self.nosu - 1
             await member.remove_roles(role, reason="starting game")
             await member.add_roles(alive, reason="starting game")
+            player_dict['alive'] = True
             await ctx.send(f"Adding alive role to {member.display_name}")
         await self.save_to_config()
         await ctx.send("Game started")
@@ -244,6 +250,7 @@ class Mafioso(commands.Cog):
             alive = ctx.guild.get_role(self.alive_role)
             await member.remove_roles(alive, reason="killed")
             await member.add_roles(dead, reason="killed")
+            self.players[member.id]['alive'] = False
             await ctx.send(f"Killing {member.display_name}")
         self.killqueue = []
         await ctx.send("Everyone killed")
