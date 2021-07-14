@@ -1,4 +1,27 @@
 {
+  "roles": 
+    {
+        "Town Apprentice Seer": 
+          {
+            "description": [
+                "**Town Apprentice Seer** | Town Unpowered"
+                "The Apprentice Seer is a Town Investigative in waiting, if any Town Investigative who resonates Magic or a Town Stalker dies the Apprentice Seer will lose their old role and gain the role of the dead Investigative, The Apprentice Seer can become a Seer, Stalker, Magicsmith, Oracle, Prophet or PI. The Apprentice Seer wins when all threats to the Town are dead."
 
-  ]
+            ],
+            "alignment": "Town",
+            "power": "Unpowered"
+          },
+      
+        "Town Deputy":
+          {
+            "description": [
+                "**Town Deputy** | Town Unpowered"
+                "The Deputy is a Town Investigative in waiting, if any Town Investigative who has a Gun or a Town Tracker dies the Deputy will lose their old role and gain the role of the dead Investigative, The Deputy can become a Cop, Tracker, Gunsmith, Detective, Sheriff or FBI agent. The Deputy wins when all threats to the Town are dead."
+
+            ],
+            "alignment": "Town",
+            "power": "Unpowered"
+          },
+      
+    }
 }
