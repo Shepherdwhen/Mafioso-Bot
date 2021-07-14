@@ -1,8 +1,0 @@
-{
-  "name": "Town Monk",
-  "description": [
-    "- Has a private chat with (an)other Monk(s)",
-    "- Monks are guaranteed to not be Wolves",
-    "- Wins when all threats to the town are dead"
-  ]
-}
