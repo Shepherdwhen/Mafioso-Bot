@@ -277,12 +277,17 @@ class Mafioso(commands.Cog):
         mod_ig = ctx.guild.get_role(self.mod_ingame_role)
         admin = ctx.guild.get_role(self.admin_role)
         admin_ig = ctx.guild.get_role(self.admin_ingame_role)
+
+        # You don't need to check the role IDs if you're got role objects on both sides
+        # Try just `if mod in ctx.author.roles`
         if "856971152978608188" in [role.id for role in ctx.message.author.roles]:
-            await member.remove_roles(mod, reason="demote")
-            await member.add_roles(mod_ig, reason="demote")
+            await member.remove_roles(mod, reason="demote")  # You didn't define `member` anywhere
+            await member.add_roles(mod_ig, reason="demote")  # Should this happen to `ctx.author` (The person who ran the command?)
             await ctx.send("Demoted from moderator")
+
+        # And here try `if admin in ctx.author.roles`
         if "796806958329495624" in [role.id for role in ctx.message.author.roles]:
-            await member.remove_roles(admin, reason="demote")
+            await member.remove_roles(admin, reason="demote")  # Or should you take an argument and do this to them?
             await member.add_roles(admin_ig, reason="demote")
             await ctx.send("Demoted from admin")
         else:
