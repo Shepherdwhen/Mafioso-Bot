@@ -73,7 +73,7 @@ class Mafioso(commands.Cog):
             alive = this_player['alive']
             role = this_player['role']
 
-            emoji = emoji_id if emoji_id is not int else self.bot.get_emoji(emoji_id)
+            emoji = emoji_id if not isistance(emoji_id, int) else self.bot.get_emoji(emoji_id)
             member_id = int(member_id)  # Converts string back to int
 
             member = guild.get_member(member_id)
@@ -92,7 +92,7 @@ class Mafioso(commands.Cog):
             emoji = player_dict["emoji"]
             log.info(f"{type(emoji)}")
             guild_id = member.guild.id  # Fetch the guild ID for this batch of members
-            if emoji is discord.Emoji or emoji is discord.emoji.Emoji:
+            if isisntance(emoji, discord.Emoji):
                 log.info(f"{emoji} is discord.Emoji")
                 emoji = emoji.id  # Save the custom emoji ID
 
@@ -294,11 +294,11 @@ class Mafioso(commands.Cog):
         mod_ig = ctx.guild.get_role(self.mod_ingame_role)
         admin = ctx.guild.get_role(self.admin_role)
         admin_ig = ctx.guild.get_role(self.admin_ingame_role)
-        if "856971152978608188" in [role.id for role in ctx.message.author.roles]:
+        if "847850195366707310" in [role.id for role in ctx.message.author.roles]:
             await member.remove_roles(mod_ig, reason="promote")
             await member.add_roles(mod, reason="promote")
             await ctx.send("Promoted to moderator")
-        if "796806958329495624" in [role.id for role in ctx.message.author.roles]:
+        if "796808073129623553" in [role.id for role in ctx.message.author.roles]:
             await member.remove_roles(admin_ig, reason="promote")
             await member.add_roles(admin, reason="promote")
             await ctx.send("Promoted to admin")
