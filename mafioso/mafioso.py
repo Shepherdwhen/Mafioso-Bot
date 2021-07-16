@@ -73,7 +73,7 @@ class Mafioso(commands.Cog):
             alive = this_player['alive']
             role = this_player['role']
 
-            emoji = emoji_id if not isistance(emoji_id, int) else self.bot.get_emoji(emoji_id)
+            emoji = emoji_id if not isinstance(emoji_id, int) else self.bot.get_emoji(emoji_id)
             member_id = int(member_id)  # Converts string back to int
 
             member = guild.get_member(member_id)
@@ -92,7 +92,7 @@ class Mafioso(commands.Cog):
             emoji = player_dict["emoji"]
             log.info(f"{type(emoji)}")
             guild_id = member.guild.id  # Fetch the guild ID for this batch of members
-            if isisntance(emoji, discord.Emoji):
+            if isinstance(emoji, discord.Emoji):
                 log.info(f"{emoji} is discord.Emoji")
                 emoji = emoji.id  # Save the custom emoji ID
 
@@ -129,6 +129,28 @@ class Mafioso(commands.Cog):
         await ctx.author.remove_roles(back, reason="Signed up")
         await ctx.author.remove_roles(spec, reason="Signed up")
         await ctx.author.add_roles(role, reason="Signed up")
+        await self.save_to_config()
+        await ctx.send(f"Successfully Signed Up with {emoji}")
+        # signup command takes name and emoji and stores it in players list
+
+    @commands.command()
+    async def psignup(self, ctx: commands.Context, member: discord.Member, emoji: RealEmojiConverter):
+        if not self.check_for_duplicates(member, emoji):
+            await ctx.send(":x: Duplicate emoji or player found")
+            return
+
+        player_dict = self.default_player.copy()
+        player_dict['obj'] = member
+        player_dict['emoji'] = emoji
+
+        self.players[ctx.author.id] = player_dict
+        self.nosu = self.nosu + 1
+        role = ctx.guild.get_role(self.signed_up_role)
+        spec = ctx.guild.get_role(self.spectator_role)
+        back = ctx.guild.get_role(self.backup_role)
+        await member.remove_roles(back, reason="Signed up")
+        await member.remove_roles(spec, reason="Signed up")
+        await member.add_roles(role, reason="Signed up")
         await self.save_to_config()
         await ctx.send(f"Successfully Signed Up with {emoji}")
         # signup command takes name and emoji and stores it in players list
