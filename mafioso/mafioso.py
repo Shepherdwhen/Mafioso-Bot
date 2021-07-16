@@ -254,3 +254,14 @@ class Mafioso(commands.Cog):
             await ctx.send(f"Killing {member.display_name}")
         self.killqueue = []
         await ctx.send("Everyone killed")
+
+    @commands.command()
+    async def sheet(self, ctx: commands.Context):
+        sheet_list = f"```\n"  # start
+        for player_dict in self.players.values():
+            member = player_dict["obj"]
+            sheet_list += f'=SPLIT({member.name},{member.id}, ,)\n'
+        sheet_list += f"```"  # end
+
+        await ctx.send(f'{sheet_list}')
+        # lists all signed up players in players list
