@@ -6,7 +6,6 @@
             "name": "Town Apprentice Seer",
             "description": [
                 "The Apprentice Seer is a Town Investigative in waiting, if any Town Investigative who resonates Magic or a Town Stalker dies the Apprentice Seer will lose their old role and gain the role of the dead Investigative, The Apprentice Seer can become a Seer, Stalker, Magicsmith, Oracle, Prophet or PI. The Apprentice Seer wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -17,7 +16,6 @@
             "name": "Town Deputy",
             "description": [
                 "The Deputy is a Town Investigative in waiting, if any Town Investigative who has a Gun or a Town Tracker dies the Deputy will lose their old role and gain the role of the dead Investigative, The Deputy can become a Cop, Tracker, Gunsmith, Detective, Sheriff or FBI agent. The Deputy wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -28,7 +26,6 @@
             "name": "Town Evangelist",
             "description": [
                 "The Evangelist Appears as a Cult member or Zombie in an alignment check, This mask is a permanent mask. The Evangelist wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -39,7 +36,6 @@
             "name": "Town Hirsute",
             "description": [
                 "The Hirsute Appears as a Wolf in an alignment check, the Hirsute also resonates magic, This mask is a permanent mask. The Hirsute wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -51,7 +47,6 @@
             "name": "Town Idiot",
             "description": [
                 "The Idiot believes themselves to be a role that they are not, the Idiot will not be told they are idiot but instead will know they are a non unpowered role, however all their actions will fail as if roleblocked, the Idiot will not be known in role lists and will only be revealed on death, the Idiot is masked as their role to role checking investigatives. The Idiot wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -63,7 +58,6 @@
             "name": "Town Innocent Child",
             "description": [
                 "During the first phase the Innocent Child will be revealed as an Innocent Child by a host, an Innocent Child is either Town or a Desecrated Child. The Innocent Child wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -75,7 +69,6 @@
             "name": "Town Known Human",
             "description": [
                 "During the first phase the Known Human will be revealed as a Known Human by a host, a Known Human is either Town or a Defiled Human. The Known Human wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -87,7 +80,6 @@
             "name": "Town Mason",
             "description": [
                 "The Masons are all confirmed to be Non-Mafia, Masons can be converted to another faction, all Masons can communicate privately within the masonry. The Mason wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -100,7 +92,6 @@
             "name": "Town Miller",
             "description": [
                 "The Miller Appears as a Mafia in an alignment check, the Miller also owns a gun, This mask is a permanent mask. The Miller wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -112,7 +103,6 @@
             "name": "Town Monk",
             "description": [
                 "The Monks are all confirmed to be Non-Werewolf, Monks can be converted to another faction, all Monks can communicate privately within the monastery. The Monk wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -124,7 +114,6 @@
             "name": "Town Stonemason",
             "description": [
                 "The Stonemasons are all confirmed to be Town and will always be Town, if any role attempts to convert a Stonemason it will fail, all Stonemasons can communicate privately within the grand-lodge. The Stonemason wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -136,7 +125,6 @@
             "name": "Town Watchlisted",
             "description": [
                 "The Watchlisted Appears as a Killer in an alignment check, This mask is a permanent mask. The Watchlisted wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -148,7 +136,6 @@
             "name": "Town Vanilla",
             "description": [
                 "The Vanilla Has no powers at all but contributes 1 body to the town, it’s aim is to keep the powers safe and find the evil. The Vanilla wins when all threats to the Town are dead."
-
             ],
             "alignment": "Town",
             "power": "Unpowered"
@@ -160,7 +147,36 @@
             "name": "",
             "description": [
                 ""
-
+            ],
+            "alignment": "",
+            "power": ""
+          },
+            
+        "":
+          {
+            "name": "",
+            "description": [
+                ""
+            ],
+            "alignment": "",
+            "power": ""
+          },
+            
+        "":
+          {
+            "name": "",
+            "description": [
+                ""
+            ],
+            "alignment": "",
+            "power": ""
+          },
+            
+        "":
+          {
+            "name": "",
+            "description": [
+                ""
             ],
             "alignment": "",
             "power": ""
