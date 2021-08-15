@@ -38,6 +38,7 @@ class Mafioso(commands.Cog):
         super().__init__()
         self.players = {}
         self.killqueue = []
+        self.game_started = False
         self.nosu = 0
         self.bot = bot
         self.signed_up_role = 810988151476453477
@@ -113,25 +114,28 @@ class Mafioso(commands.Cog):
 
     @commands.command()
     async def signup(self, ctx: commands.Context, emoji: RealEmojiConverter):
-        if not self.check_for_duplicates(ctx.author, emoji):
-            await ctx.send(":x: Duplicate emoji or player found")
-            return
+        if self.game_started == False:
+            if not self.check_for_duplicates(ctx.author, emoji):
+                await ctx.send(":x: Duplicate emoji or player found")
+                return
 
-        player_dict = self.default_player.copy()
-        player_dict['obj'] = ctx.author
-        player_dict['emoji'] = emoji
+            player_dict = self.default_player.copy()
+            player_dict['obj'] = ctx.author
+            player_dict['emoji'] = emoji
 
-        self.players[ctx.author.id] = player_dict
-        self.nosu = self.nosu + 1
-        role = ctx.guild.get_role(self.signed_up_role)
-        spec = ctx.guild.get_role(self.spectator_role)
-        back = ctx.guild.get_role(self.backup_role)
-        await ctx.author.remove_roles(back, reason="Signed up")
-        await ctx.author.remove_roles(spec, reason="Signed up")
-        await ctx.author.add_roles(role, reason="Signed up")
-        await self.save_to_config()
-        await ctx.send(f"Successfully Signed Up with {emoji}")
-        # signup command takes name and emoji and stores it in players list
+            self.players[ctx.author.id] = player_dict
+            self.nosu = self.nosu + 1
+            role = ctx.guild.get_role(self.signed_up_role)
+            spec = ctx.guild.get_role(self.spectator_role)
+            back = ctx.guild.get_role(self.backup_role)
+            await ctx.author.remove_roles(back, reason="Signed up")
+            await ctx.author.remove_roles(spec, reason="Signed up")
+            await ctx.author.add_roles(role, reason="Signed up")
+            await self.save_to_config()
+            await ctx.send(f"Successfully Signed Up with {emoji}")
+        else:
+            await ctx.send("There is no game at the moment")
+            # signup command takes name and emoji and stores it in players list
 
     @commands.command()
     async def psignup(self, ctx: commands.Context, member: discord.Member, emoji: RealEmojiConverter):
@@ -143,7 +147,7 @@ class Mafioso(commands.Cog):
         player_dict['obj'] = member
         player_dict['emoji'] = emoji
 
-        self.players[ctx.author.id] = player_dict
+        self.players[member.id] = player_dict
         self.nosu = self.nosu + 1
         role = ctx.guild.get_role(self.signed_up_role)
         spec = ctx.guild.get_role(self.spectator_role)
@@ -236,7 +240,7 @@ class Mafioso(commands.Cog):
             emoji = player_dict["emoji"]
             member = player_dict["obj"]
             to_print += f'{emoji}  {member.mention}  ({member.name})\n'
-
+        self.game_started = True
         message = await ctx.send(".")
         await message.edit(content=to_print)
         # lists all signed up players in players list
@@ -287,7 +291,7 @@ class Mafioso(commands.Cog):
         sheet_list = f"```\n"  # start
         for player_dict in self.players.values():
             member = player_dict["obj"]
-            sheet_list += f'=SPLIT({member.name},{member.id}, ,)\n'
+            sheet_list += f'=SPLIT("{member.name},{member.id}", ",")\n'
         sheet_list += f"```"  # end
 
         await ctx.send(f'{sheet_list}')
@@ -299,18 +303,13 @@ class Mafioso(commands.Cog):
         mod_ig = ctx.guild.get_role(self.mod_ingame_role)
         admin = ctx.guild.get_role(self.admin_role)
         admin_ig = ctx.guild.get_role(self.admin_ingame_role)
-
-        # You don't need to check the role IDs if you're got role objects on both sides
-        # Try just `if mod in ctx.author.roles`
-        if "856971152978608188" in [role.id for role in ctx.message.author.roles]:
-            await member.remove_roles(mod, reason="demote")  # You didn't define `member` anywhere
-            await member.add_roles(mod_ig, reason="demote")  # Should this happen to `ctx.author` (The person who ran the command?)
+        if mod in ctx.author.roles:
+            await ctx.author.remove_roles(mod, reason="demote")  # You didn't define `member` anywhere
+            await ctx.author.add_roles(mod_ig, reason="demote")  # Should this happen to `ctx.author` (The person who ran the command?)
             await ctx.send("Demoted from moderator")
-
-        # And here try `if admin in ctx.author.roles`
-        if "796806958329495624" in [role.id for role in ctx.message.author.roles]:
-            await member.remove_roles(admin, reason="demote")  # Or should you take an argument and do this to them?
-            await member.add_roles(admin_ig, reason="demote")
+        if admin in ctx.author.roles:
+            await ctx.author.remove_roles(admin, reason="demote")  # Or should you take an argument and do this to them?
+            await ctx.author.add_roles(admin_ig, reason="demote")
             await ctx.send("Demoted from admin")
         else:
             await ctx.send(":x: you do not have the permissions for that")
@@ -321,13 +320,30 @@ class Mafioso(commands.Cog):
         mod_ig = ctx.guild.get_role(self.mod_ingame_role)
         admin = ctx.guild.get_role(self.admin_role)
         admin_ig = ctx.guild.get_role(self.admin_ingame_role)
-        if "847850195366707310" in [role.id for role in ctx.message.author.roles]:
-            await member.remove_roles(mod_ig, reason="promote")
-            await member.add_roles(mod, reason="promote")
+        if mod_ig in ctx.author.roles:
+            await ctx.author.remove_roles(mod_ig, reason="promote")
+            await ctx.author.add_roles(mod, reason="promote")
             await ctx.send("Promoted to moderator")
-        if "796808073129623553" in [role.id for role in ctx.message.author.roles]:
-            await member.remove_roles(admin_ig, reason="promote")
-            await member.add_roles(admin, reason="promote")
+        if admin_ig in ctx.author.roles:
+            await ctx.author.remove_roles(admin_ig, reason="promote")
+            await ctx.author.add_roles(admin, reason="promote")
             await ctx.send("Promoted to admin")
         else:
             await ctx.send(":x: you do not have the permissions for that")
+
+    @commands.command()
+    async def gameset(self, ctx, member: discord.Member, nickname):
+        printable = (f":white_check_mark: {member.mention}'s nickname set to {nickname}")
+        await member.edit(nick=nickname)
+        message = await ctx.send(".")
+        await message.edit(content=printable)
+
+       # @commands.command(aliases=["i"])
+      #  async def info(self, ctx, role_name):
+            # something something fetch the role
+
+          #  out_role = f"""**{role_name}** | {role_data['alignment']} {role_data['power']}
+        #{role_data['description']}"""
+
+
+        #await ctx.send(out_role)
