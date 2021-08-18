@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "mafioso-bot"
+version = "0.1.0"
+description = "The Mafioso bot for the Small Town Mafia Discord server"
+authors = [
+    "abitofevrything <54505189+abitofevrything@users.noreply.github.com>",
+    "Ethan <ethan@max90.co.uk>"
+]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6.1"
+"discord.py" = "^1.7.3"
+toml = "^0.10.2"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.9.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

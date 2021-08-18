@@ -1,0 +1,8 @@
+# Fill in this file with the needed configuration values
+
+[bot]
+token = "abcdefghijklmnopqrstuvwxyz"
+prefix = "!"
+
+[ids]
+owner_id = 0123456789
