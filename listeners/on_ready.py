@@ -8,6 +8,8 @@ class on_ready(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        from globvars import client
+        from globvars import client, state_manager
         
         print(f"Logged in as {client.user.name}#{client.user.discriminator}")
+
+        state_manager.init_pregame()

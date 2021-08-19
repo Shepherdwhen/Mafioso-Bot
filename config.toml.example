@@ -5,4 +5,8 @@ token = "abcdefghijklmnopqrstuvwxyz"
 prefix = "!"
 
 [ids]
-owner_id = 0123456789
+owner_id = 1234567890
+lobby_channel_id = 14567890
+
+[durations]
+auto_unhost_timeout = 3600
