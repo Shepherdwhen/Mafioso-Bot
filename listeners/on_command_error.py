@@ -3,8 +3,8 @@ import traceback
 from discord.ext import commands
 from discord.ext.commands.errors import CheckFailure, CommandNotFound
 
-from mafia.errors import (AlreadyHosted, AlreadyJoined, NotHost, NotHosted,
-                          NotJoined, PlayerCannotHost)
+from mafia.errors import (AlreadyHosted, AlreadyJoined, NotAdmin, NotHost,
+                          NotHosted, NotJoined, PlayerCannotHost)
 
 
 class on_command_error(commands.Cog):
@@ -28,6 +28,8 @@ class on_command_error(commands.Cog):
             return await ctx.send('⛔ This game doesn\'t have a host!')
         elif isinstance(error, NotHost):
             return await ctx.send('⛔ You must be the host to perform this action!')
+        elif isinstance(error, NotAdmin):
+            return await ctx.send('⛔ You must be an administrator to perform this action!')
         elif isinstance(error, CommandNotFound):
             return
         elif isinstance(error, CheckFailure):

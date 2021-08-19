@@ -36,3 +36,8 @@ class NotHost(MafiaException):
     """Exception raised when a player that is not the host
     attempts to perform a host-restricted action.
     """
+
+class NotAdmin(MafiaException):
+    """Exception raised when a player that is not an admin
+    attempts to perform an admin-related action
+    """

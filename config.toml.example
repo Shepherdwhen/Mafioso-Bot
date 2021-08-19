@@ -6,6 +6,10 @@ prefix = "!"
 
 [ids]
 owner_id = 1234567890
+server_id = 1234567890
+
+admin_role_id = 1234567890
+
 lobby_channel_id = 14567890
 
 [durations]

@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 import globvars
-from mafia.util import check_if_is_host
+from mafia.util import check_if_is_host_or_admin
 
 
 class Host(commands.Cog):
@@ -23,7 +23,7 @@ class Host(commands.Cog):
     @commands.command(
         name='unhost'
     )
-    @commands.check(check_if_is_host)
+    @commands.check(check_if_is_host_or_admin)
     async def unhost(self, ctx):
         globvars.state_manager.pregame.unregister_host()
         await ctx.send('✅ You are now no longer the host!')
@@ -32,7 +32,7 @@ class Host(commands.Cog):
         name='transfer_host',
         aliases=['thost', 'transferhost', 'changehost', 'change_host', 'swaphost', 'swap_host']
     )
-    @commands.check(check_if_is_host)
+    @commands.check(check_if_is_host_or_admin)
     async def transfer_host(self, ctx, new_host: discord.Member):
         globvars.state_manager.pregame.transfer_host(new_host)
         await ctx.send(f'✅ Transferred host from {ctx.author.mention} to {new_host.mention}')

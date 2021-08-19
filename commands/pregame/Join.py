@@ -6,7 +6,7 @@ from discord.ext import commands
 
 import globvars
 from mafia.errors import AlreadyJoined, NotJoined, PlayerCannotHost
-from mafia.util import check_if_is_host
+from mafia.util import check_if_is_host_or_admin
 
 
 class Join(commands.Cog):
@@ -26,7 +26,7 @@ class Join(commands.Cog):
         name='fjoin',
         aliases=['fj']
     )
-    @commands.check(check_if_is_host)
+    @commands.check(check_if_is_host_or_admin)
     async def fjoin(self, ctx, targets: commands.Greedy[discord.Member]):
         targets = set(targets)
         for target in targets:
@@ -50,7 +50,7 @@ class Join(commands.Cog):
         name='fquit',
         aliases=['fq']
     )
-    @commands.check(check_if_is_host)
+    @commands.check(check_if_is_host_or_admin)
     async def fquit(self, ctx, targets: commands.Greedy[discord.Member]):
         targets = set(targets)
         for target in targets:

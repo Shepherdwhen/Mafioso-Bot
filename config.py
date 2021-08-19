@@ -11,6 +11,10 @@ try:
         PREFIX = config['bot']['prefix']
 
         OWNER_ID = config['ids']['owner_id']
+        SERVER_ID = config['ids']['server_id']
+
+        ADMIN_ROLE_ID = config['ids']['admin_role_id']
+
         LOBBY_CHANNEL_ID = config['ids']['lobby_channel_id']
 
         AUTO_UNHOST_TIMEOUT = config['durations']['auto_unhost_timeout']

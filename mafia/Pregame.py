@@ -66,7 +66,11 @@ class Pregame:
             raise PlayerCannotHost()
         self.host = new_host
         
-        self.auto_unhost_task.cancel()
+        # Transfer might be called upon by an admin,
+        # in which case the auto unhost task may be 
+        # None
+        if self.auto_unhost_task:
+            self.auto_unhost_task.cancel()
         self.auto_unhost_task = asyncio.create_task(auto_unhost_task())
 
     def register_player(self, player: discord.Member):
