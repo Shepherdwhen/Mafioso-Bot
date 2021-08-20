@@ -5,7 +5,9 @@ import discord
 from discord.ext import commands
 
 import globvars
-from mafia.util import check_if_is_host_or_admin
+from config import ADMIN_ROLE_ID, SERVER_ID
+from mafia.errors import NotAdmin
+from mafia.util import check_if_can_host, check_if_is_host_or_admin
 
 
 class Host(commands.Cog):
@@ -16,6 +18,7 @@ class Host(commands.Cog):
     @commands.command(
         name='host'
     )
+    @commands.check(check_if_can_host)
     async def host(self, ctx):
         globvars.state_manager.pregame.register_host(ctx.author)
         await ctx.send('✅ You are now the host!')
@@ -24,15 +27,13 @@ class Host(commands.Cog):
         name='unhost'
     )
     @commands.check(check_if_is_host_or_admin)
-    async def unhost(self, ctx):
-        globvars.state_manager.pregame.unregister_host()
-        await ctx.send('✅ You are now no longer the host!')
+    async def unhost(self, ctx, target: discord.Member = None):
+        if target:
+            admin_role = globvars.client.get_guild(SERVER_ID).get_role(ADMIN_ROLE_ID)
+            if admin_role not in ctx.author.roles:
+                raise NotAdmin()
+        else:
+            target = ctx.author
+        globvars.state_manager.pregame.unregister_host(target)
 
-    @commands.command(
-        name='transfer_host',
-        aliases=['thost', 'transferhost', 'changehost', 'change_host', 'swaphost', 'swap_host']
-    )
-    @commands.check(check_if_is_host_or_admin)
-    async def transfer_host(self, ctx, new_host: discord.Member):
-        globvars.state_manager.pregame.transfer_host(new_host)
-        await ctx.send(f'✅ Transferred host from {ctx.author.mention} to {new_host.mention}')
+        await ctx.send('✅ You are now no longer the host!')

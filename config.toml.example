@@ -8,7 +8,8 @@ prefix = "!"
 owner_id = 1234567890
 server_id = 1234567890
 
-admin_role_id = 1234567890
+admin_role_id = 1234567890 # Admins: have full access to all bot commands, can host
+mod_role_id = 1234567890   # Mods: have access to host-restricted commands when hosting, can host
 
 lobby_channel_id = 14567890
 

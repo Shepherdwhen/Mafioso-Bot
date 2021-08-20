@@ -7,11 +7,6 @@ class MafiaException(commands.CommandError):
     """Base class for all Mafia exceptions
     """
 
-class AlreadyHosted(MafiaException):
-    """Exception raised when a game is already hosted
-    and a player attempts to become host
-    """
-
 class PlayerCannotHost(MafiaException):
     """Exception raised when a player attempts to host
     a game while already being in the queue for the game
@@ -40,4 +35,14 @@ class NotHost(MafiaException):
 class NotAdmin(MafiaException):
     """Exception raised when a player that is not an admin
     attempts to perform an admin-related action
+    """
+
+class CannotHost(MafiaException):
+    """Exception raised when a player that cannot host games
+    attempts to do so
+    """
+
+class AlreadyHost(MafiaException):
+    """Exception raised when a player attempts to become host
+    when they are already host
     """

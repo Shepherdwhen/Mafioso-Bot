@@ -1,77 +1,42 @@
-import asyncio
-
 import discord
 
-import globvars
-from config import LOBBY_CHANNEL_ID
-
-from .errors import (AlreadyHosted, AlreadyJoined, NotHosted, NotJoined,
+from .errors import (AlreadyHost, AlreadyJoined, NotHost, NotHosted, NotJoined,
                      PlayerCannotHost)
 
-
-async def auto_unhost_task():
-    from config import AUTO_UNHOST_TIMEOUT
-    
-    await asyncio.sleep(AUTO_UNHOST_TIMEOUT)
-
-    await globvars.client.get_channel(LOBBY_CHANNEL_ID).send(f'{globvars.state_manager.pregame.host.mention} You have been unhosted because the game took too long to start.')
-    globvars.state_manager.pregame.unregister_host()
 
 class Pregame:
     """Represents the Pregame state of the bot.
     A pregame has the following properties
      - A queue of players in the lobby
-     - An (optional) host
+     - A queue of hosts
 
-    The host is required to transition to the game state.
+    At least one host is required to transition to the game state.
     """
     
     def __init__(self):
-        self.host: discord.Member = None
+        self.hosts: set[discord.Member] = set()
         self.queue: set[discord.Member] = set()
-        self.auto_unhost_task = None
 
     def register_host(self, host: discord.Member):
         """Register a host for this pregame.
-        If this pregame is already hosted, `AlreadyHosted()` is
-        raised.
         If the host is currently in the queue, `PlayerCannotHost()`
         is raised.
         """
 
-        if self.host:
-            raise AlreadyHosted()
         if host in self.queue:
             raise PlayerCannotHost()
-        self.host = host
-        self.auto_unhost_task = asyncio.create_task(auto_unhost_task())
+        if host in self.hosts:
+            raise AlreadyHost()
+        self.hosts.add(host)
 
-    def unregister_host(self):
-        """Unregister the current host.
-        If there is no host, `NotHosted()` is raised.
+    def unregister_host(self, target: discord.Member):
+        """Unregister a host.
+        If the target is not a host, `NotHost()` is raised.
         """
 
-        if not self.host:
-            raise NotHosted()
-        self.host = None
-        self.auto_unhost_task.cancel()
-
-    def transfer_host(self, new_host: discord.Member):
-        """Transfer host priviliges from one player to another.
-        If `new_host` is currently in the queue, `PlayerCannotHost()`
-        is raised.
-        """
-
-        if new_host in self.queue:
-            raise PlayerCannotHost()
-        self.host = new_host
-        
-        # Transfer might be called upon by an admin,
-        # in which case the auto unhost task may be 
-        # None
-        if self.auto_unhost_task:
-            self.auto_unhost_task.cancel()
-        self.auto_unhost_task = asyncio.create_task(auto_unhost_task())
+        if target not in self.hosts:
+            raise NotHost()
+        self.hosts.remove(target)
 
     def register_player(self, player: discord.Member):
         """Registers a player for this pregame.
@@ -83,7 +48,7 @@ class Pregame:
 
         if player in self.queue:
             raise AlreadyJoined()
-        if player == self.host:
+        if player in self.hosts:
             raise PlayerCannotHost()
         self.queue.add(player)
 
@@ -102,8 +67,8 @@ class Pregame:
         that can then be used as the game object for the bot state.
         """
 
-        if not self.host:
+        if not self.hosts:
             raise NotHosted()
-        self.auto_unhost_task.cancel()
+
         raise NotImplemented()
 

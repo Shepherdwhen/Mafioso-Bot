@@ -14,6 +14,7 @@ try:
         SERVER_ID = config['ids']['server_id']
 
         ADMIN_ROLE_ID = config['ids']['admin_role_id']
+        MOD_ROLE_ID = config['ids']['mod_role_id']
 
         LOBBY_CHANNEL_ID = config['ids']['lobby_channel_id']
 
