@@ -2,7 +2,7 @@
 
 [bot]
 token = "abcdefghijklmnopqrstuvwxyz"
-prefix = "!"
+prefix = "!" # Can also be an array of prefixes, i.e ["!", "$"]
 
 [ids]
 owner_id = 1234567890

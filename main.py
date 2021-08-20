@@ -7,7 +7,7 @@ from config import OWNER_ID, PREFIX, TOKEN
 
 globvars.client = commands.Bot(
     owner_id=OWNER_ID,
-    command_prefix=PREFIX,
+    command_prefix=PREFIX, # Might be an array
     case_insensitive=True
 )
 
