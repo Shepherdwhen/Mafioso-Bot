@@ -18,8 +18,6 @@ try:
 
         LOBBY_CHANNEL_ID = config['ids']['lobby_channel_id']
 
-        AUTO_UNHOST_TIMEOUT = config['durations']['auto_unhost_timeout']
-
 except FileNotFoundError:
     print("Config file not found.\nDo you have a file named config.toml in the projects root directory?")
     sys.exit(1)
