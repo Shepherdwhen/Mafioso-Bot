@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 
 
@@ -46,3 +47,11 @@ class AlreadyHost(MafiaException):
     """Exception raised when a player attempts to become host
     when they are already host
     """
+
+class NoRoles(MafiaException):
+    """Exception raised when a game without a role for one or
+    more players is started
+    """
+
+    def __init__(self, *players):
+        self.missing_roles: set[discord.Member] = set(players)

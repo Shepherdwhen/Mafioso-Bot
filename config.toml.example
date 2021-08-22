@@ -5,10 +5,13 @@ token = "abcdefghijklmnopqrstuvwxyz"
 prefix = "!" # Can also be an array of prefixes, i.e ["!", "$"]
 
 [ids]
-owner_id = 1234567890
-server_id = 1234567890
+owner_id = 1234567890       # Id of the bot owner. Currently unused.
+server_id = 1234567890      # Id of the guild the bot is used in
 
-admin_role_id = 1234567890 # Admins: have full access to all bot commands, can host
-mod_role_id = 1234567890   # Mods: have access to host-restricted commands when hosting, can host
+admin_role_id = 1234567890  # Admins: have full access to all bot commands, can host
+mod_role_id = 1234567890    # Mods: have access to host-restricted commands when hosting, can host
+host_role_id = 1234567890   # Hosts: role given to active hosts
+alive_role_id = 124567890   # Alive players: role given to players that are currently alive
+dead_role_id = 123456780    # Dead players: role given to players that are currently dead
 
-lobby_channel_id = 14567890
+lobby_channel_id = 14567890 # Id of the main lobby channel. Individual player/team channels will be created in the same category as this

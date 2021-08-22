@@ -2,6 +2,8 @@ import enum
 
 from discord.ext.commands.errors import ExtensionNotLoaded
 
+import globvars
+from mafia.Game import Game
 from mafia.Pregame import Pregame
 
 
@@ -15,16 +17,26 @@ class StateManager:
         self.state: State = None
 
         self.pregame: Pregame = None
+        self.game: Game = None
 
     def init_pregame(self):
         self.state = State.pregame
         self.pregame = Pregame()
-
-        import globvars
+        self.game = None
 
         globvars.client.load_extension('commands.pregame')
         
+        # commands.ingame will not be loaded when the bot is first
+        # started, so the initial transition might throw an error
         try:
             globvars.client.unload_extension('commands.ingame')
         except ExtensionNotLoaded:
             pass
+
+    def init_game(self):
+        self.state = State.ingame
+        self.game = self.pregame.transition_to_game()
+        self.pregame = None
+
+        globvars.client.load_extension('commands.ingame')
+        globvars.client.unload_extension('commands.pregame')

@@ -4,8 +4,8 @@ from discord.ext import commands
 from discord.ext.commands.errors import CheckFailure, CommandNotFound
 
 from mafia.errors import (AlreadyHost, AlreadyJoined, CannotHost,
-                          MafiaException, NotAdmin, NotHost, NotHosted,
-                          NotJoined, PlayerCannotHost)
+                          MafiaException, NoRoles, NotAdmin, NotHost,
+                          NotHosted, NotJoined, PlayerCannotHost)
 
 
 class on_command_error(commands.Cog):
@@ -33,6 +33,9 @@ class on_command_error(commands.Cog):
             return await ctx.send('⛔ You cannot host games!')
         elif isinstance(error, AlreadyHost):
             return await ctx.send('⛔ You are already a host!')
+        elif isinstance(error, NoRoles):
+            users = "**, **".join([user.display_name for user in error.missing_roles])
+            return await ctx.send(f'⛔ Some members have no roles: **{users}**')
         elif isinstance(error, CommandNotFound):
             return
         elif isinstance(error, CheckFailure):

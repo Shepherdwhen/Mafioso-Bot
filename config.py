@@ -15,6 +15,9 @@ try:
 
         ADMIN_ROLE_ID = config['ids']['admin_role_id']
         MOD_ROLE_ID = config['ids']['mod_role_id']
+        HOST_ROLE_ID = config['ids']['host_role_id']
+        ALIVE_ROLE_ID = config['ids']['alive_role_id']
+        DEAD_ROLE_ID = config['ids']['dead_role_id']
 
         LOBBY_CHANNEL_ID = config['ids']['lobby_channel_id']
 

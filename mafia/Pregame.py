@@ -1,5 +1,7 @@
 import discord
 
+from mafia.Game import Game
+
 from .errors import (AlreadyHost, AlreadyJoined, NotHost, NotHosted, NotJoined,
                      PlayerCannotHost)
 
@@ -70,5 +72,5 @@ class Pregame:
         if not self.hosts:
             raise NotHosted()
 
-        raise NotImplemented()
+        return Game(self.hosts, self.queue)
 
