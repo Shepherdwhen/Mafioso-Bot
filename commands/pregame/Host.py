@@ -16,7 +16,10 @@ class Host(commands.Cog):
         self.bot = bot
 
     @commands.command(
-        name='host'
+        name='host',
+        aliases = [
+            "h"
+        ]
     )
     @commands.check(check_if_can_host)
     async def host(self, ctx):
