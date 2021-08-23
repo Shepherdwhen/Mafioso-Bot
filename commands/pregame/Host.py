@@ -24,7 +24,7 @@ class Host(commands.Cog):
     @commands.check(check_if_can_host)
     async def host(self, ctx):
         globvars.state_manager.pregame.register_host(ctx.author)
-        await ctx.send('✅ You are now the host!')
+        await ctx.send('✅ You are now a host!')
 
     @commands.command(
         name='unhost'
@@ -39,4 +39,4 @@ class Host(commands.Cog):
             target = ctx.author
         globvars.state_manager.pregame.unregister_host(target)
 
-        await ctx.send('✅ You are now no longer the host!')
+        await ctx.send('✅ You are now no longer a host!')
