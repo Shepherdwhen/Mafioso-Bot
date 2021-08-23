@@ -2,7 +2,9 @@ import discord
 
 import globvars
 from config import ALIVE_ROLE_ID, HOST_ROLE_ID, LOBBY_CHANNEL_ID, SERVER_ID
-from mafia.errors import NoRoles
+
+from .data import Role
+from .errors import NoRoles
 
 
 class Game:
@@ -15,12 +17,16 @@ class Game:
         self.alive_players: set[discord.Member] = players
         self.dead_players: set[discord.Member] = set()
 
-        self.roles: dict[discord.Member, str] = dict()
+        self.roles: dict[discord.Member, Role] = dict()
 
         self.kill_queue: set[discord.Member] = set()
 
         self.managed_channels: set[discord.TextChannel] = set()
         self.lobby_channel: discord.TextChannel = globvars.client.get_guild(SERVER_ID).get_channel(LOBBY_CHANNEL_ID)
+
+    @property
+    def players(self) -> set[discord.Member]:
+        return self.alive_players | self.dead_players
 
     async def start(self):
         """Starts the game

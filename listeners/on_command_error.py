@@ -1,11 +1,12 @@
 import traceback
 
 from discord.ext import commands
-from discord.ext.commands.errors import CheckFailure, CommandNotFound
+from discord.ext.commands.errors import (BadArgument, CheckFailure,
+                                         CommandNotFound)
 
 from mafia.errors import (AlreadyHost, AlreadyJoined, CannotHost,
                           MafiaException, NoRoles, NotAdmin, NotHost,
-                          NotHosted, NotJoined, PlayerCannotHost)
+                          NotHosted, NotJoined, NotPlayer, PlayerCannotHost)
 
 
 class on_command_error(commands.Cog):
@@ -36,10 +37,14 @@ class on_command_error(commands.Cog):
         elif isinstance(error, NoRoles):
             users = "**, **".join([user.display_name for user in error.missing_roles])
             return await ctx.send(f'⛔ Some members have no roles: **{users}**')
+        elif isinstance(error, NotPlayer):
+            return await ctx.send('⛔ This action requries a player!')
         elif isinstance(error, CommandNotFound):
             return
         elif isinstance(error, CheckFailure):
             return
+        elif isinstance(error, BadArgument):
+            return await ctx.send('⛔ An invalid or incomplete argument was provided!')
         elif isinstance(error, MafiaException):
             await ctx.send(f'⛔ An unhandled error has occured: {error}')
 
