@@ -41,7 +41,12 @@ class on_command_error(commands.Cog):
         elif isinstance(error, CheckFailure):
             return
         elif isinstance(error, MafiaException):
-            return await ctx.send(f'⛔ An unhandled error has occured: {error}')
+            await ctx.send(f'⛔ An unhandled error has occured: {error}')
+
+            try:
+                raise error
+            except Exception:
+                traceback.print_exc()
         else:
             await ctx.send(f'⛔ An unexpected error has occured: {error}')
 
