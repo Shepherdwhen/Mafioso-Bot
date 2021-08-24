@@ -27,6 +27,9 @@ with open(path.join('mafia', 'roles.json')) as file:
         Role
     ] = _data['roles']
 
+    for role in roles:
+        roles[role]['id'] = role
+
     channels: dict[
         str,              # key: channel id
         ChannelDescriptor

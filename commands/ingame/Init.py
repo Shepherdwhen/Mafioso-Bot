@@ -18,3 +18,29 @@ class Init(commands.Cog):
     @commands.check(check_if_is_host_or_admin)
     async def init(self, ctx):
         await globvars.state_manager.game.start()
+        await ctx.send('✅ Initialized channels and roles!')
+
+    @commands.command(
+        name="cleanup",
+        aliases=[
+            "clean_up",
+            "clup"
+        ]
+    )
+    @commands.check(check_if_is_host_or_admin)
+    async def cleanup(self, ctx):
+        await globvars.state_manager.game.clean_up()
+        await ctx.send('✅ Removed channels and roles!')
+
+    @commands.command(
+        name='reload',
+        aliases=[
+            'rl'
+        ]
+    )
+    @commands.check(check_if_is_host_or_admin)
+    async def reload(self, ctx):
+        await self.cleanup(ctx)
+        await self.init(ctx)
+
+
