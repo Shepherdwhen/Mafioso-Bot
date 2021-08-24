@@ -24,8 +24,6 @@ class StateManager:
         self.pregame = Pregame()
         self.game = None
 
-        globvars.client.load_extension('commands.pregame')
-        
         # commands.ingame will not be loaded when the bot is first
         # started, so the initial transition might throw an error
         try:
@@ -33,10 +31,12 @@ class StateManager:
         except ExtensionNotLoaded:
             pass
 
+        globvars.client.load_extension('commands.pregame')
+
     def init_game(self):
         self.state = State.ingame
         self.game = self.pregame.transition_to_game()
         self.pregame = None
 
-        globvars.client.load_extension('commands.ingame')
         globvars.client.unload_extension('commands.pregame')
+        globvars.client.load_extension('commands.ingame')
