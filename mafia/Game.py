@@ -43,6 +43,7 @@ class Game:
 
         await self.give_init_roles()
         await self.create_channels()
+        await self.send_role_messages()
 
     async def clean_up(self):
         for channel in self.managed_channels.copy():
@@ -149,3 +150,13 @@ class Game:
 
             else:
                 raise MafiaException(f"Channels must be of type 'single' or 'multi', not {channel['type']!r}")
+
+    async def send_role_messages(self):
+        for player in self.players:
+            await player.send(f"""
+Your role for this upcoming game is:
+
+`{self.roles[player]['name']}`
+
+Please do not copy or screenshot this message.
+            """)
