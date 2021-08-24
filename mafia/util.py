@@ -34,7 +34,6 @@ def check_if_is_host_or_admin(ctx):
     else:
         if ctx.author in globvars.state_manager.game.hosts:
             return True
-        return True
     if admin_role in ctx.author.roles:
         return True
     raise NotHost()
