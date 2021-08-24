@@ -22,7 +22,6 @@
             "members": [
                 "_role_example (key of role)"
             ],
-            "start_command": "ping",
             "name": "Example multi channel with {n} members"
         }
     },
