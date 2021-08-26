@@ -26,7 +26,7 @@ NUMBER_EMOJIS = {
     20 :'🟦',
 }
 
-active_polls: dict[int, tuple[discord.Message, str, list[str]]] = dict()
+active_polls: dict[int, tuple[discord.Message, str, dict[str, str]]] = dict()
 
 class Poll(commands.Cog):
 
@@ -66,11 +66,14 @@ class Poll(commands.Cog):
         while id in active_polls:
             id = id + 1
 
+        option_to_emoji = {}
+
         description_str = ""
         count = 0
         for option in options:
             count = count + 1
             description_str += f'{NUMBER_EMOJIS[count]} - {option}\n'
+            option_to_emoji[option] = NUMBER_EMOJIS[count]
 
         embed = discord.Embed(
             title=prompt,
@@ -81,10 +84,32 @@ class Poll(commands.Cog):
 
         msg = await ctx.send(embed=embed)
 
-        active_polls[id] = (msg, prompt, options)
+        active_polls[id] = (msg, prompt, option_to_emoji)
 
         for i in range(1, len(options) + 1):
             await msg.add_reaction(NUMBER_EMOJIS[i])
+
+    @poll.command(
+        name='ask'
+    )
+    async def poll_ask(self, ctx, *, question: str):
+        embed = discord.Embed(
+            title=question,
+            description='👍 - Yes\n👎 - No'
+        )
+
+        id = 1
+        while id in active_polls:
+            id = id + 1
+
+        embed.set_footer(text=f"Poll #{id}")
+
+        msg = await ctx.send(embed=embed)
+
+        active_polls[id] = (msg, question, {'Yes': '👍', 'No': '👎'})
+
+        await msg.add_reaction('👍')
+        await msg.add_reaction('👎')
 
     @poll.command(
         name='end',
@@ -102,10 +127,9 @@ class Poll(commands.Cog):
         summary = ''
 
         i = 0
-        for option in target_poll[2]:
+        for (option, emoji) in target_poll[2].items():
             i = i + 1
-            # reactions = discord.utils.get(target_poll[0].reactions, emoji=NUMBER_EMOJIS[i]).count
-            reactions = discord.utils.find(lambda r: str(r.emoji).strip() == NUMBER_EMOJIS[i], message.reactions).count
+            reactions = discord.utils.find(lambda r: str(r.emoji).strip() == emoji, message.reactions).count
 
             summary += f'{option} - {reactions - 1} vote{"s" if reactions - 2 else ""}\n' # Bot will add one vote to the actual numberd
 
