@@ -98,6 +98,10 @@ class Game:
                 overwrites={
                     guild.default_role: PermissionOverwrite(read_messages=False),
 
+                    # Dead players talking in their private channels isnt a big
+                    # deal and it may be enforced by category inheritance anyways,
+                    # so don't bother restricting dead players from talking
+
                     guild.me: PermissionOverwrite(read_messages=True),
                     host_role: PermissionOverwrite(read_messages=True),
                     member: PermissionOverwrite(read_messages=True)
@@ -113,10 +117,13 @@ class Game:
                 ))
 
         async def create_multi_channel(channel, members):
+            dead_role = guild.get_role(DEAD_ROLE_ID)
+
             overwites = {member: PermissionOverwrite(read_messages=True) for member in members}
             overwites[guild.default_role] = PermissionOverwrite(read_messages=False)
             overwites[guild.me] = PermissionOverwrite(read_messages=True)
             overwites[host_role] = PermissionOverwrite(read_messages=True)
+            overwites[dead_role] = PermissionOverwrite(send_messages=False)
 
             created_channel = await guild.create_text_channel(
                 name=channel['name'].format(
