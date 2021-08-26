@@ -34,7 +34,8 @@
                 "This is an example description for this role",
                 "This is example role 1"
             ],
-            "alignment": "Example alignment"
+            "alignment": "Example alignment",
+            "power": "Unpowered"
         },
         "example_role_2": {
             "name": "Example role 2",
@@ -42,7 +43,8 @@
                 "This is an example description for this role",
                 "This is example role 2"
             ],
-            "alignment": "Example alignment"
+            "alignment": "Example alignment",
+            "power": "Unpowered"
         }
     },
     "channels": {
