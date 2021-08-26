@@ -1,8 +1,8 @@
 from discord.ext import commands
 
+import globvars
 from mafia.util import check_if_is_host_or_admin
 
-import globvars
 
 class End(commands.Cog):
 

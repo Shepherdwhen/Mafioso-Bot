@@ -1,9 +1,10 @@
+import discord
 from discord.ext import commands
 
-from mafia.util import check_if_is_host
 import globvars
-import discord
 from config import ALIVE_ROLE_ID, DEAD_ROLE_ID, SERVER_ID
+from mafia.util import check_if_is_host
+
 
 class KillQueue(commands.Cog):
 

@@ -1,7 +1,8 @@
-from .Init import Init
-from .Role import Role
 from .End import End
+from .Init import Init
 from .KillQueue import KillQueue
+from .Role import Role
+
 
 def setup(bot):
     bot.add_cog(Role(bot))
