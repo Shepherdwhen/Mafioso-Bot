@@ -12,5 +12,6 @@ globvars.client = commands.Bot(
 )
 
 globvars.client.load_extension('listeners')
+globvars.client.load_extension('commands.global')
 
 globvars.client.run(TOKEN)
