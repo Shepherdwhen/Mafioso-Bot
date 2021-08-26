@@ -39,7 +39,7 @@ class Game:
 
         players_without_role = self.alive_players - set(self.roles.keys())
         if players_without_role:
-            raise NoRoles(players_without_role)
+            raise NoRoles(*players_without_role)
 
         await self.give_init_roles()
         await self.create_channels()
