@@ -1,6 +1,8 @@
-from discord.ext import commands
 import discord
+from discord.ext import commands
 
+import globvars
+from mafia.State import State
 from mafia.util import check_if_is_host_or_admin
 
 NUMBER_EMOJIS = {
@@ -110,6 +112,46 @@ class Poll(commands.Cog):
 
         await msg.add_reaction('👍')
         await msg.add_reaction('👎')
+
+    @poll.command(
+        name='alive'
+    )
+    async def poll_alive(self, ctx, *, question: str):
+        if globvars.state_manager.state == State.pregame:
+            players = globvars.state_manager.pregame.queue
+        else:
+            players = globvars.state_manager.game.alive_players
+
+        if len(players) < 1:
+            return await ctx.send('⛔ Cannot perform an alive poll with no alive players!')
+        elif len(players) > 20:
+            return await ctx.send('⛔ Cannot perform an alive poll with more than twenty alive players!')
+
+        id = 1
+        while id in active_polls:
+            id = id + 1
+
+        player_to_emoji = {}
+        description_str = ""
+
+        count = 0
+        for player in players:
+            count += 1
+            description_str += f"{NUMBER_EMOJIS[count]} - {player.mention}\n"
+            player_to_emoji[player.mention] = NUMBER_EMOJIS[count]
+
+        embed = discord.Embed(
+            title=question,
+            description=description_str
+        )
+        embed.set_footer(text=f"Poll #{id}")
+
+        msg = await ctx.send(embed=embed)
+
+        active_polls[id] = (msg, question, player_to_emoji)
+
+        for i in range(1, len(players) + 1):
+            await msg.add_reaction(NUMBER_EMOJIS[i])
 
     @poll.command(
         name='end',
