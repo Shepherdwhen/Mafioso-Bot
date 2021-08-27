@@ -13,4 +13,4 @@ class Ping(commands.Cog):
         ]
     )
     async def ping(self, ctx):
-        await ctx.send(f'Pong! The bot\'s latency is **{round(self.bot.latency, 2)}** seconds')
+        await ctx.send(f'Pong! The bot\'s latency is **{round(self.bot.latency, 3) * 1000}** ms')
