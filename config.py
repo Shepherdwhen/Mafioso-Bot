@@ -18,6 +18,7 @@ try:
         HOST_ROLE_ID = config['ids']['host_role_id']
         ALIVE_ROLE_ID = config['ids']['alive_role_id']
         DEAD_ROLE_ID = config['ids']['dead_role_id']
+        SPECTATOR_ROLE_ID = config['ids']['spectator_role_id']
 
         LOBBY_CHANNEL_ID = config['ids']['lobby_channel_id']
 
