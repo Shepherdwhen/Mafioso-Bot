@@ -20,5 +20,6 @@ class End(commands.Cog):
     )
     @commands.check(check_if_is_host_or_admin)
     async def end_game(self, ctx):
+        await globvars.state_manager.game.clean_up()
         globvars.state_manager.init_pregame()
         await ctx.send('✅ Ended game and transitioned to pregame!')
