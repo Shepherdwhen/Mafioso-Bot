@@ -70,14 +70,17 @@ class Game:
         """
         
         guild = globvars.client.get_guild(SERVER_ID)
+        spectator_role = guild.get_role(SPECTATOR_ROLE_ID)
 
         host_role = guild.get_role(HOST_ROLE_ID)
         for host in self.hosts:
             await host.add_roles(host_role)
+            await host.remove_roles(spectator_role)
 
         alive_role = guild.get_role(ALIVE_ROLE_ID)
         for player in self.alive_players: # All players will be alive initially
             await player.add_roles(alive_role)
+            await player.remove_roles(spectator_role)
 
     async def create_channels(self):
         """Create all the channels with the needed permissions
