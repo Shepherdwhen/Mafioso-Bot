@@ -160,10 +160,13 @@ class Game:
 
     async def send_role_messages(self):
         for player in self.players:
-            await player.send(f"""
-Your role for this upcoming game is:
+            try:
+                await player.send(f"""
+    Your role for this upcoming game is:
 
-`{self.roles[player]['name']}`
+    `{self.roles[player]['name']}`
 
-Please do not copy or screenshot this message.
-            """)
+    Please do not copy or screenshot this message.
+                """)
+            except discord.Forbidden:
+                pass # User blocked
