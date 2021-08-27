@@ -3,7 +3,7 @@ from discord.ext import commands
 
 import globvars
 from mafia.errors import NotPlayer
-from mafia.util import RoleConverter, check_if_is_host_or_admin
+from mafia.util import PlayerConverter, RoleConverter, check_if_is_host_or_admin
 
 
 class Role(commands.Cog):
@@ -21,7 +21,7 @@ class Role(commands.Cog):
         name="set"
     )
     @commands.check(check_if_is_host_or_admin)
-    async def role_set(self, ctx, target: discord.Member, *, role: RoleConverter):
+    async def role_set(self, ctx, target: PlayerConverter, *, role: RoleConverter):
         if target not in globvars.state_manager.game.players:
             raise NotPlayer()
 

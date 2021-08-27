@@ -1,9 +1,11 @@
+from operator import indexOf
 from discord.ext import commands
-from discord.ext.commands.errors import BadArgument, CommandError
+from discord.ext.commands.errors import BadArgument, CommandError, MemberNotFound
+import sqlite3
 
 import globvars
 from config import ADMIN_ROLE_ID, MOD_ROLE_ID, SERVER_ID
-from mafia.errors import CannotHost, NotAdmin, NotHost
+from mafia.errors import CannotHost, NotAdmin, NotHost, NotPlayer
 from mafia.State import State
 
 from .data import roles
@@ -78,3 +80,45 @@ class RoleConverter(commands.Converter):
             raise # Don't catch raw BadArguments
         except Exception as e:
             raise CommandError from e
+
+class MemberConverter(commands.MemberConverter):
+
+    async def convert(self, ctx, argument: str):
+        try:
+            result = await super().convert(ctx, argument)
+        except MemberNotFound:
+            # Look up by emoji
+            with sqlite3.connect('database.sqlite3') as connection:
+                data = connection.execute("""
+                SELECT user_id, emoji FROM player_data
+                """).fetchall()
+
+                emoji_to_id = {row[1]: row[0] for row in data}
+
+                emojis = [row[1] for row in data]
+                conflicting_emojis = [emoji for emoji in emojis if emojis.count(emoji) > 1]
+
+            argument = argument.strip()
+            id = emoji_to_id.get(argument, None)
+
+            if id:
+                member = await globvars.client.get_guild(SERVER_ID).fetch_member(id)
+                if member:
+                    result =  member
+                if argument in conflicting_emojis:
+                    result = None # Conflict, cancel found member
+
+        if not result:
+            raise MemberNotFound(argument)
+
+        return result
+
+class PlayerConverter(MemberConverter):
+
+    async def convert(self, ctx, argument: str):
+        result = await super().convert(ctx, argument)
+
+        if result not in globvars.state_manager.game.players:
+            raise NotPlayer()
+
+        return result

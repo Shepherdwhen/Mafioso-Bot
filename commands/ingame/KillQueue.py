@@ -3,7 +3,7 @@ from discord.ext import commands
 
 import globvars
 from config import ALIVE_ROLE_ID, DEAD_ROLE_ID, SERVER_ID
-from mafia.util import check_if_is_host
+from mafia.util import PlayerConverter, check_if_is_host
 
 
 class KillQueue(commands.Cog):
@@ -39,7 +39,7 @@ Current Kill queue:
             '+'
         ]
     )
-    async def killqueue_add(self, ctx, targets: commands.Greedy[discord.Member]):
+    async def killqueue_add(self, ctx, targets: commands.Greedy[PlayerConverter]):
         current_killqueue = globvars.state_manager.game.kill_queue
 
         for target in targets:
@@ -57,7 +57,7 @@ Current Kill queue:
             'rm'
         ]
     )
-    async def killqueue_remove(self, ctx, targets: commands.Greedy[discord.Member]):
+    async def killqueue_remove(self, ctx, targets: commands.Greedy[PlayerConverter]):
         current_killqueue = globvars.state_manager.game.kill_queue
 
         for target in targets:
@@ -103,7 +103,7 @@ Current Kill queue:
         name='kill'
     )
     @commands.check(check_if_is_host)
-    async def kill(self, ctx, targets: commands.Greedy[discord.Member]):
+    async def kill(self, ctx, targets: commands.Greedy[PlayerConverter]):
         guild = globvars.client.get_guild(SERVER_ID)
 
         alive_role = guild.get_role(ALIVE_ROLE_ID)
@@ -124,7 +124,7 @@ Current Kill queue:
         ]
     )
     @commands.check(check_if_is_host)
-    async def revive(self, ctx, targets: commands.Greedy[discord.Member]):
+    async def revive(self, ctx, targets: commands.Greedy[PlayerConverter]):
         guild = globvars.client.get_guild(SERVER_ID)
 
         alive_role = guild.get_role(ALIVE_ROLE_ID)

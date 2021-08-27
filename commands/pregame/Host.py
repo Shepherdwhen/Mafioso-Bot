@@ -7,7 +7,7 @@ from discord.ext import commands
 import globvars
 from config import ADMIN_ROLE_ID, SERVER_ID
 from mafia.errors import NotAdmin
-from mafia.util import check_if_can_host, check_if_is_host_or_admin
+from mafia.util import MemberConverter, check_if_can_host, check_if_is_host_or_admin
 
 
 class Host(commands.Cog):
@@ -30,7 +30,7 @@ class Host(commands.Cog):
         name='unhost'
     )
     @commands.check(check_if_is_host_or_admin)
-    async def unhost(self, ctx, target: discord.Member = None):
+    async def unhost(self, ctx, target: MemberConverter = None):
         if target:
             admin_role = globvars.client.get_guild(SERVER_ID).get_role(ADMIN_ROLE_ID)
             if admin_role not in ctx.author.roles:
