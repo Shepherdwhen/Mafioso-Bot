@@ -53,7 +53,8 @@ Current Kill queue:
         name='remove',
         aliases=[
             'r',
-            '-'
+            '-',
+            'rm'
         ]
     )
     async def killqueue_remove(self, ctx, targets: commands.Greedy[discord.Member]):
