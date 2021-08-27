@@ -2,7 +2,7 @@ import traceback
 
 from discord.ext import commands
 from discord.ext.commands.errors import (BadArgument, CheckFailure,
-                                         CommandNotFound)
+                                         CommandNotFound, MissingRequiredArgument)
 
 from mafia.errors import (AlreadyHost, AlreadyJoined, CannotHost,
                           MafiaException, NoRoles, NotAdmin, NotHost,
@@ -45,6 +45,8 @@ class on_command_error(commands.Cog):
             return
         elif isinstance(error, BadArgument):
             return await ctx.send('⛔ An invalid or incomplete argument was provided!')
+        elif isinstance(error, MissingRequiredArgument):
+            return await ctx.send('⛔ You are missing arguments!')
         elif isinstance(error, MafiaException):
             await ctx.send(f'⛔ An unhandled error has occured: {error}')
 
