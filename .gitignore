@@ -140,3 +140,4 @@ cython_debug/
 # Local
 .vscode/
 config.toml
+database.sqlite3

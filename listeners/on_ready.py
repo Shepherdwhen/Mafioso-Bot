@@ -1,3 +1,5 @@
+import sqlite3
+
 from discord.ext import commands
 
 
@@ -11,5 +13,14 @@ class on_ready(commands.Cog):
         from globvars import client, state_manager
         
         print(f"Logged in as {client.user.name}#{client.user.discriminator}")
+
+        with sqlite3.connect('database.sqlite3') as connection:
+            connection.execute("""
+            CREATE TABLE IF NOT EXISTS player_data (
+                user_id INTEGER PRIMARY KEY NOT NULL,
+                nick    TEXT,
+                emoji   TEXT
+            )
+            """)
 
         state_manager.init_pregame()

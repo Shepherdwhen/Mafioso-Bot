@@ -12,6 +12,7 @@ license = "MIT"
 python = "^3.6.1"
 "discord.py" = "^1.7.3"
 toml = "^0.10.2"
+emoji = "^1.4.2"
 
 [tool.poetry.dev-dependencies]
 isort = "^5.9.3"

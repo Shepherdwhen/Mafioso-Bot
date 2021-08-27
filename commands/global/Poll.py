@@ -1,4 +1,7 @@
+import sqlite3
+
 import discord
+import emoji
 from discord.ext import commands
 
 import globvars
@@ -117,6 +120,13 @@ class Poll(commands.Cog):
         name='alive'
     )
     async def poll_alive(self, ctx, *, question: str):
+        with sqlite3.connect('database.sqlite3') as connection:
+            data = connection.execute("""
+            SELECT user_id, emoji FROM player_data
+            """)
+
+            player_emojis = {item[0]: item[1] for item in data}
+
         if globvars.state_manager.state == State.pregame:
             players = globvars.state_manager.pregame.queue
         else:
@@ -135,10 +145,19 @@ class Poll(commands.Cog):
         description_str = ""
 
         count = 0
+        emojis = []
+
         for player in players:
-            count += 1
-            description_str += f"{NUMBER_EMOJIS[count]} - {player.mention}\n"
-            player_to_emoji[player.mention] = NUMBER_EMOJIS[count]
+            if player.id in player_emojis:
+                emoji = player_emojis[player.id]
+            else:
+                count += 1
+                emoji = NUMBER_EMOJIS[count]
+
+            emojis.append(emoji)
+
+            description_str += f"{emoji} - {player.mention}\n"
+            player_to_emoji[player.mention] = emoji
 
         embed = discord.Embed(
             title=question,
@@ -150,8 +169,8 @@ class Poll(commands.Cog):
 
         active_polls[id] = (msg, question, player_to_emoji)
 
-        for i in range(1, len(players) + 1):
-            await msg.add_reaction(NUMBER_EMOJIS[i])
+        for emoji in emojis:
+            await msg.add_reaction(emoji)
 
     @poll.command(
         name='end',

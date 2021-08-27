@@ -1,8 +1,9 @@
-from mafia.State import State
 from discord.ext import commands
-import globvars
 
+import globvars
 from config import SERVER_ID, SPECTATOR_ROLE_ID
+from mafia.State import State
+
 
 class Spectate(commands.Cog):
 
