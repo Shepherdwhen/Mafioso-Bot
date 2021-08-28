@@ -4,7 +4,7 @@ from discord.errors import NotFound
 
 import globvars
 from config import (ALIVE_ROLE_ID, DEAD_ROLE_ID, HOST_ROLE_ID,
-                    LOBBY_CHANNEL_ID, SERVER_ID, SPECTATOR_ROLE_ID)
+                    MAIN_CATEGORY_ID, SERVER_ID, SPECTATOR_ROLE_ID)
 
 from .data import Role, channels
 from .errors import MafiaException, NoRoles
@@ -25,7 +25,7 @@ class Game:
         self.kill_queue: set[discord.Member] = set()
 
         self.managed_channels: set[discord.TextChannel] = set()
-        self.lobby_channel: discord.TextChannel = globvars.client.get_guild(SERVER_ID).get_channel(LOBBY_CHANNEL_ID)
+        self.main_category: discord.CategoryChannel = globvars.client.get_guild(SERVER_ID).get_channel(MAIN_CATEGORY_ID)
 
     @property
     def players(self) -> set[discord.Member]:
@@ -87,7 +87,7 @@ class Game:
         """
 
         guild = globvars.client.get_guild(SERVER_ID)
-        target_category = guild.get_channel(LOBBY_CHANNEL_ID).category
+        target_category = self.main_category
 
         host_role = guild.get_role(HOST_ROLE_ID)
         spectator_role = guild.get_role(SPECTATOR_ROLE_ID)

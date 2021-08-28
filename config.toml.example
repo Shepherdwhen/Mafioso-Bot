@@ -15,4 +15,4 @@ alive_role_id = 124567890      # Alive players: role given to players that are c
 dead_role_id = 123456780       # Dead players: role given to players that are currently dead
 spectator_role_id = 1234567890 # Spectators: can view all game channels (like hosts), but cannot talk
 
-lobby_channel_id = 14567890 # Id of the main lobby channel. Individual player/team channels will be created in the same category as this
+main_category_id = 14567890 # Id of the main category. Individual player/team channels will be created in this category. To use no category, set to server_id

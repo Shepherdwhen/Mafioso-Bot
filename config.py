@@ -20,7 +20,7 @@ try:
         DEAD_ROLE_ID = config['ids']['dead_role_id']
         SPECTATOR_ROLE_ID = config['ids']['spectator_role_id']
 
-        LOBBY_CHANNEL_ID = config['ids']['lobby_channel_id']
+        MAIN_CATEGORY_ID = (config['ids']['main_category_id'] if config['ids']['main_category_id'] != SERVER_ID else None)
 
 except FileNotFoundError:
     print("Config file not found.\nDo you have a file named config.toml in the projects root directory?")
