@@ -10,14 +10,6 @@
         },
 
         "_channel_example_1": {
-            "type": "single",
-            "members": [
-                "_role_example (key of role)"
-            ],
-            "start_message": "This is an example channel",
-            "name": "Example channel for {player_name}"
-        },
-        "_channel_example_2": {
             "type": "multi",
             "members": [
                 "_role_example (key of role)"
@@ -48,14 +40,6 @@
         }
     },
     "channels": {
-        "example_single_channel": {
-            "type": "single",
-            "members": [
-                "example_role_1",
-                "example_role_2"
-            ],
-            "name": "{player_name}"
-        },
         "example_multi_channel": {
             "type": "multi",
             "members": [

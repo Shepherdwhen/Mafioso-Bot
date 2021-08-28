@@ -92,12 +92,9 @@ class Game:
         host_role = guild.get_role(HOST_ROLE_ID)
         spectator_role = guild.get_role(SPECTATOR_ROLE_ID)
 
-        async def create_individual_channel(channel, member, role):
+        async def create_individual_channel(channel, member):
             created_channel = await guild.create_text_channel(
-                name=channel['name'].format(
-                    player_name=member.display_name,
-                    role_name=role['name']
-                ),
+                name=channel['name'],
                 category=target_category,
                 overwrites={
                     guild.default_role: PermissionOverwrite(read_messages=False),
@@ -114,12 +111,6 @@ class Game:
             )
 
             self.managed_channels.add(created_channel)
-
-            if 'start_message' in channel and channel['start_message']:
-                await created_channel.send(channel['start_message'].format(
-                    player_name=member.display_name,
-                    role_name=role['name']
-                ))
 
         async def create_multi_channel(channel, members):
             dead_role = guild.get_role(DEAD_ROLE_ID)
@@ -147,12 +138,7 @@ class Game:
                 ))
 
         for channel in channels.values():
-            if channel['type'] == 'single':
-                for player in self.players:
-                    if self.roles[player]['id'] in channel['members']:
-                        await create_individual_channel(channel, player, self.roles[player])
-
-            elif channel['type'] == 'multi':
+            if channel['type'] == 'multi':
                 members = []
                 for player in self.players:
                     if self.roles[player]['id'] in channel['members']:
@@ -162,7 +148,12 @@ class Game:
                     await create_multi_channel(channel, members)
 
             else:
-                raise MafiaException(f"Channels must be of type 'single' or 'multi', not {channel['type']!r}")
+                raise MafiaException(f"Channels must be of type 'multi', not {channel['type']!r}")
+
+        for player in self.players:
+            await create_individual_channel({
+                'name': self.roles[player]['name']
+            }, player)
 
     async def send_role_messages(self):
         for player in self.players:
