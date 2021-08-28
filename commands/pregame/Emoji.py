@@ -18,10 +18,11 @@ class Emoji(commands.Cog):
         with sqlite3.connect('database.sqlite3') as connection:
             connection.execute("""
             REPLACE INTO
-                player_data (user_id, emoji)
+                player_data (user_id, emoji, nick)
                 VALUES (
                     :id,
-                    :emoji
+                    :emoji,
+                    (SELECT nick FROM player_data WHERE user_id=:id)
                 )
             """, {
                 'id': ctx.author.id,
