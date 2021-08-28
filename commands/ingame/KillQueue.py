@@ -92,6 +92,11 @@ Current Kill queue:
             if dead_role not in player.roles:
                 await player.add_roles(dead_role)
 
+            if player in globvars.state_manager.game.alive_players:
+                globvars.state_manager.game.alive_players.remove(player)
+            if player not in globvars.state_manager.game.dead_players:
+                globvars.state_manager.game.dead_players.add(player)
+
         globvars.state_manager.game.kill_queue.clear()
 
         await ctx.send(f'✅ Kill queue executed')
@@ -117,10 +122,21 @@ Current Kill queue:
         dead_role = guild.get_role(DEAD_ROLE_ID)
 
         for player in targets:
+            print(f"KILLING {player.display_name}")
             if alive_role in player.roles:
                 await player.remove_roles(alive_role)
             if dead_role not in player.roles:
                 await player.add_roles(dead_role)
+
+            if player in globvars.state_manager.game.alive_players:
+                print(f"PLAYER IN ALIVE")
+                globvars.state_manager.game.alive_players.remove(player)
+            if player not in globvars.state_manager.game.dead_players:
+                print(f"PLAYER NOT IN DEAD")
+                globvars.state_manager.game.dead_players.add(player)
+
+            print(f"ALIVE: {globvars.state_manager.game.alive_players}")
+            print(f"DEAD: {globvars.state_manager.game.dead_players}")
 
         await ctx.send(f'✅ Killed player{"s" if len(targets) != 1 else ""}!')
 
@@ -142,5 +158,10 @@ Current Kill queue:
                 await player.add_roles(alive_role)
             if dead_role in player.roles:
                 await player.remove_roles(dead_role)
+
+            if player not in globvars.state_manager.game.alive_players:
+                globvars.state_manager.game.alive_players.add(player)
+            if player in globvars.state_manager.game.dead_players:
+                globvars.state_manager.game.dead_players.remove(player)
 
         await ctx.send(f'✅ Revived player{"s" if len(targets) != 1 else ""}!')
