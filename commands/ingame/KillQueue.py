@@ -1,5 +1,5 @@
-import discord
 from discord.ext import commands
+import sqlite3
 
 import globvars
 from config import ALIVE_ROLE_ID, DEAD_ROLE_ID, SERVER_ID
@@ -22,10 +22,17 @@ class KillQueue(commands.Cog):
     @commands.check(check_if_is_host)
     async def killqueue(self, ctx):
         if ctx.invoked_subcommand is None:
+            with sqlite3.connect('database.sqlite3') as connection:
+                data = connection.execute("""
+                SELECT user_id, nick FROM player_data
+                """).fetchall()
+
+            id_to_nick = {row[0]: row[1] for row in data if row[1]}
+
             # Send current kill queue
             game = globvars.state_manager.game
 
-            formatted = ' - ' + ('\n - '.join([p.display_name for p in game.kill_queue]) if game.kill_queue else 'Queue empty')
+            formatted = ' - ' + ('\n - '.join([(id_to_nick[p.id] if p.id in id_to_nick else p.display_name) for p in game.kill_queue]) if game.kill_queue else 'Queue empty')
             await ctx.send(f"""```
 Current Kill queue:
 
