@@ -3,16 +3,6 @@ import sqlite3
 from discord.ext import commands
 from emoji import UNICODE_EMOJI_ENGLISH
 
-
-def is_emoji(s):
-    count = 0
-    for emoji in UNICODE_EMOJI_ENGLISH:
-        print(emoji)
-        count += s.count(emoji)
-        if count > 1:
-            return False
-    return bool(count)
-
 class Emoji(commands.Cog):
 
     def __init__(self, bot):
