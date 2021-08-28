@@ -1,7 +1,7 @@
 import sqlite3
 
 import discord
-import emoji
+import random
 from discord.ext import commands
 
 import globvars
@@ -67,9 +67,9 @@ class Poll(commands.Cog):
         if len(options) < 1 or len(options) > len(NUMBER_EMOJIS.keys()):
             return await ctx.send(f'⛔ There is a maximum of twenty options and a minimum of one!')
 
-        id = 1
+        id = random.randint(0, 9999)
         while id in active_polls:
-            id = id + 1
+            id = random.randint(0, 9999)
 
         option_to_emoji = {}
 
@@ -103,9 +103,9 @@ class Poll(commands.Cog):
             description='👍 - Yes\n👎 - No'
         )
 
-        id = 1
+        id = random.randint(0, 9999)
         while id in active_polls:
-            id = id + 1
+            id = random.randint(0, 9999)
 
         embed.set_footer(text=f"Poll #{id}")
 
@@ -137,9 +137,9 @@ class Poll(commands.Cog):
         elif len(players) > 20:
             return await ctx.send('⛔ Cannot perform an alive poll with more than twenty alive players!')
 
-        id = 1
+        id = random.randint(0, 9999)
         while id in active_polls:
-            id = id + 1
+            id = random.randint(0, 9999)
 
         player_to_emoji = {}
         description_str = ""
