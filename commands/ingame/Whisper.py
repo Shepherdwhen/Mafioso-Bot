@@ -1,4 +1,3 @@
-import sqlite3
 import discord
 from discord.ext import commands
 from mafia.util import PlayerConverter, check_if_is_host, check_if_is_player
@@ -27,13 +26,6 @@ class Whisper(commands.Cog):
     )
     @commands.check(check_if_is_player)
     async def whisper_send(self, ctx, target: PlayerConverter, *, message: str):
-        with sqlite3.connect('database.sqlite3') as connection:
-            nick = connection.execute("""
-            SELECT nick, user_id FROM player_data WHERE user_id = :id
-            """, {
-                'id': ctx.author.id
-            }).fetchone()
-
         if ctx.author not in whisper_ratelimit:
             whisper_ratelimit[ctx.author] = 0
         whisper_ratelimit[ctx.author] += 1
@@ -43,7 +35,7 @@ class Whisper(commands.Cog):
 
         channel = globvars.state_manager.game.player_to_private_channel[target]
 
-        await channel.send(f'From **{nick[0] if nick else ctx.author.display_name}**: {message}')
+        await channel.send(f'Whisper: {message}')
         await ctx.send('✅ Whisper sent!')
 
     @whisper.command(
