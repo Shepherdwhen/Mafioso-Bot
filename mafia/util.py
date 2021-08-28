@@ -47,6 +47,11 @@ def check_if_can_host(ctx):
         return True
     raise CannotHost()
 
+def check_if_is_player(ctx):
+    if ctx.author not in globvars.state_manager.game.players:
+        raise NotPlayer()
+    return True
+
 class RoleConverter(commands.Converter):
 
     def __init__(self):
@@ -84,6 +89,7 @@ class RoleConverter(commands.Converter):
 class MemberConverter(commands.MemberConverter):
 
     async def convert(self, ctx, argument: str):
+        result = None
         try:
             result = await super().convert(ctx, argument)
         except MemberNotFound:

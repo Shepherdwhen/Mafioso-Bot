@@ -25,6 +25,7 @@ class Game:
         self.kill_queue: set[discord.Member] = set()
 
         self.managed_channels: set[discord.TextChannel] = set()
+        self.player_to_private_channel: dict[discord.Member, discord.TextChannel] = dict()
         self.main_category: discord.CategoryChannel = globvars.client.get_guild(SERVER_ID).get_channel(MAIN_CATEGORY_ID)
 
     @property
@@ -53,6 +54,7 @@ class Game:
                 pass # Channel already deleted
             finally:
                 self.managed_channels.remove(channel)
+        self.player_to_private_channel.clear()
 
         guild = globvars.client.get_guild(SERVER_ID)
 
@@ -111,6 +113,7 @@ class Game:
             )
 
             self.managed_channels.add(created_channel)
+            self.player_to_private_channel[member] = created_channel
 
         async def create_multi_channel(channel, members):
             dead_role = guild.get_role(DEAD_ROLE_ID)
