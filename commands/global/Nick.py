@@ -1,4 +1,5 @@
 import sqlite3
+import discord
 from discord.ext import commands
 
 from mafia.util import MemberConverter, check_if_is_host_or_admin
@@ -27,3 +28,7 @@ class Nick(commands.Cog):
                 'nick': nick.strip()
             })
         await ctx.send(f'✅ Set **{target.display_name}**\'s nickname!')
+        try:
+            target.edit(nick=nick.strip())
+        except discord.Forbidden:
+            pass
