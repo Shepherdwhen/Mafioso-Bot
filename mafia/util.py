@@ -90,7 +90,7 @@ class MemberConverter(commands.MemberConverter):
             # Look up by emoji
             with sqlite3.connect('database.sqlite3') as connection:
                 data = connection.execute("""
-                SELECT user_id, emoji FROM player_data
+                SELECT user_id, emoji, nick FROM player_data
                 """).fetchall()
 
                 emoji_to_id = {row[1]: row[0] for row in data}
@@ -100,6 +100,24 @@ class MemberConverter(commands.MemberConverter):
 
             argument = argument.strip()
             id = emoji_to_id.get(argument, None)
+
+            if not id:
+                # Look up by nickname
+                nick_to_id = {row[2]: row[0] for row in data}
+
+                if argument in nick_to_id:
+                    id = nick_to_id[argument]
+                else:
+                    found = None
+                    for nick in nick_to_id:
+                        if argument in nick:
+                            if found:
+                                found = None # Conflict, cancel found member
+                                break
+                            found = nick
+                    
+                    if found:
+                        id = nick[found]
 
             if id:
                 member = await globvars.client.get_guild(SERVER_ID).fetch_member(id)
