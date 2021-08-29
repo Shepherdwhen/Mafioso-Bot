@@ -26,7 +26,13 @@ class Game:
 
         self.managed_channels: set[discord.TextChannel] = set()
         self.player_to_private_channel: dict[discord.Member, discord.TextChannel] = dict()
+        self.player_to_multi_channels: dict[discord.Member, set[discord.TextChannel]] = dict()
         self.main_category: discord.CategoryChannel = globvars.client.get_guild(SERVER_ID).get_channel(MAIN_CATEGORY_ID)
+
+        # Players who have been spectators are not eligible to be backups
+        # so we keep track of who has spectated this game
+        # Also contains players who left the game after a back up
+        self.cannot_backup: set[discord.Member] = set()
 
     @property
     def players(self) -> set[discord.Member]:
@@ -41,6 +47,11 @@ class Game:
         players_without_role = self.alive_players - set(self.roles.keys())
         if players_without_role:
             raise NoRoles(*players_without_role)
+
+        # Spectators can join during pregame, load all current spectators
+        # TODO: Issue with members intent?
+        spectator_role = globvars.client.get_guild(SERVER_ID).get_role(SPECTATOR_ROLE_ID)
+        self.cannot_backup = set(spectator_role.members)
 
         await self.give_init_roles()
         await self.create_channels()
@@ -134,6 +145,10 @@ class Game:
             )
 
             self.managed_channels.add(created_channel)
+            for member in members:
+                if member not in self.player_to_multi_channels:
+                    self.player_to_multi_channels[member] = set()
+                self.player_to_multi_channels[member].add(created_channel)
 
             if 'start_message' in channel and channel['start_message']:
                 await created_channel.send(channel['start_message'].format(

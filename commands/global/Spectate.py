@@ -28,6 +28,9 @@ class Spectate(commands.Cog):
             if ctx.author in queue_and_hosts:
                 return await ctx.send('⛔ You cannot spectate and be in a game!')
 
+        if globvars.state_manager.state == State.ingame:
+            globvars.state_manager.game.cannot_backup.add(ctx.author)
+
         spectator_role = globvars.client.get_guild(SERVER_ID).get_role(SPECTATOR_ROLE_ID)
 
         await ctx.author.add_roles(spectator_role)

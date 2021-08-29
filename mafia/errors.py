@@ -61,3 +61,8 @@ class NotPlayer(MafiaException):
     to perform a player restricted action or is targeted by a
     player-restricted operation
     """
+
+class CannotBackup(MafiaException):
+    """Exception raised when a player that is already joined or
+    hosting attempts to backup
+    """

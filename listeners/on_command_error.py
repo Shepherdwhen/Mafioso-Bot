@@ -4,7 +4,7 @@ from discord.ext import commands
 from discord.ext.commands.errors import (BadArgument, CheckFailure,
                                          CommandNotFound, MissingRequiredArgument)
 
-from mafia.errors import (AlreadyHost, AlreadyJoined, CannotHost,
+from mafia.errors import (AlreadyHost, AlreadyJoined, CannotBackup, CannotHost,
                           MafiaException, NoRoles, NotAdmin, NotHost,
                           NotHosted, NotJoined, NotPlayer, PlayerCannotHost)
 
@@ -39,6 +39,8 @@ class on_command_error(commands.Cog):
             return await ctx.send(f'⛔ Some members have no roles: **{users}**')
         elif isinstance(error, NotPlayer):
             return await ctx.send('⛔ This action requries a player!')
+        elif isinstance(error, CannotBackup):
+            return await ctx.send('⛔ That user cannot be a backup!')
         elif isinstance(error, CommandNotFound):
             return
         elif isinstance(error, CheckFailure):
