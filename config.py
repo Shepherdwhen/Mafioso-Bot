@@ -19,6 +19,8 @@ try:
         ALIVE_ROLE_ID = config['ids']['alive_role_id']
         DEAD_ROLE_ID = config['ids']['dead_role_id']
         SPECTATOR_ROLE_ID = config['ids']['spectator_role_id']
+        INGAME_ADMIN_ROLE_ID = config['ids']['ingame_admin_role_id']
+        INGAME_MOD_ROLE_ID = config['ids']['ingame_mod_role_id']
 
         MAIN_CATEGORY_ID = (config['ids']['main_category_id'] if config['ids']['main_category_id'] != SERVER_ID else None)
 
