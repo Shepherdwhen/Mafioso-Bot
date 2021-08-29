@@ -2,7 +2,8 @@ import traceback
 
 from discord.ext import commands
 from discord.ext.commands.errors import (BadArgument, CheckFailure,
-                                         CommandNotFound, MissingRequiredArgument)
+                                         CommandNotFound,
+                                         MissingRequiredArgument)
 
 from mafia.errors import (AlreadyHost, AlreadyJoined, CannotBackup, CannotHost,
                           MafiaException, NoRoles, NotAdmin, NotHost,

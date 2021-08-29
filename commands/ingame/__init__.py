@@ -1,10 +1,11 @@
+from .Backup import Backup
 from .End import End
 from .Init import Init
 from .KillQueue import KillQueue
-from .Role import Role
 from .List import List
+from .Role import Role
 from .Whisper import Whisper
-from .Backup import Backup
+
 
 def setup(bot):
     bot.add_cog(Role(bot))

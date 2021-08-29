@@ -1,9 +1,9 @@
 from .Info import Info
+from .Nick import Nick
 from .Ping import Ping
 from .Poll import Poll
-from .Spectate import Spectate
-from .Nick import Nick
 from .Promote import Promote
+from .Spectate import Spectate
 
 
 def setup(bot):

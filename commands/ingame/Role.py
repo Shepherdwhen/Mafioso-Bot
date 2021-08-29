@@ -1,9 +1,11 @@
 import sqlite3
+
 from discord.ext import commands
 
 import globvars
 from mafia.errors import NotPlayer
-from mafia.util import PlayerConverter, RoleConverter, check_if_is_host_or_admin
+from mafia.util import (PlayerConverter, RoleConverter,
+                        check_if_is_host_or_admin)
 
 
 class Role(commands.Cog):

@@ -1,8 +1,10 @@
+import math
+
 import discord
 from discord.ext import commands
-from mafia.util import PlayerConverter, check_if_is_host, check_if_is_player
+
 import globvars
-import math
+from mafia.util import PlayerConverter, check_if_is_host, check_if_is_player
 
 whisper_ratelimit: dict[discord.Member, int] = dict()
 max_whispers = math.inf

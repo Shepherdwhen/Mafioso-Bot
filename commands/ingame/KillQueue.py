@@ -1,5 +1,6 @@
-from discord.ext import commands
 import sqlite3
+
+from discord.ext import commands
 
 import globvars
 from config import ALIVE_ROLE_ID, DEAD_ROLE_ID, SERVER_ID

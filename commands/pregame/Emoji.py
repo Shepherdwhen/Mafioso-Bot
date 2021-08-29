@@ -3,6 +3,7 @@ import sqlite3
 from discord.ext import commands
 from emoji import UNICODE_EMOJI_ENGLISH
 
+
 class Emoji(commands.Cog):
 
     def __init__(self, bot):

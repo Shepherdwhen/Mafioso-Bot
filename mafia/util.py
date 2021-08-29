@@ -1,7 +1,9 @@
-from operator import indexOf
-from discord.ext import commands
-from discord.ext.commands.errors import BadArgument, CommandError, MemberNotFound
 import sqlite3
+from operator import indexOf
+
+from discord.ext import commands
+from discord.ext.commands.errors import (BadArgument, CommandError,
+                                         MemberNotFound)
 
 import globvars
 from config import ADMIN_ROLE_ID, MOD_ROLE_ID, SERVER_ID

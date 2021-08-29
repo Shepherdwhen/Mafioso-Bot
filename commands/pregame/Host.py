@@ -7,7 +7,8 @@ from discord.ext import commands
 import globvars
 from config import ADMIN_ROLE_ID, SERVER_ID
 from mafia.errors import NotAdmin
-from mafia.util import MemberConverter, check_if_can_host, check_if_is_host_or_admin
+from mafia.util import (MemberConverter, check_if_can_host,
+                        check_if_is_host_or_admin)
 
 
 class Host(commands.Cog):

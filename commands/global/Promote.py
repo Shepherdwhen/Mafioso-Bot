@@ -1,6 +1,9 @@
-from config import ADMIN_ROLE_ID, INGAME_ADMIN_ROLE_ID, INGAME_MOD_ROLE_ID, MOD_ROLE_ID, SERVER_ID
-import globvars
 from discord.ext import commands
+
+import globvars
+from config import (ADMIN_ROLE_ID, INGAME_ADMIN_ROLE_ID, INGAME_MOD_ROLE_ID,
+                    MOD_ROLE_ID, SERVER_ID)
+
 
 class Promote(commands.Cog):
 

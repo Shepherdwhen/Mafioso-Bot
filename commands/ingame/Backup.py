@@ -1,10 +1,11 @@
-from config import ALIVE_ROLE_ID, DEAD_ROLE_ID, SERVER_ID
-from discord.permissions import PermissionOverwrite
-from mafia.errors import CannotBackup
 from discord.ext import commands
-import globvars
+from discord.permissions import PermissionOverwrite
 
+import globvars
+from config import ALIVE_ROLE_ID, DEAD_ROLE_ID, SERVER_ID
+from mafia.errors import CannotBackup
 from mafia.util import MemberConverter, PlayerConverter, check_if_is_host
+
 
 class Backup(commands.Cog):
 
