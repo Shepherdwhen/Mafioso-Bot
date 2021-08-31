@@ -31,7 +31,7 @@ NUMBER_EMOJIS = {
     20 :'🟦',
 }
 
-active_polls: dict[int, tuple[discord.Message, str, dict[str, str]]] = dict()
+active_polls: dict[int, tuple[discord.Message, str, dict[str, str]], bool] = dict()
 
 class Poll(commands.Cog):
 
@@ -44,6 +44,14 @@ class Poll(commands.Cog):
                 return
 
             if reaction.message in [el[0] for el in active_polls.values()]:
+                restrict_dead_votes = active_polls[[k for k, v in active_polls.items() if v[0].id == reaction.message.id][0]][3]
+                if restrict_dead_votes:
+                    if globvars.state_manager.state == State.ingame:
+                        if member in globvars.state_manager.game.dead_players:
+                            await reaction.message.remove_reaction(reaction, member)
+                            return
+
+
                 for r in reaction.message.reactions:
                     if r.emoji != reaction.emoji:
                         async for m in r.users():
@@ -89,7 +97,7 @@ class Poll(commands.Cog):
 
         msg = await ctx.send(embed=embed)
 
-        active_polls[id] = (msg, prompt, option_to_emoji)
+        active_polls[id] = (msg, prompt, option_to_emoji, False)
 
         for i in range(1, len(options) + 1):
             await msg.add_reaction(NUMBER_EMOJIS[i])
@@ -111,7 +119,7 @@ class Poll(commands.Cog):
 
         msg = await ctx.send(embed=embed)
 
-        active_polls[id] = (msg, question, {'Yes': '👍', 'No': '👎'})
+        active_polls[id] = (msg, question, {'Yes': '👍', 'No': '👎'}, False)
 
         await msg.add_reaction('👍')
         await msg.add_reaction('👎')
@@ -167,7 +175,7 @@ class Poll(commands.Cog):
 
         msg = await ctx.send(embed=embed)
 
-        active_polls[id] = (msg, question, player_to_emoji)
+        active_polls[id] = (msg, question, player_to_emoji, True)
 
         for emoji in emojis:
             await msg.add_reaction(emoji)
