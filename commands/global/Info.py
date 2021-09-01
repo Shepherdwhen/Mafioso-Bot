@@ -3,7 +3,7 @@ from discord.ext import commands
 from mafia.util import RoleConverter
 
 TEMPLATE = """
-**{name}** - {alignment} {power}
+**{name}** | {alignment} {power}
 
 {description}
 """
