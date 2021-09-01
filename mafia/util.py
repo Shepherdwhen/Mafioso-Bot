@@ -59,7 +59,7 @@ class RoleConverter(commands.Converter):
     def __init__(self):
         pass
 
-    async def convert(self, ctx, argument: str):
+    async def convert(self, ctx, argument: 'str'):
         try:
             argument = argument.lower()
 
@@ -90,7 +90,7 @@ class RoleConverter(commands.Converter):
 
 class MemberConverter(commands.MemberConverter):
 
-    async def convert(self, ctx, argument: str):
+    async def convert(self, ctx, argument: 'str'):
         result = None
         try:
             result = await super().convert(ctx, argument)
@@ -141,7 +141,7 @@ class MemberConverter(commands.MemberConverter):
 
 class PlayerConverter(MemberConverter):
 
-    async def convert(self, ctx, argument: str):
+    async def convert(self, ctx, argument: 'str'):
         result = await super().convert(ctx, argument)
 
         if result not in globvars.state_manager.game.players:

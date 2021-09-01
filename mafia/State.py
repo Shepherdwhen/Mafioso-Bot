@@ -14,10 +14,10 @@ class State(enum.Enum):
 class StateManager:
 
     def __init__(self):
-        self.state: State = None
+        self.state: 'State' = None
 
-        self.pregame: Pregame = None
-        self.game: Game = None
+        self.pregame: 'Pregame' = None
+        self.game: 'Game' = None
 
     def init_pregame(self):
         self.state = State.pregame

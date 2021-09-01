@@ -1,7 +1,6 @@
 """Contains commands related to joining/leaving a lobby
 """
 
-import discord
 from discord.ext import commands
 
 import globvars
@@ -27,7 +26,7 @@ class Join(commands.Cog):
         aliases=['fj']
     )
     @commands.check(check_if_is_host_or_admin)
-    async def fjoin(self, ctx, targets: commands.Greedy[MemberConverter]):
+    async def fjoin(self, ctx, targets: 'commands.Greedy[MemberConverter]'):
         targets = set(targets)
         for target in targets:
             try:
@@ -51,7 +50,7 @@ class Join(commands.Cog):
         aliases=['fq']
     )
     @commands.check(check_if_is_host_or_admin)
-    async def fquit(self, ctx, targets: commands.Greedy[MemberConverter]):
+    async def fquit(self, ctx, targets: 'commands.Greedy[MemberConverter]'):
         targets = set(targets)
         for target in targets:
             try:

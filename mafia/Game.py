@@ -16,26 +16,26 @@ class Game:
     """
 
     def __init__(self, hosts, players):
-        self.hosts: set[discord.Member] = hosts
-        self.alive_players: set[discord.Member] = players
-        self.dead_players: set[discord.Member] = set()
+        self.hosts: 'set[discord.Member]' = hosts
+        self.alive_players: 'set[discord.Member]' = players
+        self.dead_players: 'set[discord.Member]' = set()
 
-        self.roles: dict[discord.Member, Role] = dict()
+        self.roles: 'dict[discord.Member, Role]' = dict()
 
-        self.kill_queue: set[discord.Member] = set()
+        self.kill_queue: 'set[discord.Member]' = set()
 
-        self.managed_channels: set[discord.TextChannel] = set()
-        self.player_to_private_channel: dict[discord.Member, discord.TextChannel] = dict()
-        self.player_to_multi_channels: dict[discord.Member, set[discord.TextChannel]] = dict()
-        self.main_category: discord.CategoryChannel = globvars.client.get_guild(SERVER_ID).get_channel(MAIN_CATEGORY_ID)
+        self.managed_channels: 'set[discord.TextChannel]' = set()
+        self.player_to_private_channel: 'dict[discord.Member, discord.TextChannel]' = dict()
+        self.player_to_multi_channels: 'dict[discord.Member, set[discord.TextChannel]]' = dict()
+        self.main_category: 'discord.CategoryChannel' = globvars.client.get_guild(SERVER_ID).get_channel(MAIN_CATEGORY_ID)
 
         # Players who have been spectators are not eligible to be backups
         # so we keep track of who has spectated this game
         # Also contains players who left the game after a back up
-        self.cannot_backup: set[discord.Member] = set()
+        self.cannot_backup: 'set[discord.Member]' = set()
 
     @property
-    def players(self) -> set[discord.Member]:
+    def players(self) -> 'set[discord.Member]':
         return self.alive_players | self.dead_players
 
     async def start(self):

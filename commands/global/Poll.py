@@ -31,7 +31,7 @@ NUMBER_EMOJIS = {
     20 :'🟦',
 }
 
-active_polls: dict[int, tuple[discord.Message, str, dict[str, str]], bool] = dict()
+active_polls: 'dict[int, tuple[discord.Message, str, dict[str, str]], bool]' = dict()
 
 class Poll(commands.Cog):
 
@@ -105,7 +105,7 @@ class Poll(commands.Cog):
     @poll.command(
         name='ask'
     )
-    async def poll_ask(self, ctx, *, question: str):
+    async def poll_ask(self, ctx, *, question: 'str'):
         embed = discord.Embed(
             title=question,
             description='👍 - Yes\n👎 - No'
@@ -127,7 +127,7 @@ class Poll(commands.Cog):
     @poll.command(
         name='alive'
     )
-    async def poll_alive(self, ctx, *, question: str):
+    async def poll_alive(self, ctx, *, question: 'str'):
         with sqlite3.connect('database.sqlite3') as connection:
             data = connection.execute("""
             SELECT user_id, emoji FROM player_data
@@ -186,7 +186,7 @@ class Poll(commands.Cog):
             'stop'
         ]
     )
-    async def poll_stop(self, ctx, id: int):
+    async def poll_stop(self, ctx, id: 'int'):
         if id not in active_polls:
             return await ctx.send(f'⛔ Poll #{id} does not exist!')
 

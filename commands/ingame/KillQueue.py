@@ -47,7 +47,7 @@ Current Kill queue:
             '+'
         ]
     )
-    async def killqueue_add(self, ctx, targets: commands.Greedy[PlayerConverter]):
+    async def killqueue_add(self, ctx, targets: 'commands.Greedy[PlayerConverter]'):
         current_killqueue = globvars.state_manager.game.kill_queue
 
         for target in targets:
@@ -65,7 +65,7 @@ Current Kill queue:
             'rm'
         ]
     )
-    async def killqueue_remove(self, ctx, targets: commands.Greedy[PlayerConverter]):
+    async def killqueue_remove(self, ctx, targets: 'commands.Greedy[PlayerConverter]'):
         current_killqueue = globvars.state_manager.game.kill_queue
 
         for target in targets:
@@ -116,7 +116,7 @@ Current Kill queue:
         name='kill'
     )
     @commands.check(check_if_is_host)
-    async def kill(self, ctx, targets: commands.Greedy[PlayerConverter]):
+    async def kill(self, ctx, targets: 'commands.Greedy[PlayerConverter]'):
         guild = globvars.client.get_guild(SERVER_ID)
 
         alive_role = guild.get_role(ALIVE_ROLE_ID)
@@ -142,7 +142,7 @@ Current Kill queue:
         ]
     )
     @commands.check(check_if_is_host)
-    async def revive(self, ctx, targets: commands.Greedy[PlayerConverter]):
+    async def revive(self, ctx, targets: 'commands.Greedy[PlayerConverter]'):
         guild = globvars.client.get_guild(SERVER_ID)
 
         alive_role = guild.get_role(ALIVE_ROLE_ID)

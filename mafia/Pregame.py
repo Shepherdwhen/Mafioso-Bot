@@ -16,8 +16,8 @@ class Pregame:
     """
     
     def __init__(self):
-        self.hosts: set[discord.Member] = set()
-        self.queue: set[discord.Member] = set()
+        self.hosts: 'set[discord.Member]' = set()
+        self.queue: 'set[discord.Member]' = set()
 
     def register_host(self, host: discord.Member):
         """Register a host for this pregame.
@@ -31,7 +31,7 @@ class Pregame:
             raise AlreadyHost()
         self.hosts.add(host)
 
-    def unregister_host(self, target: discord.Member):
+    def unregister_host(self, target: 'discord.Member'):
         """Unregister a host.
         If the target is not a host, `NotHost()` is raised.
         """
@@ -40,7 +40,7 @@ class Pregame:
             raise NotHost()
         self.hosts.remove(target)
 
-    def register_player(self, player: discord.Member):
+    def register_player(self, player: 'discord.Member'):
         """Registers a player for this pregame.
         If the player is already in the queue, `AlreadyJoined()`
         is raised.
@@ -54,7 +54,7 @@ class Pregame:
             raise PlayerCannotHost()
         self.queue.add(player)
 
-    def unregister_player(self, player: discord.Member):
+    def unregister_player(self, player: 'discord.Member'):
         """Removes a player from the pregame queue.
         If the player is already not in the queue, `NotJoined()`
         is raised.

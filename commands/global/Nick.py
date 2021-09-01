@@ -15,7 +15,7 @@ class Nick(commands.Cog):
         name='nick'
     )
     @commands.check(check_if_is_host_or_admin)
-    async def nick(self, ctx, target: MemberConverter, *, nick: str):
+    async def nick(self, ctx, target: 'MemberConverter', *, nick: 'str'):
         with sqlite3.connect('database.sqlite3') as connection:
             connection.execute("""
             REPLACE INTO

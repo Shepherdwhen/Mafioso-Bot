@@ -2,35 +2,17 @@ import json
 from os import path
 from typing import NewType, Union
 
-Role = NewType('Role', dict[
-    str,          # key: role attribute
-    Union[
-        str,      # data: role attribute
-        list[str] # data: role attribute (description)
-    ]
-])
+Role = NewType('Role', 'dict[str, Union[str, list[str]]]')
 
-ChannelDescriptor = NewType('ChannelDescriptor', dict[
-    str,          # key: channel attribute
-    Union[
-        str,      # data: channel attribute
-        list[str] # data: channel attribute (members)
-    ]
-])
+ChannelDescriptor = NewType('ChannelDescriptor', 'dict[str, Union[str, list[str]]]')
 
 with open(path.join('mafia', 'roles.json')) as file:
     _data = json.load(file)
 
 
-    roles: dict[
-        str,              # key: role id
-        Role
-    ] = _data['roles']
+    roles: 'dict[str, Role]' = _data['roles']
 
     for role in roles:
         roles[role]['id'] = role
 
-    channels: dict[
-        str,              # key: channel id
-        ChannelDescriptor
-    ] = _data['channels']
+    channels: 'dict[str, ChannelDescriptor]' = _data['channels']

@@ -31,7 +31,7 @@ class Host(commands.Cog):
         name='unhost'
     )
     @commands.check(check_if_is_host_or_admin)
-    async def unhost(self, ctx, target: MemberConverter = None):
+    async def unhost(self, ctx, target: 'MemberConverter' = None):
         if target:
             admin_role = globvars.client.get_guild(SERVER_ID).get_role(ADMIN_ROLE_ID)
             if admin_role not in ctx.author.roles:

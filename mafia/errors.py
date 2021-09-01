@@ -54,7 +54,7 @@ class NoRoles(MafiaException):
     """
 
     def __init__(self, *players):
-        self.missing_roles: set[discord.Member] = set(players)
+        self.missing_roles: 'set[discord.Member]' = set(players)
 
 class NotPlayer(MafiaException):
     """Exception raised when a user that is not a player attempts

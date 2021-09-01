@@ -12,7 +12,7 @@ class Emoji(commands.Cog):
     @commands.command(
         name='emoji'
     )
-    async def emoji(self, ctx, emoji: str):
+    async def emoji(self, ctx, emoji: 'str'):
         if emoji.strip() not in UNICODE_EMOJI_ENGLISH:
             raise commands.BadArgument()
 

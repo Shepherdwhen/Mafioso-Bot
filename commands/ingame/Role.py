@@ -23,7 +23,7 @@ class Role(commands.Cog):
         name="set"
     )
     @commands.check(check_if_is_host_or_admin)
-    async def role_set(self, ctx, target: PlayerConverter, *, role: RoleConverter):
+    async def role_set(self, ctx, target: 'PlayerConverter', *, role: 'RoleConverter'):
         if target not in globvars.state_manager.game.players:
             raise NotPlayer()
 

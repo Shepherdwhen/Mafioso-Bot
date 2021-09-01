@@ -27,7 +27,7 @@ class Whisper(commands.Cog):
         name='send'
     )
     @commands.check(check_if_is_player)
-    async def whisper_send(self, ctx, target: PlayerConverter, *, message: str):
+    async def whisper_send(self, ctx, target: 'PlayerConverter', *, message: 'str'):
         if ctx.author not in whisper_ratelimit:
             whisper_ratelimit[ctx.author] = 0
         whisper_ratelimit[ctx.author] += 1
@@ -47,7 +47,7 @@ class Whisper(commands.Cog):
         ]
     )
     @commands.check(check_if_is_host)
-    async def whisper_max(self, ctx, max: int):
+    async def whisper_max(self, ctx, max: 'int'):
         global max_whispers
         max_whispers = max
         await ctx.send('✅ Set maximum whispers per day!')

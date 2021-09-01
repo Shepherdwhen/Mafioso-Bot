@@ -21,7 +21,7 @@ class Backup(commands.Cog):
         ]
     )
     @commands.check(check_if_is_host)
-    async def backup(self, ctx, target: PlayerConverter, swap: MemberConverter):
+    async def backup(self, ctx, target: 'PlayerConverter', swap: 'MemberConverter'):
         if swap in globvars.state_manager.game.cannot_backup \
         or swap in globvars.state_manager.game.players \
         or swap in globvars.state_manager.game.hosts:
