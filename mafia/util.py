@@ -69,6 +69,8 @@ class RoleConverter(commands.Converter):
             for role in roles.values():
                 if argument == role['name'].lower(): # Name match
                     return role
+                if 'aliases' in role and argument in role['aliases']: # Alias match
+                    return role
 
             found = None
 
@@ -80,7 +82,7 @@ class RoleConverter(commands.Converter):
                     found = role
 
             if found:
-                return found
+                return found    
             raise BadArgument
 
         except BadArgument:
