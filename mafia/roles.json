@@ -1,52 +1,1092 @@
 {
-    "_examples": {
-        "_role_example": {
-            "name": "Example role",
-            "description": [
-                "This is an example role"
-            ],
-            "alignment": "Example alignment",
-            "power": "Unpowered"
-        },
-
-        "_channel_example_1": {
-            "type": "multi",
-            "members": [
-                "_role_example (key of role)"
-            ],
-            "name": "Example multi channel with {n} members"
-        }
-    },
-
-
     "roles": {
-        "example_role_1": {
-            "name": "Example role 1",
+        "town_apprentice_seer": {
+            "name": "Town Apprentice Seer",
             "description": [
-                "This is an example description for this role",
-                "This is example role 1"
+                "The Apprentice Seer is a Town Investigative in waiting, if any Town Investigative who resonates Magic or a Town Stalker dies the Apprentice Seer will lose their old role and gain the role of the dead Investigative, The Apprentice Seer can become a Seer, Stalker, Magicsmith, Clairvoyante, Prophet or Paranormal Investigator. The Apprentice Seer wins when all threats to the Town are dead."
             ],
-            "alignment": "Example alignment",
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "as"
+            ]
+        },
+        "town_deputy": {
+            "name": "Town Deputy",
+            "description": [
+                "The Deputy is a Town Investigative in waiting, if any Town Investigative who has a Gun or a Town Tracker dies the Deputy will lose their old role and gain the role of the dead Investigative, The Deputy can become a Cop, Tracker, Gunsmith, Detective, Sheriff or FBI agent. The Deputy wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "dep"
+            ]
+        },
+        "town_evangelist": {
+            "name": "Town Evangelist",
+            "description": [
+                "The Evangelist registers as an alignment changing in an alignment check, This mask is a permanent mask. The Evangelist wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "eva"
+            ]
+        },
+        "town_hirsute": {
+            "name": "Town Hirsute",
+            "description": [
+                "The Hirsute registers as a Wolf in an alignment check, the Hirsute also resonates magic, This mask is a permanent mask. The Hirsute wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "hir",
+                "hirstute"
+            ]
+        },
+        "town_idiot": {
+            "name": "Town Idiot",
+            "description": [
+                "The Idiot believes themselves to be a role that they are not, the Idiot will not be told they are idiot but instead will know they are a non unpowered role, however all their actions will fail as if roleblocked, the Idiot will not be known in role lists and will only be revealed on death, the Idiot is masked as their role to role checking investigatives. The Idiot wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "id"
+            ]
+        },
+        "town_innocent_child": {
+            "name": "Town Innocent Child",
+            "description": [
+                "During the first phase the Innocent Child will be revealed as an Innocent Child by a host, an Innocent Child is either Town or a Desecrated Child. The Innocent Child wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "ic",
+                "child"
+            ]
+        },
+        "town_known_human": {
+            "name": "Town Known Human",
+            "description": [
+                "During the first phase the Known Human will be revealed as a Known Human by a host, a Known Human is either Town or a Defiled Human. The Known Human wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "kh",
+                "human"
+            ]
+        },
+        "town_mason": {
+            "name": "Town Mason ",
+            "description": [
+                "The Masons are all confirmed to be Non-Mafia, Masons can be converted to another faction, all Masons can communicate privately within the masonry. The Mason wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "tma",
+                "mason"
+            ]
+        },
+        "town_miller": {
+            "name": "Town Miller",
+            "description": [
+                "The Miller registers as Mafia in an alignment check, the Miller also owns a gun, This mask is a permanent mask. The Miller wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "mill"
+            ]
+        },
+        "town_monk": {
+            "name": "Town Monk",
+            "description": [
+                "The Monks are all confirmed to be Non-Werewolf, Monks can be converted to another faction, all Monks can communicate privately within the monastery. The Monk wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "tmo",
+                "monk"
+            ]
+        },
+        "town_oracle": {
+            "name": "Town Oracle",
+            "description": [
+                "The Oracle may choose a person each night and look into their crystal ball, if the oracle dies that night they will reveal the role of their last target, the Oracle is not affected by masks but is affected by redirections, if the Oracle is cleaned it will not reveal the role. The Oracle wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "ora"
+            ]
+        },
+        "town_stonemason": {
+            "name": "Town Stonemason",
+            "description": [
+                "The Stonemasons are all confirmed to be Town and will always be Town, if any role attempts to convert a Stonemason it will fail, all Stonemasons can communicate privately within the grand-lodge. The Stonemason wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "sm"
+            ]
+        },
+        "town_stump": {
+            "name": "Town Stump",
+            "description": [
+                "The Stump Will survive any attack on it; however the first time it is attacked it will lose its ability to vote and will no longer count towards parity. The Stump wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "tree",
+                "treestump"
+            ]
+        },
+        "town_watchlisted": {
+            "name": "Town Watchlisted",
+            "description": [
+                "The Watchlisted registers as a Killer in an alignment check, This mask is a permanent mask. The Watchlisted wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "watch"
+            ]
+        },
+        "town_vanilla": {
+            "name": "Town Vanilla",
+            "description": [
+                "The Vanilla Has no powers at all but contributes 1 body to the town, it’s aim is to keep the powers safe and find the evil. The Vanilla wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Unpowered",
+            "aliases": [
+                "vt",
+                "tv"
+            ]
+        },
+        "town_escort": {
+            "name": "Town Escort",
+            "description": [
+                "The Escort may sleep with a player each night causing all actions performed by that player to be roleblocked and fail. The Escort wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Powered"
+        },
+        "town_mayor": {
+            "name": "Town Mayor",
+            "description": [
+                "Once per game the Mayor can choose to double their votes, this will be a hidden action and from that point the Mayor will always cast 2 votes rather than one. The Mayor wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Powered"
+        },
+        "town_medium": {
+            "name": "Town Medium",
+            "description": [
+                "The Medium may ask the dead a question each day, at night the dead may poll on that question and the Medium will learn the majority result of the poll at the end of the night, if the Medium dies during the day the dead will not be asked the question. The Medium wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Powered"
+        },
+        "town_clairvoyante": {
+            "name": "Town Clairvoyante",
+            "description": [
+                "Each night the Clairvoyante may submit a name of a player and an alignment (Town, Wolf, Mafia, Pyro, Killer, ect) and will receive a positive result if they match and a negative result if they don’t, they will also receive a false negative if that alignment doesn’t exist but that role displays as that alignment, the Clairvoyante is affected by Alignment and Redirective Masks. The Clairvoyante wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_cop": {
+            "name": "Town Cop",
+            "description": [
+                "Each night the Cop may check a player and see if they are “Mafia” or “Not Mafia” aligned, the Cop is affected by Millers, Godfathers, Moles, Framers, Lawyers, Bankers & Double Agents. The Cop wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_detective": {
+            "name": "Town Detective",
+            "description": [
+                "Each night the Detective may check a player and learn their role, but not their alignment (i.e would get the result archangel but not wolf or town), the Detective is affected by all Role and Redirective masks. The Detective wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_fbi_agent": {
+            "name": "Town FBI Agent",
+            "description": [
+                "Each night the FBI Agent may check a player and see if they are “Killer” or “Not Killer”, the FBI Agent receives a positive result on Serial Killers, Arsonists, Double Agents, Demon Wolves, Hell-Raisers, Head Assassins, Frost Psychos & Watchlisted. The FBI Agent wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_gunsmith": {
+            "name": "Town Gunsmith",
+            "description": [
+                "Each night the Gunsmith may check a player and see if they own a gun or not , the Gunsmith receives a positive result on all main group Mafia except the Sorcerer, Hollow Heros, Cops, Gunsmiths, Desperados, Hollow Heros, Deputies, FBI agents, Sheriffs, Detectives, Vigilantes & Double Agents, the Gunsmith is also affected by a Banker redirection. The Gunsmith wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_magicsmith": {
+            "name": "Town Magicsmith",
+            "description": [
+                "Each night the Magicsmith may check a player and see if they resonate magic or not , the Magicsmith receives a positive result on all Wolfpack members except the Archangel, Corrupt Clerics, Seers, Magicsmiths, Priests, Corrupt Clerics, Apprentice Seers, Paranormal Investigators, Prophets, Clairvoyants, Mages & Demon Wolves, the Magicsmith is also affected by a Greedy Wolf redirection. The Magicsmith wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_mortician": {
+            "name": "Town Mortician",
+            "description": [
+                "Once per game the Mortician may choose a dead player during the day and learn the player that killed them, however not that player's role or alignment, the Mortician are not affected by any masks. The Mortician wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_paranormal_investigator": {
+            "name": "Town Paranormal Investigator",
+            "description": [
+                "Each night the Paranormal Investigator may check a player and see if they are “Alignment Changing” or “Not Alignment Changing”, the Paranormal Investigator receives a positive result on Cult Leaders, Zombie Lords, Cultists, Zombies & Evangelical, the Paranormal Investigator cannot be converted. The Paranormal Investigator wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_prophet": {
+            "name": "Town Prophet",
+            "description": [
+                "Each night the Prophet may submit a role and a list of 3 players, the Prophet will receive a positive result if at least one player in the list is the submitted role and a negative result if not, the Prophet is affected by role masks and redirective masks (The submitted role will be changed to the redirected one). The Prophet wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_sheriff": {
+            "name": "Town Sheriff",
+            "description": [
+                "Each Night the Sheriff may check a player and learn if they are “Guilty” or “Not Guilty”, the Sheriff is affected by all alignment and redirective masks, the Sheriff can also use a basic attack once per game after which it becomes a Town Vanilla. The Sheriff wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_seer": {
+            "name": "Town Seer",
+            "description": [
+                "Each night the Seer may check a player and see if they are “Wolf” or “Not Wolf” aligned, the Seer is affected by Hirsuites, Alphas, Slys, Shadow Wolves, Advocate Wolf, Greedy Wolves & Demon Wolves. The Seer wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_stalker": {
+            "name": "Town Stalker",
+            "description": [
+                "Each night the Stalker may check a player and see who they visit, if the target in Mafia aligned they will receive the result “Your target did not visit” even if they did, the Stalker is affected by Stealth Wolves, Alphas, & Greedy Wolves. The Stalker wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_tracker": {
+            "name": "Town Tracker",
+            "description": [
+                "Each night the Tracker may check a player and see who they visit, if the target in Mafia aligned they will receive the result “Your target did not visit” even if they did, the Tracker is affected by Ninjas, Godfathers, & Bankers. The Tracker wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Investigative"
+        },
+        "town_alarmist": {
+            "name": "Town Alarmist",
+            "description": [
+                "Each night the Alarmist can target a player and protect them from conversion by an alignment changing role, the Alarmist cannot be converted itself. The Alarmist wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_archangel": {
+            "name": "Town Archangel",
+            "description": [
+                "Each night the Archangel may target a player and protect them from one basic non Wolf attack that night. The Archangel wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_doctor": {
+            "name": "Town Doctor",
+            "description": [
+                "Each night the Doctor may target a player and protect them from one basic attack that night. The Doctor wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_firefighter": {
+            "name": "Town Firefighter",
+            "description": [
+                "Each night the Doctor may target a player and clean any gasoline on them as well as protect them from being doused that night, they can then not be ignited unless redoused, if ignited that night the Firefighter will not protect that player from death, the Firefighter cannot target the same player twice in a row and cannot self target. The Firefighter wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_jailkeeper": {
+            "name": "Town Jailkeeper",
+            "description": [
+                "Each night the Jailkeeper may target a player and protect them from all basic non Wolf  attacks that night, as well as role blocking all non Wolf abilities and attacks performed by the target. The Jailkeeper wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_jailor": {
+            "name": "Town Jailor",
+            "description": [
+                "Each night the Jailor may target a player and protect them from all basic and one strong attack that night, as well as role blocking all abilities and attacks performed by the target. The Jailor wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_plague_doctor": {
+            "name": "Town Plague Doctor",
+            "description": [
+                "Each night the Plague Doctor can target a player and attempt to cure them of the plague, if successful the Plague Walker will be informed that a player was cured and the target will no longer be afflicted by the plague, however they can still be re-infected, the Plague Doctor can only visit each player once per game. The Plague Doctor wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_sorcerer": {
+            "name": "Town Sorcerer",
+            "description": [
+                "Each night the Sorcerer may target a player and protect them from one basic non Mafia kill that night. The Sorcerer wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_wizard": {
+            "name": "Town Wizard",
+            "description": [
+                "Each night the Wizard may target a player and protect them from all basic non Mafia  attacks that night, as well as role blocking all non Mafia abilities and attacks performed by the target. The Wizard wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Protective"
+        },
+        "town_desperado": {
+            "name": "Town Desperado",
+            "description": [
+                "Each night the Desperado may choose to perform a basic attack on a player, if the target is a member of the Family (Includes Double Agent) then the target will be attacked, if the target is Town then the Desperado will die, otherwise nothing will happen. The Desperado wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Killing"
+        },
+        "town_mage": {
+            "name": "Town Mage",
+            "description": [
+                "Once per game you may perform an unstoppable attack on one player during the day, you may submit a name to the hosts at any point during the day, the kill will happen at the end of the day, the Mage may choose to reveal themselves as the Mage or not. The Mage wins when all threats to the Town are dead.  "
+            ],
+            "alignment": "Town",
+            "power": "Killing"
+        },
+        "town_priest": {
+            "name": "Town Priest",
+            "description": [
+                "Each night the Priest may choose to perform a basic attack on a player, if the target is a member of the Wolfpack (Includes Demon Wolf) then the target will be attacked, if the target is Town then the Priest will die, otherwise nothing will happen. The Priest wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Killing"
+        },
+        "town_vengeful": {
+            "name": "Town Vengeful",
+            "description": [
+                "Each phase the Vengeful may choose a player as their “Hexed Target”, if the Vengeful is ever lynched they will die but also unstoppably take their “Hexed Target” with them. The Vengeful wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Killing"
+        },
+        "town_vigilante": {
+            "name": "Town Vigilante",
+            "description": [
+                "The Vigilante may basically attack a player each night, they will learn the reason for their attack failing if it does fail, the Vigilante has an amount of bullets equal to ⅛ of the players the game started with. The Vigilante wins when all threats to the Town are dead."
+            ],
+            "alignment": "Town",
+            "power": "Killing"
+        },
+        "defiled_human": {
+            "name": "Defiled Human",
+            "description": [
+                "During the first phase the Defiled Human will be revealed as a Known Human by a host, a Known Human is either Town or a Defiled Human, the Defiled Human does not know it’s Mafia partners neither do they know of it’s existence, the Defiled Human registers as Town in an alignment check and does not carry a gun, if all the Family are dead the Defiled Human will join the Mafia as a Goon. The Defiled Human wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
             "power": "Unpowered"
         },
-        "example_role_2": {
-            "name": "Example role 2",
+        "elder_traitor": {
+            "name": "Elder Traitor",
             "description": [
-                "This is an example description for this role",
-                "This is example role 2"
+                "Passively the Elder Traitor is immune to basic non Mafia attacks on it at night, the Elder Traitor does not know it’s Mafia partners neither do they know of it’s existence, the Elder Traitor registers as Town in an alignment check and does not carry a gun, if all the Family are dead the Elder Traitor will join the Mafia as a Goon. The Elder Traitor wins when all who oppose the Mafia are dead."
             ],
-            "alignment": "Example alignment",
+            "alignment": "Mafia",
             "power": "Unpowered"
+        },
+        "mad_monk": {
+            "name": "Mad Monk",
+            "description": [
+                "The Monks are all confirmed to be Non-Werewolf, Monks can be converted to another faction, all Monks can communicate privately within the monastery, the Mad Monk does not know it’s Mafia partners neither do they know of it’s existence, the Mad Monk registers as Town in an alignment check and does not carry a gun, if all the Family are dead the Mad Monk will join the Mafia as a Mafia Monk. The Mad Monk wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "mafia_elder": {
+            "name": "Mafia Elder",
+            "description": [
+                "Passively the Elder is immune to basic non Mafia attacks on it at night, the Elder is part of the Family and has access to the Mafia channel and the factional kill. The Elder wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "mafia_godfather": {
+            "name": "Mafia Godfather",
+            "description": [
+                "Passively the Godfather is immune to basic attacks on it as night, the Godfather also registers as Town in an alignment check and Not visiting to Trackers, the Godfather is part of the Family and has access to the Mafia channel and the factional kill. The Godfather wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "mafia_goon": {
+            "name": "Mafia Goon",
+            "description": [
+                "The Goon has no active powers but contributes a body toward the mafia, the Goon is part of the Family and has access to the Mafia channel and the factional kill. The Goon wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "mafia_hirsute": {
+            "name": "Mafia Hirsute",
+            "description": [
+                "The Hirsute registers as Wolf and Mafia in an alignment check, the Hirsute is part of the Family and has access to the Mafia channel and the factional kill. The Hirsute wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "mafia_mole": {
+            "name": "Mafia Mole",
+            "description": [
+                "The Mole registers as Town in an alignment check, the Mole is part of the Family and has access to the Mafia channel and the factional kill. The Mole wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "mafia_monk": {
+            "name": "Mafia Monk",
+            "description": [
+                "The Monks are all confirmed to be Non-Werewolf, Monks can be converted to another faction, all Monks can communicate privately within the monastery, the Monk is part of the Family and has access to the Mafia channel and the factional kill. The Monk wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "mafia_ninja": {
+            "name": "Mafia Ninja",
+            "description": [
+                "The Ninja registers as not visiting to Trackers, the Ninja is part of the Family and has access to the Mafia channel and the factional kill. The Ninja wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Unpowered"
+        },
+        "corrupted_cleric": {
+            "name": "Corrupted Cleric",
+            "description": [
+                "Each night the Corrupted Cleric may Target a player, if the target is a Wolf or Town they will be basic attacked, if the target is Mafia the Corrupted Cleric will die instead, otherwise nothing happens, the Corrupted Cleric will never be a part of the main Mafia chat. The Corrupted Cleric wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_banker": {
+            "name": "Mafia Banker",
+            "description": [
+                "The Banker targets a player each night, if they are an investigative role then they will be redirected to investigate the Banker but think they are investigating their target, the Banker is part of the Family and has access to the Mafia channel and the factional kill. The Banker wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_consort": {
+            "name": "Mafia Consort",
+            "description": [
+                "The Consort may sleep with a player each night causing all actions performed by that player to be roleblocked and fail, the Consort is part of the Family and has access to the Mafia channel and the factional kill. The Consort wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_framer": {
+            "name": "Mafia Framer",
+            "description": [
+                "The Framer can target a player and make them register as Mafia in an alignment check, the Framer is part of the Family and has access to the Mafia channel and the factional kill. The Framer wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_janitor": {
+            "name": "Mafia Janitor",
+            "description": [
+                "The Janitor can clean the body of whoever the Mafia kills that night meaning that it won’t reveal the target’s role if they die that night, the Janitor has a number of uses equal to  ⅒ of the players the game started with, the Janitor is part of the Family and has access to the Mafia channel and the factional kill. The Janitor wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_lawyer": {
+            "name": "Mafia Lawyer",
+            "description": [
+                "The Lawyer can target a player and make them register as Town in an alignment check, the Lawyer is part of the Family and has access to the Mafia channel and the factional kill. The Lawyer wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_sorcerer": {
+            "name": "Mafia Sorcerer",
+            "description": [
+                "Each night the Sorcerer may target a player and protect them from one basic non Mafia kill that night, the Sorcerer is part of the Family and has access to the Mafia channel and the factional kill. The Sorcerer wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_strongman": {
+            "name": "Mafia Strongman",
+            "description": [
+                "Twice per game the Strongman may choose to perform the mafia factional kill and buff it to make it a strong attack not a basic attack, the Strongman is part of the Family and has access to the Mafia channel and the factional kill. The Strongman wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered"
+        },
+        "mafia_consigliere": {
+            "name": "Mafia Consigliere",
+            "description": [
+                "Each night the Consigliere may check a player and learn their role, but not their alignment (i.e would get the result archangel but not wolf or town), the Consigliere is affected by all Role and Redirective masks, the Consigliere is part of the Family and has access to the Mafia channel and the factional kill. The Consigliere wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Investigative"
+        },
+        "informant": {
+            "name": "Informant",
+            "description": [
+                "Each night the Informant may check a player but not receive any information and the mafia will learn the target’s role but not who was targeted, but not their alignment (i.e would get the result archangel but not wolf or town), the Informant is affected by all Role and Redirective masks, the Informant will join the Mafia channel when the first Family member dies. The Informant wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Investigative"
+        },
+        "mafia_seer": {
+            "name": "Mafia Seer",
+            "description": [
+                "Each night the Seer may check a player and see if they are “Wolf” or “Not Wolf” aligned, the Seer is affected by Hirsuites, Alphas, Slys, Shadow Wolves, Advocate Wolf, Greedy Wolves & Demon Wolves, the Seer is part of the Family and has access to the Mafia channel and the factional kill. The Seer wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Investigative"
+        },
+        "mafia_stalker": {
+            "name": "Mafia Stalker",
+            "description": [
+                "Each night the Stalker may check a player and see who they visit, if the target in Mafia aligned they will receive the result “Your target did not visit” even if they did, the Stalker is affected by Stealth Wolves, Alphas, & Greedy Wolves, the Stalker is part of the Family and has access to the Mafia channel and the factional kill. The Stalker wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Investigative"
+        },
+        "alpha_wolf": {
+            "name": "Alpha Wolf",
+            "description": [
+                "Passively the Alpha is immune to basic attacks on it as night, the Alpha also registers as Town in an alignment check and Not visiting to Stalkers, the Alpha is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Alpha wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "bulletproof_defector": {
+            "name": "Bulletproof Defector",
+            "description": [
+                "Passively the Bulletproof Defector is immune to basic non Wolf attacks on it at night, the Bulletproof Defector does not know it’s Wolfpack partners neither do they know of it’s existence, the Bulletproof Defector registers as Town in an alignment check and does not resonate magic, if all the Wolfpack are dead the Bulletproof Defector will join the Wolfpack as a Bulletproof Wolf. The Bulletproof Defector wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "bulletproof_wolf": {
+            "name": "Bulletproof Wolf",
+            "description": [
+                "Passively the Bulletproof is immune to basic non Wolf attacks on it at night, the Bulletproof is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Bulletproof wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "desecrated_child": {
+            "name": "Desecrated Child",
+            "description": [
+                "During the first phase the Desecrated Child will be revealed as an Innocent Child by a host, an Innocent Child is either Town or a Desecrated Child, the Desecrated Child does not know it’s Wolfpack partners neither do they know of it’s existence, the Desecrated Child registers as Town in an alignment check and does not resonate magic, if all the Wolfpack are dead the Defiled Human will join the Wolfpack as a Wolf. The Desecrated Child wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "malicious_mason": {
+            "name": "Malicious Mason",
+            "description": [
+                "The Masons are all confirmed to be Non-Mafia, Masons can be converted to another faction, all Masons can communicate privately within the masonry, the Malicious Mason does not know it’s Wolfpack partners neither do they know of it’s existence, the Malicious Mason  registers as Town in an alignment check and does not resonate magic, if all the Wolfpack are dead the Malicious Mason will join the Wolfpack as a Mason Wolf. The Malicious Mason wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "mason_wolf": {
+            "name": "Mason Wolf",
+            "description": [
+                "The Masons are all confirmed to be Non-Mafia, Masons can be converted to another faction, all Masons can communicate privately within the masonry, the Mason is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Mason wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "miller_wolf": {
+            "name": "Miller Wolf",
+            "description": [
+                "The Miller registers as Mafia and Wolf in an alignment check, the Miller is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Miller wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "sly_wolf": {
+            "name": "Sly Wolf",
+            "description": [
+                "The Sly registers as Town in an alignment check, the Sly is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Sly wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "stealth_wolf": {
+            "name": "Stealth Wolf",
+            "description": [
+                "The Stealth Wolf registers as not visiting to Stalkers, the Stealth Wolf is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Stealth Wolf wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "wolf": {
+            "name": "Wolf",
+            "description": [
+                "The Wolf has no active powers but contributes a body toward the Wolfpack, the Wolf is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Wolf wins when all who oppose the Wolfpack are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Unpowered"
+        },
+        "advocate_wolf": {
+            "name": "Advocate Wolf",
+            "description": [
+                "The Advocate can target a player and make them register as Town in an alignment check, the Advocate is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Advocate wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "archangel_wolf": {
+            "name": "Archangel Wolf",
+            "description": [
+                "Each night the Archangel may target a player and protect them from one basic non Wolf kill that night, the Archangel is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Archangel wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "crippler_wolf": {
+            "name": "Crippler Wolf",
+            "description": [
+                "The Crippler may bite a player each night causing all actions performed by that player to be roleblocked and fail, the Crippler is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Crippler wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "greedy_wolf": {
+            "name": "Greedy Wolf",
+            "description": [
+                "The Greedy Wolf targets a player each night, if they are an investigative role then they will be redirected to investigate the Greedy Wolf but think they are investigating their target, the Greedy Wolf is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Banker wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "feral_wolf": {
+            "name": "Feral Wolf",
+            "description": [
+                "Twice per game the Feral may choose to perform the mafia factional kill and buff it to make it a strong attack not a basic attack, the Feral is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Feral wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "hungry_wolf": {
+            "name": "Hungry Wolf",
+            "description": [
+                "The Hungry Wolf can Eat the body of whoever the Wolves kills that night meaning that it won’t reveal the target’s role if they die that night, the Feral has a number of uses equal to  ⅒ of the players the game started with, the Feral is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Feral wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "hollow_hero": {
+            "name": "Hollow Hero",
+            "description": [
+                "Each night the Hollow Hero may Target a player, if the target is a Mafia or Town they will be basic attacked, if the target is Wolf the Hollow Hero will die instead, otherwise nothing happens, the Hollow Hero will never be a part of the main Wolfpack chat. The Hollow Hero wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "shadow_wolf": {
+            "name": "Shadow Wolf",
+            "description": [
+                "The Shadow can target a player and make them register as Wolf in an alignment check, the Shadow is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Shadow wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered"
+        },
+        "canid": {
+            "name": "Canid",
+            "description": [
+                "Each night the Canid may check a player but not receive any information and the mafia will learn the target’s role but not who was targeted, but not their alignment (i.e would get the result archangel but not wolf or town), the Canid is affected by all Role and Redirective masks, the Canid will join the Wolfpack when the first Wolfpack member dies. The Canid wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Investigative"
+        },
+        "cop_wolf": {
+            "name": "Cop Wolf",
+            "description": [
+                "Each night the Cop may check a player and see if they are “Mafia” or “Not Mafia” aligned, the Cop is affected by Millers, Godfathers, Moles, Framers, Lawyers, Bankers & Double Agents, the Cop is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Cop wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Investigative"
+        },
+        "mystic_wolf": {
+            "name": "Mystic Wolf",
+            "description": [
+                "Each night the Mystic may check a player and learn their role, but not their alignment (i.e would get the result archangel but not wolf or town), the Mystic is affected by all Role and Redirective masks, the Mystic is part of the Wolfpack and has access to the Wolfpackchannel and the factional kill. The Mystic wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Investigative"
+        },
+        "tracker_wolf": {
+            "name": "Tracker Wolf",
+            "description": [
+                "Each night the Tracker may check a player and see who they visit, if the target in Mafia aligned they will receive the result “Your target did not visit” even if they did, the Tracker is affected by Ninjas, Godfathers, & Bankers, the Tracker is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Tracker wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Investigative"
+        },
+        "serial_killer": {
+            "name": "Serial Killer",
+            "description": [
+                "The Serial Killer is part of a team with a self assigned basic factional kill for each Serial Killer, The Serial Killer has a permanent basic protection, any member of the Killer team can talk in the hideout privately, members of the Killer team can still be converted to the Cult. The Serial Killer wins if only Killers and Neutrals remain."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Killing"
+        },
+        "copycat_killer": {
+            "name": "Copycat Killer",
+            "description": [
+                "Every even night The Copycat Killer may basic attack one person, if all the Serial Killers are dead then the attack will become a strong attack, the Copycat Killer registers as Town in an alignment check, as a member of the Killer team the Copycat Killer has access to the hideout, members of the Killer team can still be converted to the Cult. The Serial Killer wins if only Killers and Neutrals remain."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Killing"
+        },
+        "arsonist": {
+            "name": "Arsonist",
+            "description": [
+                "The Arsonist is part of a team with a self assigned factional douse and ignite (Strong kill all doused players) for each Arsonist, the Arsonist has a permanent basic protection, any member of the Pyromaniac team can talk in the charred ruins privately, members of the Pyromaniac team can still be converted to the Cult. The Arsonist wins if only Pyromaniacs and Neutrals remain."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Killing"
+        },
+        "fire_raiser": {
+            "name": "Fire-Raiser",
+            "description": [
+                "Every odd night The Fire-Raiser may visit a person and attempt to douse them, if the target is already doused they will instead be ignited, if all the Arsonists are dead then the Fire-Raiser can act every night, the Fire-Raiser registers as Town in an alignment check, as a member of the Pyromaniac team the Fire-Raiser has access to the charred ruins, members of the Pyromaniac team can still be converted to the Cult. The Fire-Raiser wins if only Pyromaniacs and Neutrals remain."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Killing"
+        },
+        "cult_leader": {
+            "name": "Cult leader",
+            "description": [
+                "Every other night the Cult Leader may target a player and attempt to recruit them to the Cult and they become Cultist and are added to the sanctum, certain roles cannot be recruited (Stonemasons, Paranormal Investigators & Alarmists) and certain roles will convert but work against the cult (Demon Wolves & Double Agents), if the last Cult Leader dies then all Cultists suicide and the Cult loses. The Cult Leader wins when the Cult has more votes than other players and there are no external kills left."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Chaotic"
+        },
+        "cultist": {
+            "name": "Cultist",
+            "description": [
+                "The Cultist isn’t a role the game begins with but comes from when a player is converted to the Cult, when a player becomes a Cultist they are added to the sanctum and can talk with other Cult members. The Cultist wins when the Cult has more votes than other players and there are no external kills left."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Chaotic"
+        },
+        "cult_atheist": {
+            "name": "Cult Atheist",
+            "description": [
+                "The Athiest registers as Town in an alignment check and will become the Cult Leader is the previous Cult Leader ever dies, as a member of the Cult the Athiest can speak to other Cult Members in the sanctum. The Athiest wins when the Cult has more votes than other players and there are no external kills left."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Chaotic"
+        },
+        "plague_walker": {
+            "name": "Plague Walker",
+            "description": [
+                "The Plague Walker starts with an amount of visits equal to ⅛ of the starting players, each time the Plague Walker visits a player they will become infected with the plague, if an infected player visits or is visited by a player that player will then become infected, infected players are informed they are infected after three in game days, the Plague Walker has permanent basic protection and starts the game infected, all members of the Infection team can talk privately in the dead village. The Plague Walker wins if all alive players are infected."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Chaotic"
+        },
+        "parasite": {
+            "name": "Parasite",
+            "description": [
+                "The Parasite may keep a targeted player at all times, if the Parasite is targeted by any action other than an attack by an infected player the the action will be redirected onto the Parasites targeted player, the Parasite starts the game infected, all members of the Infection team can talk privately in the dead village. The Parasite wins if all alive players are infected."
+            ],
+            "alignment": "3rd Party Solo",
+            "power": "Chaotic"
+        },
+        "double_agent": {
+            "name": "Double Agent",
+            "description": [
+                "The Double Agent is a Traitor in the Mafia, once per game the Double Agent may perform a basic attack on one other player in the Mafia channel, you can also perform the Mafia factional kill, the Double Agent registers as Mafia and Killer in an alignment check and a Goon in a role check, the Double Agent also has a permanent strong protection. The Double Agent wins if only it and Neutrals remain. "
+            ],
+            "alignment": "Solo",
+            "power": "Killing"
+        },
+        "demon_wolf": {
+            "name": "Demon Wolf",
+            "description": [
+                "The Demon Wolf is a Traitor in the Wolfpack, once per game the Demon Wolf may perform a basic attack on one other player in the Wolfpack channel, you can also perform the Wolfpack factional kill, the Demon Wolf registers as Wolf and Killer in an alignment check and a Wolf in a role check, the Demon Wolf also has a permanent strong protection. The Demon Wolf wins if only it and Neutrals remain. "
+            ],
+            "alignment": "Solo",
+            "power": "Killing"
+        },
+        "hell-raiser": {
+            "name": "Hell-Raiser",
+            "description": [
+                "The Hell-Raiser is a Traitor in the Cult, once per game the Hell-Raiser may perform a basic attack on a cultist, you can perform a kill if all the Cult are dead, the Hell-Raiser registers as Cult and Killer in an alignment check and a Cultist in a role check, the Hell-Raiser also has a permanent strong protection and is immune to Cult Suicide. The Demon Wolf wins if only it and Neutrals remain. "
+            ],
+            "alignment": "Solo",
+            "power": "Killing"
+        },
+        "amnesiac": {
+            "name": "Amnesiac",
+            "description": [
+                "The Amnesiac will passively take the role and alignment of the first player to die, if multiple people die in the same phase while the Amnesiac hasn’t taken a role the Amnesiac will take a one of them randomly. The Amnesiac wins with the new win condition."
+            ],
+            "alignment": "Neutral 3rd",
+            "power": "Party"
+        },
+        "jester": {
+            "name": "Jester",
+            "description": [
+                "The Jester may keep a target and update it each phase, when Lynched, similar to the Vengeful, the Jester will strong kill the target. The Jester wins when it is lynched."
+            ],
+            "alignment": "Neutral 3rd",
+            "power": "Party"
+        },
+        "lyncher": {
+            "name": "Lyncher",
+            "description": [
+                "The Lyncher is given the name of a Town player (Target) at the beginning of the game, the Lyncher has a permanent basic protection, if the Target dies at night the Lyncher will become a Town Vanilla. The Lyncher wins and leaves the game if the Target is lynched and the Lyncher is still alive."
+            ],
+            "alignment": "Neutral 3rd",
+            "power": "Party"
+        },
+        "nymphomaniac": {
+            "name": "Nymphomaniac",
+            "description": [
+                "The Nymphomaniac will start the game with a list of three arbitrarily picked players, the Nymphomanic must pick one of these players the first night, the Nymphomaniac will share a lover chat with that player, if one of the Lovers dies the other will suicide. The Nymphomaniac wins if them and their Lover live until the end of the game."
+            ],
+            "alignment": "Neutral 3rd",
+            "power": "Party"
+        },
+        "survivor": {
+            "name": "Survivor",
+            "description": [
+                "Each night the Survivor must visit another player, if the Survivor is attacked they will not die, however if the player they visit is attacked so will the Survivor, the Survivor is not affected by any other forms of protection. The Survivor wins if they live to endgame."
+            ],
+            "alignment": "Neutral 3rd",
+            "power": "Party"
+        },
+        "head_assassin": {
+            "name": "Head Assassin",
+            "description": [
+                "The Head Assassin is an alternate to the Serial Killer, except they speak in the brotherhood and win with the Assassin team."
+            ],
+            "alignment": "Solo",
+            "power": "Killing"
+        },
+        "assassin": {
+            "name": "Assassin",
+            "description": [
+                "The Assassin is an alternate to the Copycat Killer, except they speak in the brotherhood and win with the Assassin team."
+            ],
+            "alignment": "Solo",
+            "power": "Killing"
+        },
+        "frost_psycho": {
+            "name": "Frost Psycho",
+            "description": [
+                "The Frost Psycho is an alternate to the Arsonist, except they speak in the outpost and win with the Frostpunk team."
+            ],
+            "alignment": "Solo",
+            "power": "Killing"
+        },
+        "frost_delinquent": {
+            "name": "Frost Delinquent",
+            "description": [
+                "The Frost Delinquent is an alternate to the Fire-Raiser, except they speak in the outpost and win with the Frostpunk team."
+            ],
+            "alignment": "Solo",
+            "power": "Killing"
+        },
+        "zombie_lord": {
+            "name": "Zombie Lord",
+            "description": [
+                "The Zombie Lord is an alternate to the Cult Leader, except they speak in the crypt and win with the Zombie team."
+            ],
+            "alignment": "Solo",
+            "power": "Chaotic"
+        },
+        "zombie": {
+            "name": "Zombie",
+            "description": [
+                "The Zombie is an alternate to the Cultist, except they speak in the crypt and win with the Zombie team."
+            ],
+            "alignment": "Solo",
+            "power": "Chaotic"
+        },
+        "zombie_knight": {
+            "name": "Zombie Knight",
+            "description": [
+                "The Zombie Knight is an alternate to the Cult Athiest, except they speak in the crypt and win with the Zombie team."
+            ],
+            "alignment": "Solo",
+            "power": "Chaotic"
         }
     },
-    "channels": {
-        "example_multi_channel": {
+
+    "channels" : {
+         "mafia" : {
             "type": "multi",
+            "name": "mafia",
             "members": [
-                "example_role_1",
-                "example_role_2"
-            ],
-            "name": "Example multi channel"
+                "mafia_elder",
+                "mafia_godfather",
+                "mafia_goon",
+                "mafia_hirsute",
+                "mafia_mole",
+                "mafia_monk",
+                "mafia_ninja",
+                "mafia_banker",
+                "mafia_consort",
+                "mafia_framer",
+                "mafia_janitor",
+                "mafia_lawyer",
+                "mafia_sorcerer",
+                "mafia_strongman",
+                "mafia_consigliere",
+                "mafia_seer",
+                "mafia_stalker"
+            ]
+        },
+        "wolf": {
+            "type": "multi",
+            "name": "wolfpack",
+            "members": [
+                "alpha_wolf",
+                "bulletproof_wolf",
+                "mason_wolf",
+                "miller_wolf",
+                "sly_wolf",
+                "stealth_wolf",
+                "wolf",
+                "advocate_wolf",
+                "archangel_wolf",
+                "crippler_wolf",
+                "greedy_wolf",
+                "feral_wolf",
+                "hungry_wolf",
+                "shadow_wolf",
+                "cop_wolf",
+                "mystic_wolf",
+                "tracker_wolf"
+            ]
+        },
+        "monastery": {
+            "type": "multi",
+            "name": "monastery",
+            "members": [
+                "town_monk",
+                "mafia_monk",
+                "mad_monk"
+            ]
+        },
+        "masonry": {
+            "type": "multi",
+            "name": "masonry",
+            "members": [
+                "town_mason",
+                "mason_wolf",
+                "malicious_mason"
+            ]
+        },
+        "grand_lodge": {
+            "type": "multi",
+            "name": "grand lodge",
+            "members": [
+                "town_stonemason"
+            ]
+        },
+        "hideout": {
+            "type": "multi",
+            "name": "hideout",
+            "members": [
+                "serial_killer",
+                "copycat_killer"
+            ]
+        },
+        "charred_ruins": {
+            "type": "multi",
+            "name": "charred ruins",
+            "members": [
+                "arsonist",
+                "fire_raiser"
+            ]
+        },
+        "sanctum": {
+            "type": "multi",
+            "name": "sanctum",
+            "members": [
+                "cult_leader",
+                "cultist",
+                "cult_atheist"
+            ]
+        },
+        "dead_village": {
+            "type": "multi",
+            "name": "dead village",
+            "members": [
+                "plague_walker",
+                "parasite"
+            ]
+        },
+        "brotherhood": {
+            "type": "multi",
+            "name": "brotherhood",
+            "members": [
+                "head_assassin",
+                "assassin"
+            ]
+        },
+        "outpost": {
+            "type": "multi",
+            "name": "outpost",
+            "members": [
+                "frost_psycho",
+                "frost_delinquent"
+            ]
+        },
+        "crypt": {
+            "type": "multi",
+            "name": "crypt",
+            "members": [
+                "zombie_lord",
+                "zombie",
+                "zombie_knight"
+            ]
         }
     }
 }
