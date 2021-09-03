@@ -1,7 +1,10 @@
-from discord.ext import commands
-import globvars
 import sqlite3
+
+from discord.ext import commands
+
+import globvars
 from mafia.util import check_if_is_host_or_admin
+
 
 class Export(commands.Cog):
 

@@ -1,11 +1,11 @@
 from .Backup import Backup
 from .End import End
+from .Export import Export
 from .Init import Init
 from .KillQueue import KillQueue
 from .List import List
 from .Role import Role
 from .Whisper import Whisper
-from .Export import Export
 
 
 def setup(bot):
