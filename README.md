@@ -35,7 +35,8 @@ Once all players have signed up, hosts can transition to the ingame state using 
 Just after running the `start` command, hosts should set individual players' roles. This is done using the `role set <player> <role>` command. A list of already set roles can be viewed with the `role list` command. **These commands should always be run in a host-restricted channel or in DMs with the bot**, as players may learn others roles if they see the command.
 
 Once all players have roles, the `init` command will set up roles and channels with the relevant permissions for the game. It will also send a DM to all players informing them of their roles. If there is an issue, the `cleanup` command will remove all channels and roles so that the hosts can tweak roles. For convenience, the `reload` command will execute `cleanup` and `init` in order.  
-Note that roles can still be changed with the `role set <player> <role>` command after `init` is run. This will not, however, change channel permissions.
+Note that roles can still be changed with the `role set <player> <role>` command after `init` is run. This will not, however, change channel permissions.  
+Because the `init` command also sends a DM to all players telling them their role, **roles that should not learn their true role should not be set. Set the fake role for that player instead.** You can change this back after `init` so that the player's true role appears in `role list`.
 
 The `killq add <player> [...<player>]`, `killq remove <player> [...<player>]` and `killq exec` commands can be used to manage the kill queue. `killq` alone will list the current kill queue.  
 As well as these commands, the `kill <player> [...<player>]` and `revive <player> [...<player>]` commands can be used to instantly kill and revive players.
