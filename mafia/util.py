@@ -61,7 +61,7 @@ class RoleConverter(commands.Converter):
 
     async def convert(self, ctx, argument: 'str'):
         try:
-            argument = argument.lower()
+            argument = argument.lower().strip('" ')
 
             if argument in roles: # ID match
                 return roles[argument]
