@@ -19,7 +19,7 @@ class Info(commands.Cog):
             'i'
         ]
     )
-    async def info(self, ctx, role: 'RoleConverter'):
+    async def info(self, ctx, *, role: 'RoleConverter'):
         description_str = '\n'.join(role['description'])
 
         await ctx.send(TEMPLATE.format(
