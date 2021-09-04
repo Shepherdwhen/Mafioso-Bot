@@ -6,7 +6,7 @@ from discord.ext import commands
 import globvars
 from mafia.util import PlayerConverter, check_if_is_host, check_if_is_player
 
-whisper_ratelimit: dict[discord.Member, int] = dict()
+whisper_ratelimit: 'dict[discord.Member, int]' = dict()
 max_whispers = math.inf
 
 class Whisper(commands.Cog):
