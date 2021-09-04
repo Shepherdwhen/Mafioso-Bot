@@ -28,7 +28,10 @@ class Host(commands.Cog):
         await ctx.send('✅ You are now a host!')
 
     @commands.command(
-        name='unhost'
+        name='unhost',
+        aliases=[
+            'uh'
+        ]
     )
     @commands.check(check_if_is_host_or_admin)
     async def unhost(self, ctx, target: 'MemberConverter' = None):
