@@ -13,7 +13,15 @@ class Emoji(commands.Cog):
         name='emoji'
     )
     async def emoji(self, ctx, emoji: 'str'):
-        if emoji.strip() not in UNICODE_EMOJI_ENGLISH:
+        emoji = emoji.strip()
+
+        has_variation_selector = False
+        if emoji.endswith(u'\U0000FE0F'):
+            has_variation_selector = True
+            emoji = emoji[:-1] # Strip variation selector
+
+
+        if emoji not in UNICODE_EMOJI_ENGLISH:
             raise commands.BadArgument()
 
         with sqlite3.connect('database.sqlite3') as connection:
@@ -27,7 +35,7 @@ class Emoji(commands.Cog):
                 )
             """, {
                 'id': ctx.author.id,
-                'emoji': emoji.strip()
+                'emoji': emoji + (u'\U0000FE0F' if has_variation_selector else '')
             })
         
         await ctx.send('✅ Set your emoji!')
