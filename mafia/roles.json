@@ -252,7 +252,7 @@
         "town_gunsmith": {
             "name": "Town Gunsmith",
             "description": [
-                "Each night the Gunsmith may check a player and see if they own a gun or not , the Gunsmith receives a positive result on all main group Mafia except the Sorcerer, Hollow Heros, Millers, Cops, Gunsmiths, Desperados, Hollow Heros, Deputies, FBI agents, Sheriffs, Detectives, Vigilantes & Double Agents, the Gunsmith is also affected by a Banker redirection. The Gunsmith wins when all threats to the Town are dead."
+                "Each night the Gunsmith may check a player and see if they own a gun or not, the Gunsmith receives a positive result on all main group Mafia except the Sorcerer, Hollow Heros, Millers, Cops, Gunsmiths, Desperados, Hollow Heros, Deputies, FBI agents, Sheriffs, Detectives, Vigilantes & Double Agents, the Gunsmith is also affected by a Banker redirection. The Gunsmith wins when all threats to the Town are dead."
             ],
             "alignment": "Town",
             "power": "Investigative",
@@ -263,7 +263,7 @@
         "town_magicsmith": {
             "name": "Town Magicsmith",
             "description": [
-                "Each night the Magicsmith may check a player and see if they resonate magic or not , the Magicsmith receives a positive result on all Wolfpack members except the Archangel, Corrupt Clerics, Hirsutes, Seers, Magicsmiths, Priests, Corrupt Clerics, Apprentice Seers, Paranormal Investigators, Prophets, Clairvoyants, Mages & Demon Wolves, the Magicsmith is also affected by a Greedy Wolf redirection. The Magicsmith wins when all threats to the Town are dead."
+                "Each night the Magicsmith may check a player and see if they resonate magic or not, the Magicsmith receives a positive result on all Wolfpack members except the Archangel, Corrupt Clerics, Hirsutes, Seers, Magicsmiths, Priests, Corrupt Clerics, Apprentice Seers, Paranormal Investigators, Prophets, Clairvoyants, Mages & Demon Wolves, the Magicsmith is also affected by a Greedy Wolf redirection. The Magicsmith wins when all threats to the Town are dead."
             ],
             "alignment": "Town",
             "power": "Investigative",
