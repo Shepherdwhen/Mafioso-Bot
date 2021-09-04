@@ -65,6 +65,7 @@ The `ping` command checks if the bot is up, and the bots response time.
 
 The `poll create <prompt> <option> [...<option>]` can be used by hosts to create polls. There is  maximum of twenty options, as Discord limits the number of reactions per message. For convenience, the command `poll ask <prompt>` will create a poll with yes/no options and `poll alive <prompt>` will create a poll with an option for each alive player when ingame, and for each joined player when in pregame.  
 The `poll end <poll ID>` command can be used to end and get the results of a poll.
+Hosts and admins can use the `poll power <user> <power>` command to set the voting power of a player. This is reset to 1 when games start and end.
 
 Admins and moderators can use the `promote` and `demote` commands to switch between ingame versions of their admin and moderator roles.
 
@@ -98,8 +99,10 @@ Ingame :
 
 Global :
 - `info <role>` : Display information about `<role>`.
+- `roles` : Display a list of all roles.
 - `nick <player> <nick>` (host) : Set `<player>`'s nickname.
 - `poll create <prompt> <options>` (host) : Create a poll.
 - `poll end <poll ID>` (host) : End a poll.
+- `poll power <player> <power>` (host / admin) : Set the voting power of a player.
 - `promote`/`demote` (admin, mod) : Switch between ingame and active admin and mod roles.
 - `spectate`/`unspectate` : Become a spectator or stop being a spectator.
