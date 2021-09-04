@@ -1,11 +1,11 @@
 import enum
+from importlib import import_module
 
 from discord.ext.commands.errors import ExtensionNotLoaded
 
 import globvars
 from mafia.Game import Game
 from mafia.Pregame import Pregame
-
 
 class State(enum.Enum):
     ingame = 'ingame'
@@ -24,6 +24,8 @@ class StateManager:
         self.pregame = Pregame()
         self.game = None
 
+        import_module('commands.global.Poll').poll_power.clear()
+
         # commands.ingame will not be loaded when the bot is first
         # started, so the initial transition might throw an error
         try:
@@ -37,6 +39,8 @@ class StateManager:
         self.state = State.ingame
         self.game = self.pregame.transition_to_game()
         self.pregame = None
+
+        import_module('commands.global.Poll').poll_power.clear()
 
         globvars.client.unload_extension('commands.pregame')
         globvars.client.load_extension('commands.ingame')

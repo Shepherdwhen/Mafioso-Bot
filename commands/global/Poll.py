@@ -1,4 +1,5 @@
 import random
+from functools import reduce
 import sqlite3
 
 import discord
@@ -6,7 +7,7 @@ from discord.ext import commands
 
 import globvars
 from mafia.State import State
-from mafia.util import check_if_is_host_or_admin
+from mafia.util import MemberConverter, check_if_is_host_or_admin
 
 NUMBER_EMOJIS = {
     1:  '1️⃣',
@@ -32,6 +33,7 @@ NUMBER_EMOJIS = {
 }
 
 active_polls: 'dict[int, tuple[discord.Message, str, dict[str, str]], bool]' = dict()
+poll_power: 'dict[discord.Member, int]' = dict()
 
 class Poll(commands.Cog):
 
@@ -198,7 +200,11 @@ class Poll(commands.Cog):
         i = 0
         for (option, emoji) in target_poll[2].items():
             i = i + 1
-            reactions = discord.utils.find(lambda r: str(r.emoji).strip() == emoji, message.reactions).count
+            members = await discord.utils.find(lambda r: str(r.emoji).strip() == emoji, message.reactions).users().flatten()
+
+            reactions = reduce(lambda count, user:
+                count + (poll_power[user] if user in poll_power else 1)
+            , members, 0)
 
             summary += f'{option} - {reactions - 1} vote{"s" if reactions - 2 else ""}\n' # Bot will add one vote to the actual numberd
 
@@ -209,4 +215,12 @@ class Poll(commands.Cog):
 
         await ctx.send(embed=embed)
         del active_polls[id]
+
+    @poll.command(
+        name="power"
+    )
+    @commands.check(check_if_is_host_or_admin)
+    async def poll_power(self, ctx, target: 'MemberConverter', power: 'int'):
+        poll_power[target] = power
+        await ctx.send(f'✅ Set **{target.display_name}**\'s voting power!')
 
