@@ -50,7 +50,7 @@ class Nick(commands.Cog):
                 'nick': None,
                 'id': target.id
             })
-        await ctx.send(f'✅ Cleared your emoji!')
+        await ctx.send(f'✅ Cleared **{target.display_name}**\'s nickname!')
         try:
             await target.edit(nick=None)
         except discord.Forbidden:

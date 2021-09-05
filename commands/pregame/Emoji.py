@@ -54,4 +54,4 @@ class Emoji(commands.Cog):
                 'emoji': None,
                 'id': ctx.author.id
             })
-        await ctx.send(f'✅ Cleared **{ctx.author.display_name}**\'s nickname!')
+        await ctx.send(f'✅ Cleared your emoji!')
