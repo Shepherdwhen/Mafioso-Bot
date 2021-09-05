@@ -11,8 +11,9 @@ class Nick(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(
-        name='nick'
+    @commands.group(
+        name='nick',
+        invoke_without_command = True
     )
     @commands.check(check_if_is_host_or_admin)
     async def nick(self, ctx, target: 'MemberConverter', *, nick: 'str'):
@@ -34,3 +35,24 @@ class Nick(commands.Cog):
             await target.edit(nick=nick.strip())
         except discord.Forbidden:
             pass
+
+    @nick.command(
+        name='clear'
+    )
+    @commands.check(check_if_is_host_or_admin)
+    async def nick_clear(self, ctx, target: 'MemberConverter'):
+        with sqlite3.connect('database.sqlite3') as connection:
+            connection.execute("""
+            UPDATE player_data
+                SET nick = :nick
+                WHERE user_id = :id
+            """, {
+                'nick': None,
+                'id': target.id
+            })
+        await ctx.send(f'✅ Cleared your emoji!')
+        try:
+            await target.edit(nick=None)
+        except discord.Forbidden:
+            pass
+

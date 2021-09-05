@@ -9,8 +9,9 @@ class Emoji(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(
-        name='emoji'
+    @commands.group(
+        name='emoji',
+        invoke_without_command=True
     )
     async def emoji(self, ctx, emoji: 'str'):
         emoji = emoji.strip()
@@ -39,3 +40,18 @@ class Emoji(commands.Cog):
             })
         
         await ctx.send('✅ Set your emoji!')
+
+    @emoji.command(
+        name='clear'
+    )
+    async def nick_clear(self, ctx):
+        with sqlite3.connect('database.sqlite3') as connection:
+            connection.execute("""
+            UPDATE player_data
+                SET emoji = :emoji
+                WHERE user_id = :id
+            """, {
+                'emoji': None,
+                'id': ctx.author.id
+            })
+        await ctx.send(f'✅ Cleared **{ctx.author.display_name}**\'s nickname!')
