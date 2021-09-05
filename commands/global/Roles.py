@@ -9,7 +9,10 @@ class Roles(commands.Cog):
         self.bot = bot
 
     @commands.command(
-        name='roles'
+        name='roles',
+        aliases=[
+            'r'
+        ]
     )
     async def roles(self, ctx, filter: 'str' = ''):
         filter = filter.lower()
