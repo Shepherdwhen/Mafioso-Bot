@@ -4,7 +4,7 @@ from discord.errors import NotFound
 
 import globvars
 from config import (ALIVE_ROLE_ID, DEAD_ROLE_ID, HOST_ROLE_ID,
-                    MAIN_CATEGORY_ID, SERVER_ID, SPECTATOR_ROLE_ID)
+                    MAIN_CATEGORY_ID, MOD_ROLE_ID, SERVER_ID, SPECTATOR_ROLE_ID)
 
 from .data import Role, channels
 from .errors import MafiaException, NoRoles
@@ -104,6 +104,8 @@ class Game:
 
         host_role = guild.get_role(HOST_ROLE_ID)
         spectator_role = guild.get_role(SPECTATOR_ROLE_ID)
+        mod_role = guild.get_role(MOD_ROLE_ID)
+        dead_role = guild.get_role(DEAD_ROLE_ID)
 
         async def create_individual_channel(channel, member):
             created_channel = await guild.create_text_channel(
@@ -112,6 +114,7 @@ class Game:
                 overwrites={
                     guild.default_role: PermissionOverwrite(read_messages=False),
                     spectator_role: PermissionOverwrite(read_messages=True, send_messages=False),
+                    dead_role: PermissionOverwrite(read_messages=True, send_messages=False),
 
                     # Dead players talking in their private channels isnt a big
                     # deal and it may be enforced by category inheritance anyways,
@@ -119,6 +122,7 @@ class Game:
 
                     guild.me: PermissionOverwrite(read_messages=True),
                     host_role: PermissionOverwrite(read_messages=True),
+                    mod_role: PermissionOverwrite(read_messages=True),
                     member: PermissionOverwrite(read_messages=True)
                 }
             )
