@@ -108,12 +108,12 @@ class MemberConverter(commands.MemberConverter):
                 emojis = [row[1] for row in data]
                 conflicting_emojis = [emoji for emoji in emojis if emojis.count(emoji) > 1]
 
-            argument = argument.strip()
+            argument = argument.strip().lower()
             id = emoji_to_id.get(argument, None)
 
             if not id:
                 # Look up by nickname
-                nick_to_id = {row[2]: row[0] for row in data}
+                nick_to_id = {row[2].lower(): row[0] for row in data}
 
                 if argument in nick_to_id:
                     id = nick_to_id[argument]
