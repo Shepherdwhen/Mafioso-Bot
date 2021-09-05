@@ -31,6 +31,6 @@ class Nick(commands.Cog):
             })
         await ctx.send(f'✅ Set **{target.display_name}**\'s nickname!')
         try:
-            target.edit(nick=nick.strip())
+            await target.edit(nick=nick.strip())
         except discord.Forbidden:
             pass
