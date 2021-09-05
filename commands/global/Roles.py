@@ -1,5 +1,3 @@
-import math
-
 from discord.ext import commands
 
 from mafia.data import roles
@@ -13,11 +11,16 @@ class Roles(commands.Cog):
     @commands.command(
         name='roles'
     )
-    async def roles(self, ctx):
+    async def roles(self, ctx, filter: 'str' = ''):
+        filter = filter.lower()
+
         messages = ["__Roles__:"]
 
         for role in roles.values():
-            messages.append(f"`{role['name']}` - {role['alignment']}")
+            if not filter \
+                or filter in role['power'].lower() \
+                or filter in role['alignment'].lower():
+                messages.append(f"`{role['name']}` - {role['alignment']}")
 
         message = ""
         for m in messages:
