@@ -18,7 +18,10 @@ class Init(commands.Cog):
     @commands.check(check_if_is_host_or_admin)
     async def init(self, ctx):
         await globvars.state_manager.game.start()
-        await ctx.send('✅ Initialized channels and roles!')
+        try:
+            await ctx.send('✅ Initialized channels and roles!')
+        except Exception:
+            pass
 
     @commands.command(
         name="cleanup",
@@ -30,7 +33,10 @@ class Init(commands.Cog):
     @commands.check(check_if_is_host_or_admin)
     async def cleanup(self, ctx):
         await globvars.state_manager.game.clean_up()
-        await ctx.send('✅ Removed channels and roles!')
+        try:
+            await ctx.send('✅ Removed channels and roles!')
+        except Exception:
+            pass
 
     @commands.command(
         name='reload',
