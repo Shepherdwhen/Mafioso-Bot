@@ -1275,7 +1275,8 @@
                 "mafia_strongman",
                 "mafia_consigliere",
                 "mafia_seer",
-                "mafia_stalker"
+                "mafia_stalker",
+                "double_agent"
             ]
         },
         "wolf": {
@@ -1298,7 +1299,8 @@
                 "shadow_wolf",
                 "cop_wolf",
                 "mystic_wolf",
-                "tracker_wolf"
+                "tracker_wolf",
+                "demon_wolf"
             ]
         },
         "monastery": {
