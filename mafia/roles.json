@@ -990,8 +990,8 @@
             "description": [
                 "The Serial Killer is part of a team with a self assigned basic factional kill for each Serial Killer, The Serial Killer has a permanent basic protection, any member of the Killer team can talk in the hideout privately, members of the Killer team can still be converted to the Cult. The Serial Killer wins if only Killers and Neutrals remain."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "sk"
             ]
@@ -1001,8 +1001,8 @@
             "description": [
                 "Every even night The Copycat Killer may basic attack one person, if all the Serial Killers are dead then the attack will become a strong attack, the Copycat Killer registers as Town in an alignment check, as a member of the Killer team the Copycat Killer has access to the hideout, members of the Killer team can still be converted to the Cult. The Serial Killer wins if only Killers and Neutrals remain."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "ck"
             ]
@@ -1012,8 +1012,8 @@
             "description": [
                 "The Arsonist is part of a team with a self assigned factional douse and ignite (Strong kill all doused players) for each Arsonist, the Arsonist has a permanent basic protection, any member of the Pyromaniac team can talk in the charred ruins privately, members of the Pyromaniac team can still be converted to the Cult. The Arsonist wins if only Pyromaniacs and Neutrals remain."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "arso"
             ]
@@ -1023,8 +1023,8 @@
             "description": [
                 "Every odd night The Fire-Raiser may visit a person and attempt to douse them, if the target is already doused they will instead be ignited, if all the Arsonists are dead then the Fire-Raiser can act every night, the Fire-Raiser registers as Town in an alignment check, as a member of the Pyromaniac team the Fire-Raiser has access to the charred ruins, members of the Pyromaniac team can still be converted to the Cult. The Fire-Raiser wins if only Pyromaniacs and Neutrals remain."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "fr"
             ]
@@ -1034,8 +1034,8 @@
             "description": [
                 "Every other night the Cult Leader may target a player and attempt to recruit them to the Cult and they become Cultist and are added to the sanctum, certain roles cannot be recruited (Stonemasons, Paranormal Investigators & Alarmists) and certain roles will convert but work against the cult (Demon Wolves & Double Agents), if the last Cult Leader dies then all Cultists suicide and the Cult loses. The Cult Leader wins when the Cult has more votes than other players and there are no external kills left."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Chaotic",
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic",
             "aliases": [
                 "cl"
             ]
@@ -1045,16 +1045,16 @@
             "description": [
                 "The Cultist isn’t a role the game begins with but comes from when a player is converted to the Cult, when a player becomes a Cultist they are added to the sanctum and can talk with other Cult members. The Cultist wins when the Cult has more votes than other players and there are no external kills left."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Chaotic"
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic"
         },
         "cult_atheist": {
             "name": "Cult Atheist",
             "description": [
                 "The Athiest registers as Town in an alignment check and will become the Cult Leader is the previous Cult Leader ever dies, as a member of the Cult the Athiest can speak to other Cult Members in the sanctum. The Athiest wins when the Cult has more votes than other players and there are no external kills left."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Chaotic",
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic",
             "aliases": [
                 "ca"
             ]
@@ -1064,8 +1064,8 @@
             "description": [
                 "The Plague Walker starts with an amount of visits equal to ⅛ of the starting players, each time the Plague Walker visits a player they will become infected with the plague, if an infected player visits or is visited by a player that player will then become infected, infected players are informed they are infected after three in game days, the Plague Walker has permanent basic protection and starts the game infected, all members of the Infection team can talk privately in the dead village. The Plague Walker wins if all alive players are infected."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Chaotic",
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic",
             "aliases": [
                 "pw"
             ]
@@ -1075,8 +1075,8 @@
             "description": [
                 "The Parasite may keep a targeted player at all times, if the Parasite is targeted by any action other than an attack by an infected player the the action will be redirected onto the Parasites targeted player, the Parasite starts the game infected, all members of the Infection team can talk privately in the dead village. The Parasite wins if all alive players are infected."
             ],
-            "alignment": "3rd Party Solo",
-            "power": "Chaotic",
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic",
             "aliases": [
                 "para"
             ]
@@ -1086,8 +1086,8 @@
             "description": [
                 "The Double Agent is a Traitor in the Mafia, once per game the Double Agent may perform a basic attack on one other player in the Mafia channel, you can also perform the Mafia factional kill, the Double Agent registers as Mafia and Killer in an alignment check and a Goon in a role check, the Double Agent also has a permanent strong protection. The Double Agent wins if only it and Neutrals remain. "
             ],
-            "alignment": "Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "da"
             ]
@@ -1097,8 +1097,8 @@
             "description": [
                 "The Demon Wolf is a Traitor in the Wolfpack, once per game the Demon Wolf may perform a basic attack on one other player in the Wolfpack channel, you can also perform the Wolfpack factional kill, the Demon Wolf registers as Wolf and Killer in an alignment check and a Wolf in a role check, the Demon Wolf also has a permanent strong protection. The Demon Wolf wins if only it and Neutrals remain. "
             ],
-            "alignment": "Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "dw"
             ]
@@ -1108,8 +1108,8 @@
             "description": [
                 "The Hell-Raiser is a Traitor in the Cult, once per game the Hell-Raiser may perform a basic attack on a cultist, you can perform a kill if all the Cult are dead, the Hell-Raiser registers as Cult and Killer in an alignment check and a Cultist in a role check, the Hell-Raiser also has a permanent strong protection and is immune to Cult Suicide. The Demon Wolf wins if only it and Neutrals remain. "
             ],
-            "alignment": "Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "hr",
                 "hell"
@@ -1131,8 +1131,8 @@
             "description": [
                 "The Jester may keep a target and update it each phase, when Lynched, similar to the Vengeful, the Jester will strong kill the target. The Jester wins when it is lynched."
             ],
-            "alignment": "Neutral 3rd",
-            "power": "Party",
+            "alignment": "3rd Party",
+            "power": "Neutral",
             "aliases": [
                 "jest"
             ]
@@ -1142,8 +1142,8 @@
             "description": [
                 "The Lyncher is given the name of a Town player (Target) at the beginning of the game, the Lyncher has a permanent basic protection, if the Target dies at night the Lyncher will become a Town Vanilla. The Lyncher wins and leaves the game if the Target is lynched and the Lyncher is still alive."
             ],
-            "alignment": "Neutral 3rd",
-            "power": "Party",
+            "alignment": "3rd Party",
+            "power": "Neutral",
             "aliases": [
                 "lyn",
                 "exe",
@@ -1155,8 +1155,8 @@
             "description": [
                 "The Nymphomaniac will start the game with a list of three arbitrarily picked players, the Nymphomanic must pick one of these players the first night, the Nymphomaniac will share a lover chat with that player, if one of the Lovers dies the other will suicide. The Nymphomaniac wins if them and their Lover live until the end of the game."
             ],
-            "alignment": "Neutral 3rd",
-            "power": "Party",
+            "alignment": "3rd Party",
+            "power": "Neutral",
             "aliases": [
                 "nym",
                 "cupid",
@@ -1168,8 +1168,8 @@
             "description": [
                 "Each night the Survivor must visit another player, if the Survivor is attacked they will not die, however if the player they visit is attacked so will the Survivor, the Survivor is not affected by any other forms of protection. The Survivor wins if they live to endgame."
             ],
-            "alignment": "Neutral 3rd",
-            "power": "Party",
+            "alignment": "3rd Party",
+            "power": "Neutral",
             "aliases": [
                 "surv"
             ]
@@ -1179,8 +1179,8 @@
             "description": [
                 "The Head Assassin is an alternate to the Serial Killer, except they speak in the brotherhood and win with the Assassin team."
             ],
-            "alignment": "Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "ha"
             ]
@@ -1190,8 +1190,8 @@
             "description": [
                 "The Assassin is an alternate to the Copycat Killer, except they speak in the brotherhood and win with the Assassin team."
             ],
-            "alignment": "Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "ass"
             ]
@@ -1201,8 +1201,8 @@
             "description": [
                 "The Frost Psycho is an alternate to the Arsonist, except they speak in the outpost and win with the Frostpunk team."
             ],
-            "alignment": "Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "fp"
             ]
@@ -1212,8 +1212,8 @@
             "description": [
                 "The Frost Delinquent is an alternate to the Fire-Raiser, except they speak in the outpost and win with the Frostpunk team."
             ],
-            "alignment": "Solo",
-            "power": "Killing",
+            "alignment": "3rd Party",
+            "power": "Solo Killing",
             "aliases": [
                 "fd"
             ]
@@ -1234,8 +1234,8 @@
             "description": [
                 "The Zombie is an alternate to the Cultist, except they speak in the crypt and win with the Zombie team."
             ],
-            "alignment": "Solo",
-            "power": "Chaotic",
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic",
             "aliases": [
                 "zom",
                 "zomb"
@@ -1246,8 +1246,8 @@
             "description": [
                 "The Zombie Knight is an alternate to the Cult Athiest, except they speak in the crypt and win with the Zombie team."
             ],
-            "alignment": "Solo",
-            "power": "Chaotic",
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic",
             "aliases": [
                 "zk"
             ]
