@@ -1120,8 +1120,8 @@
             "description": [
                 "The Amnesiac will passively take the role and alignment of the first player to die, if multiple people die in the same phase while the Amnesiac hasn’t taken a role the Amnesiac will take a one of them randomly. The Amnesiac wins with the new win condition."
             ],
-            "alignment": "Neutral 3rd",
-            "power": "Party",
+            "alignment": "3rd Party",
+            "power": "Neutral",
             "aliases": [
                 "amne"
             ]
