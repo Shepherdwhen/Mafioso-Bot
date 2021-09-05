@@ -21,8 +21,8 @@ class Roles(commands.Cog):
 
         for role in roles.values():
             if not filter \
-                or filter in role['power'].lower() \
-                or filter in role['alignment'].lower():
+                or role['power'].lower().startswith(filter) \
+                or role['alignment'].lower().startswith(filter):
                 messages.append(f"`{role['name']}` - {role['alignment']}")
 
         message = ""
