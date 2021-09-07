@@ -140,7 +140,7 @@
         "town_stump": {
             "name": "Town Stump",
             "description": [
-                "The Stump Will survive any attack on it; however the first time it is attacked it will lose its ability to vote and will no longer count towards parity. The Stump wins when all threats to the Town are dead."
+                "The Stump will survive any Death; however the first time it dies it will lose its ability to vote and will no longer count towards parity. The Stump wins when all threats to the Town are dead."
             ],
             "alignment": "Town",
             "power": "Unpowered",
