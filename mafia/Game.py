@@ -130,6 +130,11 @@ class Game:
             self.managed_channels.add(created_channel)
             self.player_to_private_channel[member] = created_channel
 
+            description = '\n'.join(self.roles[member]['description'])
+
+            msg = await created_channel.send(f"`{self.roles[member]['name']}`\n\n{description}")
+            await msg.pin()
+
         async def create_multi_channel(channel, members):
             dead_role = guild.get_role(DEAD_ROLE_ID)
 
