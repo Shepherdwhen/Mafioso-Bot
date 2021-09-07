@@ -113,7 +113,7 @@ class MemberConverter(commands.MemberConverter):
 
             if not id:
                 # Look up by nickname
-                nick_to_id = {row[2].lower(): row[0] for row in data}
+                nick_to_id = {row[2].lower(): row[0] for row in data if row[2]}
 
                 if argument in nick_to_id:
                     id = nick_to_id[argument]
