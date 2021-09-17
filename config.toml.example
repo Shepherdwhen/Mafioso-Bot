@@ -9,6 +9,7 @@ owner_id = 1234567890       # Id of the bot owner. Currently unused.
 server_id = 1234567890      # Id of the guild the bot is used in
 
 mod_role_id = 1234567890         # Mods: have access to host-restricted commands when hosting, can host
+admin_role_id = 1234567890       # Admins: have access to most bot commands, even if they are not hosting.
 host_role_id = 1234567890        # Hosts: role given to active hosts
 alive_role_id = 124567890        # Alive players: role given to players that are currently alive
 dead_role_id = 123456780         # Dead players: role given to players that are currently dead
