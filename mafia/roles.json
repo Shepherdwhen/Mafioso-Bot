@@ -1223,8 +1223,8 @@
             "description": [
                 "The Zombie Lord is an alternate to the Cult Leader, except they speak in the crypt and win with the Zombie team."
             ],
-            "alignment": "Solo",
-            "power": "Chaotic",
+            "alignment": "3rd Party",
+            "power": "Solo Chaotic",
             "aliases": [
                 "zl"
             ]
