@@ -144,7 +144,7 @@ class Game:
             overwrites[guild.me] = PermissionOverwrite(read_messages=True)
             overwrites[host_role] = PermissionOverwrite(read_messages=True)
             overwrites[dead_role] = PermissionOverwrite(send_messages=False)
-            overwrites[mod_role] = PermissionOverwrite(read_messages=True, send_messages=True),
+            overwrites[mod_role] = PermissionOverwrite(read_messages=True, send_messages=True)
 
             created_channel = await guild.create_text_channel(
                 name=channel['name'].format(
