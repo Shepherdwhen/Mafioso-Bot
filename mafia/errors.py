@@ -66,3 +66,8 @@ class CannotBackup(MafiaException):
     """Exception raised when a player that is already joined or
     hosting attempts to backup
     """
+
+class NotPrivateChannel(MafiaException):
+    """Exception raised when a private-channel restricted command 
+    is run outside of a private channel.
+    """

@@ -7,7 +7,8 @@ from discord.ext.commands.errors import (BadArgument, CommandError,
 
 import globvars
 from config import ADMIN_ROLE_ID, MOD_ROLE_ID, SERVER_ID
-from mafia.errors import CannotHost, NotAdmin, NotHost, NotPlayer
+from mafia.errors import (CannotHost, NotAdmin, NotHost, NotPlayer,
+                          NotPrivateChannel)
 from mafia.State import State
 
 from .data import roles
@@ -53,6 +54,12 @@ def check_if_is_player(ctx):
     if ctx.author not in globvars.state_manager.game.players:
         raise NotPlayer()
     return True
+
+def check_is_private_channel(ctx):
+    if ctx.channel not in globvars.state_manager.game.managed_channels:
+        raise NotPrivateChannel()
+    return True
+
 
 class RoleConverter(commands.Converter):
 

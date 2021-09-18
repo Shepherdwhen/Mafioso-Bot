@@ -1,6 +1,6 @@
 import random
-from functools import reduce
 import sqlite3
+from functools import reduce
 
 import discord
 from discord.ext import commands

@@ -7,6 +7,7 @@ import globvars
 from mafia.Game import Game
 from mafia.Pregame import Pregame
 
+
 class State(enum.Enum):
     ingame = 'ingame'
     pregame = 'pregame'

@@ -4,7 +4,8 @@ import discord
 from discord.ext import commands
 
 import globvars
-from mafia.util import PlayerConverter, check_if_is_host, check_if_is_player
+from mafia.util import (PlayerConverter, check_if_is_host, check_if_is_player,
+                        check_is_private_channel)
 
 whisper_ratelimit: 'dict[discord.Member, int]' = dict()
 max_whispers = math.inf
@@ -27,6 +28,7 @@ class Whisper(commands.Cog):
         name='send'
     )
     @commands.check(check_if_is_player)
+    @commands.check(check_is_private_channel)
     async def whisper_send(self, ctx, target: 'PlayerConverter', *, message: 'str'):
         if ctx.author not in whisper_ratelimit:
             whisper_ratelimit[ctx.author] = 0

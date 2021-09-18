@@ -4,7 +4,8 @@ from discord.errors import NotFound
 
 import globvars
 from config import (ALIVE_ROLE_ID, DEAD_ROLE_ID, HOST_ROLE_ID,
-                    MAIN_CATEGORY_ID, MOD_ROLE_ID, SERVER_ID, SPECTATOR_ROLE_ID)
+                    MAIN_CATEGORY_ID, MOD_ROLE_ID, SERVER_ID,
+                    SPECTATOR_ROLE_ID)
 
 from .data import Role, channels
 from .errors import MafiaException, NoRoles

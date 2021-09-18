@@ -7,7 +7,8 @@ from discord.ext.commands.errors import (BadArgument, CheckFailure,
 
 from mafia.errors import (AlreadyHost, AlreadyJoined, CannotBackup, CannotHost,
                           MafiaException, NoRoles, NotAdmin, NotHost,
-                          NotHosted, NotJoined, NotPlayer, PlayerCannotHost)
+                          NotHosted, NotJoined, NotPlayer, NotPrivateChannel,
+                          PlayerCannotHost)
 
 
 class on_command_error(commands.Cog):
@@ -42,6 +43,8 @@ class on_command_error(commands.Cog):
             return await ctx.send('⛔ This action requries a player!')
         elif isinstance(error, CannotBackup):
             return await ctx.send('⛔ That user cannot be a backup!')
+        elif isinstance(error, NotPrivateChannel):
+            return await ctx.send('⛔ This command can only be run in prirvate channels!')
         elif isinstance(error, CommandNotFound):
             return
         elif isinstance(error, CheckFailure):

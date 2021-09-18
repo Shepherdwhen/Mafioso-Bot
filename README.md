@@ -41,8 +41,7 @@ Because the `init` command also sends a DM to all players telling them their rol
 The `killq add <player> [...<player>]`, `killq remove <player> [...<player>]` and `killq exec` commands can be used to manage the kill queue. `killq` alone will list the current kill queue.  
 As well as these commands, the `kill <player> [...<player>]` and `revive <player> [...<player>]` commands can be used to instantly kill and revive players.
 
-The `whisper send <player> <message>` command can be used to send an anonymous message to another player. Hosts can limit the maximum whispers per day with the `whisper setmax <max>` command. Since the bot does not include phase management, hosts must manually reset the counter with `whisper clear` every day.  
-Similarly to `role list`, the `whisper send` command should not be executed in a public channel where other players may see the message.
+The `whisper send <player> <message>` command can be used to send an anonymous message to another player. Hosts can limit the maximum whispers per day with the `whisper setmax <max>` command. Since the bot does not include phase management, hosts must manually reset the counter with `whisper clear` every day.
 
 The `backup <player> <backup>` command can be used to swap `<player>` with `<backup>` if need be. There are however resitrictions on `<backup>`:
 - `<backup>` cannot have spectated at any point during this game
