@@ -73,13 +73,14 @@ class Backup(commands.Cog):
             await channel.set_permissions(target, overwrite=None)
         await channel.set_permissions(swap, overwrite=PermissionOverwrite(read_messages=True))
 
-        game.player_to_multi_channels[swap] = game.player_to_multi_channels[target]
-        del game.player_to_multi_channels[target]
+        if target in game.player_to_multi_channels:
+            game.player_to_multi_channels[swap] = game.player_to_multi_channels[target]
+            del game.player_to_multi_channels[target]
 
-        for channel in game.player_to_multi_channels[swap]:
-            if fetched_target:
-                await channel.set_permissions(target, overwrite=None)
-            await channel.set_permissions(swap, overwrite=PermissionOverwrite(read_messages=True))
+            for channel in game.player_to_multi_channels[swap]:
+                if fetched_target:
+                    await channel.set_permissions(target, overwrite=None)
+                await channel.set_permissions(swap, overwrite=PermissionOverwrite(read_messages=True))
 
         # Prevent player from acting as backup
         game.cannot_backup.add(target)
