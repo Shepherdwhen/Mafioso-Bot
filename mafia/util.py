@@ -151,7 +151,13 @@ class MemberConverter(commands.MemberConverter):
 class PlayerConverter(MemberConverter):
 
     async def convert(self, ctx, argument: 'str'):
-        result = await super().convert(ctx, argument)
+        try:
+            result = await super().convert(ctx, argument)
+        except MemberNotFound:
+            # Member might have left, loop through all joined players and see if they are there:
+            for player in globvars.state_manager.game.players:
+                if player.name == argument:
+                    return player
 
         if result not in globvars.state_manager.game.players:
             raise NotPlayer()

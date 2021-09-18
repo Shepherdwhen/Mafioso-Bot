@@ -28,7 +28,9 @@ class Backup(commands.Cog):
             raise CannotBackup()
 
         game = globvars.state_manager.game
-        guild = globvars.client.get_guild(SERVER_ID)
+        guild = globvars.client.get_guild(SERVER_ID):
+
+        fetched_target = guild.get_member(target.id)
 
         # Swap player state
 
@@ -36,7 +38,8 @@ class Backup(commands.Cog):
             alive_role = guild.get_role(ALIVE_ROLE_ID)
 
             game.alive_players.remove(target)
-            await target.remove_roles(alive_role)
+            if fetched_target:
+                await target.remove_roles(alive_role)
             
             game.alive_players.add(swap)
             await swap.add_roles(alive_role)
@@ -44,7 +47,8 @@ class Backup(commands.Cog):
             dead_role = guild.get_role(DEAD_ROLE_ID)
 
             game.dead_players.remove(target)
-            await target.remove_roles(dead_role)
+            if fetched_target:
+                await target.remove_roles(dead_role)
             
             game.dead_players.add(swap)
             await swap.add_roles(dead_role)
@@ -64,14 +68,17 @@ class Backup(commands.Cog):
 
         channel = game.player_to_private_channel[swap]
 
-        await channel.set_permissions(target, overwrite=None)
+
+        if fetched_target:
+            await channel.set_permissions(target, overwrite=None)
         await channel.set_permissions(swap, overwrite=PermissionOverwrite(read_messages=True))
 
         game.player_to_multi_channels[swap] = game.player_to_multi_channels[target]
         del game.player_to_multi_channels[target]
 
         for channel in game.player_to_multi_channels[swap]:
-            await channel.set_permissions(target, overwrite=None)
+            if fetched_target:
+                await channel.set_permissions(target, overwrite=None)
             await channel.set_permissions(swap, overwrite=PermissionOverwrite(read_messages=True))
 
         # Prevent player from acting as backup
