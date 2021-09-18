@@ -127,7 +127,7 @@ class MemberConverter(commands.MemberConverter):
                             found = nick
                     
                     if found:
-                        id = nick[found]
+                        id = nick_to_id[found]
 
             if id:
                 member = await globvars.client.get_guild(SERVER_ID).fetch_member(id)
