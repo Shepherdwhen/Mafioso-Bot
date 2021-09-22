@@ -106,7 +106,7 @@ class Pregame:
                 VALUES (:key, :value)
             """, {
                 'key': 'pregame.queue',
-                'value': ','.join([str(member.id) for member in self.hosts])
+                'value': ','.join([str(member.id) for member in self.queue])
             })
 
     def unregister_player(self, player: 'discord.Member'):
@@ -126,7 +126,7 @@ class Pregame:
                 VALUES (:key, :value)
             """, {
                 'key': 'pregame.queue',
-                'value': ','.join([str(member.id) for member in self.hosts])
+                'value': ','.join([str(member.id) for member in self.queue])
             })
 
     def transition_to_game(self):
