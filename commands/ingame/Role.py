@@ -30,6 +30,8 @@ class Role(commands.Cog):
         globvars.state_manager.game.roles[target] = role
         await ctx.send(f'✅ Set **{target.display_name}**\'s role!')
 
+        globvars.state_manager.game._push_to_db()
+
     @role.command(
         name='list'
     )

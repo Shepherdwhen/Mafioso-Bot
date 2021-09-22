@@ -57,6 +57,8 @@ Current Kill queue:
                 current_killqueue.add(target)
                 await ctx.send(f'✅ **{target.display_name}** added to the kill queue!')
 
+                globvars.state_manager.game._push_to_db()
+
     @killqueue.command(
         name='remove',
         aliases=[
@@ -74,6 +76,8 @@ Current Kill queue:
             else:
                 current_killqueue.remove(target)
                 await ctx.send(f'✅ **{target.display_name}** removed from the kill queue!')
+
+                globvars.state_manager.game._push_to_db()
 
     @killqueue.command(
         name='exec',
@@ -104,6 +108,8 @@ Current Kill queue:
 
         await ctx.send(f'✅ Kill queue executed')
 
+        globvars.state_manager.game._push_to_db()
+
     @killqueue.command(
         name='clear',
         aliases=[
@@ -113,6 +119,8 @@ Current Kill queue:
     async def killqueue_clear(self, ctx):
         globvars.state_manager.game.kill_queue.clear()
         await ctx.send('✅ Cleared kill queue!')
+
+        globvars.state_manager.game._push_to_db()
 
     @commands.command(
         name='kill'
@@ -137,6 +145,8 @@ Current Kill queue:
                 globvars.state_manager.game.dead_players.add(player)
 
         await ctx.send(f'✅ Killed player{"s" if len(targets) != 1 else ""}!')
+
+        globvars.state_manager.game._push_to_db()
 
     @commands.command(
         name='revive',
@@ -164,3 +174,5 @@ Current Kill queue:
                 globvars.state_manager.game.dead_players.remove(player)
 
         await ctx.send(f'✅ Revived player{"s" if len(targets) != 1 else ""}!')
+
+        globvars.state_manager.game._push_to_db()

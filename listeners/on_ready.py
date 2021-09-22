@@ -23,4 +23,22 @@ class on_ready(commands.Cog):
             )
             """)
 
-        state_manager.init_pregame()
+            connection.execute("""
+            CREATE TABLE IF NOT EXISTS data (
+                key   TEXT PRIMARY KEY NOT NULL,
+                value TEXT
+            )
+            """)
+
+            res = connection.execute("""
+            SELECT key, value FROM data
+            """)
+
+            data = {key: value for (key, value) in res}
+
+        state = data.get('state', 'pregame')
+
+        if state == 'pregame':
+            state_manager.init_pregame()
+        else:
+            state_manager.init_game()

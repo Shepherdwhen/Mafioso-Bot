@@ -1,3 +1,5 @@
+import asyncio
+import sqlite3
 import discord
 from discord import PermissionOverwrite
 from discord.errors import NotFound
@@ -7,7 +9,7 @@ from config import (ALIVE_ROLE_ID, DEAD_ROLE_ID, HOST_ROLE_ID,
                     MAIN_CATEGORY_ID, MOD_ROLE_ID, SERVER_ID,
                     SPECTATOR_ROLE_ID)
 
-from .data import Role, channels
+from .data import Role, channels, roles
 from .errors import MafiaException, NoRoles
 
 
@@ -35,6 +37,147 @@ class Game:
         # Also contains players who left the game after a back up
         self.cannot_backup: 'set[discord.Member]' = set()
 
+        asyncio.create_task(self._init_from_db())
+
+    async def _init_from_db(self):
+        with sqlite3.connect('database.sqlite3') as connection:
+            res = connection.execute("""
+            SELECT key, value FROM data
+            """)
+
+            data = {key: value for (key, value) in res}
+
+        guild = globvars.client.get_guild(SERVER_ID)
+
+        for id in data.get('game.hosts', '').split(','):
+            if id:
+                self.hosts.add(await guild.fetch_member(id))
+
+        for id in data.get('game.alive_players', '').split(','):
+            if id:
+                self.alive_players.add(await guild.fetch_member(id))
+
+        for id in data.get('game.dead_players', '').split(','):
+            if id:
+                self.dead_players.add(await guild.fetch_member(id))
+
+        for (id, role) in map(lambda s: s.split(':'), data.get('game.roles', ':').split(',')):
+            if id:
+                self.roles[await guild.fetch_member(id)] = roles[role]
+
+        for id in data.get('game.kill_queue', '').split(','):
+            if id:
+                self.kill_queue.add(await guild.fetch_member(id))
+
+        for (member_id, channel_id) in map(lambda s: s.split(':'), data.get('game.private_channels', ':').split(',')):
+            if member_id:
+                self.player_to_private_channel[await guild.fetch_member(member_id)] = await globvars.client.fetch_channel(channel_id)
+
+        for ch_data in data.get('game.multi_channels', '').split(','):
+            member_split = ch_data.split(':')
+            member_id = member_split[0]
+
+            if member_id:
+                channel_ids = member_split[1].split(';')
+
+                channels = [await globvars.client.fetch_channel(channel_id) for channel_id in channel_ids]
+                self.player_to_multi_channels[await guild.fetch_member(member_id)] = set(channels)
+        
+        for channel in self.player_to_private_channel.values():
+            self.managed_channels.add(channel)
+        for channels in self.player_to_multi_channels.values():
+            for channel in channels:
+                self.managed_channels.add(channel)
+
+        for id in data.get('game.cannot_backup', '').split(','):
+            if id:
+                self.cannot_backup.add(await guild.fetch_member(id))
+
+        self._push_to_db()
+
+    def _push_to_db(self):
+        with sqlite3.connect('database.sqlite3') as connection:
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.hosts',
+                'value': ','.join([str(m.id) for m in self.hosts])
+            })
+
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.alive_players',
+                'value': ','.join([str(m.id) for m in self.alive_players])
+            })
+
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.dead_players',
+                'value': ','.join([str(m.id) for m in self.dead_players])
+            })
+
+            roles_as_id = {str(m.id): self.roles[m]['id'] for m in self.roles}
+            roles_string = [f"{m}:{roles_as_id[m]}" for m in roles_as_id]
+
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.roles',
+                'value': ','.join(roles_string)
+            })
+
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.kill_queue',
+                'value': ','.join([str(m.id) for m in self.kill_queue])
+            })
+
+            private_channels_as_id = {m.id: self.player_to_private_channel[m].id for m in self.player_to_private_channel}
+            private_channels_string = [f"{m}:{private_channels_as_id[m]}" for m in private_channels_as_id]
+
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.private_channels',
+                'value': ','.join(private_channels_string)
+            })
+
+            multi_channels_as_id = {m.id: [str(c.id) for c in self.player_to_multi_channels[m]] for m in self.player_to_multi_channels}
+            multi_channels_string = [f"{m}:{';'.join(multi_channels_as_id[m])}" for m in multi_channels_as_id]
+
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.multi_channels',
+                'value': ','.join(multi_channels_string)
+            })
+
+            connection.execute("""
+            INSERT OR REPLACE
+                INTO data (key, value)
+                VALUES (:key, :value)
+            """, {
+                'key': 'game.cannot_backup',
+                'value': ','.join([str(m.id) for m in self.cannot_backup])
+            })
+
     @property
     def players(self) -> 'set[discord.Member]':
         return self.alive_players | self.dead_players
@@ -58,6 +201,8 @@ class Game:
         await self.create_channels()
         await self.send_role_messages()
 
+        self._push_to_db()
+
     async def clean_up(self):
         for channel in self.managed_channels.copy():
             try:
@@ -78,6 +223,8 @@ class Game:
         dead_role = guild.get_role(DEAD_ROLE_ID)
         for player in self.players:
             await player.remove_roles(alive_role, dead_role)
+        
+        self._push_to_db()
 
     async def give_init_roles(self):
         """Give the initial roles to the players on game start
@@ -183,6 +330,8 @@ class Game:
             await create_individual_channel({
                 'name': self.roles[player]['name']
             }, player)
+
+        self._push_to_db()
 
     async def send_role_messages(self):
         for player in self.players:

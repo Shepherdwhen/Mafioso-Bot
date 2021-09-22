@@ -28,7 +28,7 @@ class Backup(commands.Cog):
             raise CannotBackup()
 
         game = globvars.state_manager.game
-        guild = globvars.client.get_guild(SERVER_ID):
+        guild = globvars.client.get_guild(SERVER_ID)
 
         fetched_target = guild.get_member(target.id)
 
@@ -86,3 +86,5 @@ class Backup(commands.Cog):
         game.cannot_backup.add(target)
 
         await ctx.send(f'✅ Swapped **{target.display_name}** with **{swap.display_name}**')
+
+        game._push_to_db()
