@@ -30,6 +30,9 @@ class Whisper(commands.Cog):
     @commands.check(check_if_is_player)
     @commands.check(check_is_private_channel)
     async def whisper_send(self, ctx, target: 'PlayerConverter', *, message: 'str'):
+        if target.id == ctx.author.id:
+            return await ctx.send('⛔ You cannot whisper yourself!')
+
         if ctx.author not in whisper_ratelimit:
             whisper_ratelimit[ctx.author] = 0
         whisper_ratelimit[ctx.author] += 1
