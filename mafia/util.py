@@ -158,6 +158,7 @@ class PlayerConverter(MemberConverter):
             for player in globvars.state_manager.game.players:
                 if player.name == argument:
                     return player
+            raise
 
         if result not in globvars.state_manager.game.players:
             raise NotPlayer()
