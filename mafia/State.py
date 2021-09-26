@@ -2,7 +2,7 @@ import enum
 import sqlite3
 from importlib import import_module
 
-from discord.ext.commands.errors import ExtensionNotLoaded
+from discord.ext.commands.errors import ExtensionAlreadyLoaded, ExtensionNotLoaded
 
 import globvars
 from mafia.Game import Game
@@ -48,7 +48,10 @@ class StateManager:
         except ExtensionNotLoaded:
             pass
 
-        globvars.client.load_extension('commands.pregame')
+        try:
+            globvars.client.load_extension('commands.pregame')
+        except ExtensionAlreadyLoaded:
+            pass
 
     def init_game(self):
         self.state = State.ingame
@@ -78,4 +81,7 @@ class StateManager:
         except ExtensionNotLoaded:
             pass
 
-        globvars.client.load_extension('commands.ingame')
+        try:
+            globvars.client.load_extension('commands.ingame')
+        except ExtensionAlreadyLoaded:
+            pass
