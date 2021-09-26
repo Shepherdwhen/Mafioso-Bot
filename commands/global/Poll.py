@@ -1,4 +1,6 @@
+import asyncio
 import random
+import re
 import sqlite3
 from functools import reduce
 
@@ -6,6 +8,7 @@ import discord
 from discord.ext import commands
 
 import globvars
+from config import SERVER_ID
 from mafia.State import State
 from mafia.util import MemberConverter, check_if_is_host_or_admin
 
@@ -35,6 +38,97 @@ NUMBER_EMOJIS = {
 active_polls: 'dict[int, tuple[discord.Message, str, dict[str, str]], bool]' = dict()
 poll_power: 'dict[discord.Member, int]' = dict()
 
+async def sync_db():
+    with sqlite3.connect('database.sqlite3') as connection:
+
+        guild = globvars.client.get_guild(SERVER_ID)
+
+        # Pull from DB
+        res = connection.execute("""
+        SELECT
+            id, channel_id, message_id, prompt, options_map, restrict_dead
+            FROM polls
+        """).fetchall()
+
+        for row in res:
+            options_map = {}
+            for opt in re.split(r"(?<!\\),", row[4]):
+                opt_split = re.split(r"(?<!\\):", opt)
+                options_map[opt_split[0].replace('\\,', ',').replace('\\:', ':')] = opt_split[1].replace('\\,', ',').replace('\\:', ':')
+
+            message = await guild.get_channel(row[1]).fetch_message(row[2])
+
+            active_polls[int(row[0])] = (
+                message,
+                row[3],
+                options_map,
+                row[5]
+            )
+
+        res = connection.execute("""
+            SELECT
+                id, power
+                FROM poll_power
+        """).fetchall()
+
+        for (id, power) in res:
+            member = await guild.fetch_member(id)
+            poll_power[member] = power
+
+        connection.execute("""
+        DELETE FROM polls
+        """)
+
+        connection.execute("""
+        DELETE FROM poll_power
+        """)
+
+        # Push to DB
+
+        for id in active_polls:
+            poll = active_polls[id]
+            message = poll[0]
+
+            channel_id = message.channel.id
+            message_id = message.id
+
+            prompt = poll[1]
+
+            options_list = []
+            options = poll[2]
+
+            for key in options:
+                rep_key = key.replace(',', '\\,').replace(':', '\\:')
+                rep_opt = options[key].replace(',', '\\,').replace(':', '\\:')
+                options_list.append(f"{rep_key}:{rep_opt}")
+
+            options_map = ','.join(options_list)
+
+            restrict_dead = poll[3]
+
+            connection.execute("""
+            INSERT
+                INTO polls(id, channel_id, message_id, prompt, options_map, restrict_dead)
+                VALUES (:poll_id, :channel_id, :message_id, :prompt, :options_map, :restrict_dead)
+            """, {
+                "poll_id": id,
+                "channel_id": channel_id,
+                "message_id": message_id,
+                "prompt": prompt,
+                "options_map": options_map,
+                "restrict_dead": 1 if restrict_dead else 0
+            })
+
+        for member in poll_power:
+            connection.execute("""
+            INSERT
+                INTO poll_power(id, power)
+                VALUES (:id, :power)
+            """, {
+                'id': member.id,
+                'power': poll_power[member]
+            })
+
 class Poll(commands.Cog):
 
     def __init__(self, bot):
@@ -59,6 +153,8 @@ class Poll(commands.Cog):
                         async for m in r.users():
                             if m.id == member.id:
                                 await reaction.message.remove_reaction(r, member)
+
+        asyncio.get_event_loop().create_task(sync_db())
 
     @commands.group(
         name='poll'
@@ -104,6 +200,8 @@ class Poll(commands.Cog):
         for i in range(1, len(options) + 1):
             await msg.add_reaction(NUMBER_EMOJIS[i])
 
+        asyncio.create_task(sync_db())
+
     @poll.command(
         name='ask'
     )
@@ -125,6 +223,8 @@ class Poll(commands.Cog):
 
         await msg.add_reaction('👍')
         await msg.add_reaction('👎')
+
+        asyncio.create_task(sync_db())
 
     @poll.command(
         name='alive'
@@ -182,6 +282,8 @@ class Poll(commands.Cog):
         for emoji in emojis:
             await msg.add_reaction(emoji)
 
+        asyncio.create_task(sync_db())
+
     @poll.command(
         name='end',
         aliases=[
@@ -215,6 +317,15 @@ class Poll(commands.Cog):
 
         await ctx.send(embed=embed)
         del active_polls[id]
+
+        # Manually delete from DB as syncing DB will just re-pull poll
+        with sqlite3.connect("database.sqlite3") as connection:
+            connection.execute("""
+            DELETE FROM polls
+                WHERE id = :id
+            """, {
+                'id': id
+            })
 
     @poll.command(
         name="power"

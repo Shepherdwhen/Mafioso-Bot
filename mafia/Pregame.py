@@ -1,14 +1,14 @@
 import asyncio
 import sqlite3
+
 import discord
 
 import globvars
-
+from config import SERVER_ID
 from mafia.Game import Game
 
 from .errors import (AlreadyHost, AlreadyJoined, NotHost, NotHosted, NotJoined,
                      PlayerCannotHost)
-from config import SERVER_ID
 
 
 class Pregame:

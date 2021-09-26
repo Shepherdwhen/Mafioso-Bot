@@ -2,6 +2,8 @@ import sqlite3
 
 from discord.ext import commands
 
+import globvars
+
 
 class on_ready(commands.Cog):
 
@@ -30,6 +32,24 @@ class on_ready(commands.Cog):
             )
             """)
 
+            connection.execute("""
+            CREATE TABLE IF NOT EXISTS polls (
+                id            TEXT    PRIMARY KEY NOT NULL,
+                channel_id    INTEGER             NOT NULL,
+                message_id    INTEGER             NOT NULL,
+                prompt        TEXT                NOT NULL,
+                options_map   TEXT                NOT NULL,
+                restrict_dead INTEGER             NOT NULL
+            )
+            """)
+
+            connection.execute("""
+            CREATE TABLE IF NOT EXISTS poll_power (
+                id    INTEGER PRIMARY KEY NOT NULL,
+                power INTEGER             NOT NULL
+            )
+            """)
+
             res = connection.execute("""
             SELECT key, value FROM data
             """)
@@ -42,3 +62,5 @@ class on_ready(commands.Cog):
             state_manager.init_pregame()
         else:
             state_manager.init_game()
+        
+        globvars.client.load_extension('commands.global')

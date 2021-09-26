@@ -1,6 +1,6 @@
 import enum
-from importlib import import_module
 import sqlite3
+from importlib import import_module
 
 from discord.ext.commands.errors import ExtensionNotLoaded
 
