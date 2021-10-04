@@ -5,6 +5,7 @@ from .Poll import Poll
 from .Promote import Promote
 from .Roles import Roles
 from .Spectate import Spectate
+from .ChannelVis import ChannelVis
 
 
 def setup(bot):
@@ -15,3 +16,4 @@ def setup(bot):
     bot.add_cog(Nick(bot))
     bot.add_cog(Promote(bot))
     bot.add_cog(Roles(bot))
+    bot.add_cog(ChannelVis(bot))

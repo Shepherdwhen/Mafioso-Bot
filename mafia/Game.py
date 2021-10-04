@@ -262,8 +262,8 @@ class Game:
                 category=target_category,
                 overwrites={
                     guild.default_role: PermissionOverwrite(read_messages=False),
-                    spectator_role: PermissionOverwrite(read_messages=True, send_messages=False),
-                    dead_role: PermissionOverwrite(read_messages=True, send_messages=False),
+                    spectator_role: PermissionOverwrite(read_messages=globvars.private_channel_vis, send_messages=False),
+                    dead_role: PermissionOverwrite(read_messages=globvars.private_channel_vis, send_messages=False),
 
                     # Dead players talking in their private channels isnt a big
                     # deal and it may be enforced by category inheritance anyways,
@@ -289,10 +289,10 @@ class Game:
 
             overwrites = {member: PermissionOverwrite(read_messages=True) for member in members}
             overwrites[guild.default_role] = PermissionOverwrite(read_messages=False)
-            overwrites[spectator_role] =  PermissionOverwrite(read_messages=True, send_messages=False)
+            overwrites[spectator_role] =  PermissionOverwrite(read_messages=globvars.private_channel_vis, send_messages=False)
             overwrites[guild.me] = PermissionOverwrite(read_messages=True)
             overwrites[host_role] = PermissionOverwrite(read_messages=True)
-            overwrites[dead_role] = PermissionOverwrite(read_messages=True, send_messages=False)
+            overwrites[dead_role] = PermissionOverwrite(read_messages=globvars.private_channel_vis, send_messages=False)
             overwrites[mod_role] = PermissionOverwrite(read_messages=True, send_messages=True)
 
             created_channel = await guild.create_text_channel(

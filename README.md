@@ -70,6 +70,8 @@ Admins and moderators can use the `promote` and `demote` commands to switch betw
 
 The `spectate` command can be used by any non-joined player or host to spectate a game. Spectators can see all game channels but cannot send messages, and as such are not legible to be backups. Use `unspectate` to stop spectating.
 
+Hosts can use the `channelvis` command to hide or show private and/or group channels from spectators and dead players. Use `channelvis true` to show channels and `channelvis false` to hide them.
+
 ### Command quick reference
 
 Pregame :
@@ -105,3 +107,4 @@ Global :
 - `poll power <player> <power>` (host / admin) : Set the voting power of a player.
 - `promote`/`demote` (admin, mod) : Switch between ingame and active admin and mod roles.
 - `spectate`/`unspectate` : Become a spectator or stop being a spectator.
+- `channelvis <visibility>` (host) : Configure private and group channel visibility.
