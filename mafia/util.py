@@ -15,39 +15,43 @@ from .data import roles
 
 
 def check_if_is_host(ctx):
-    if globvars.state_manager.state == State.pregame:
-        if ctx.author in globvars.state_manager.pregame.hosts:
-            return True
-    else:
-        if ctx.author in globvars.state_manager.game.hosts:
-            return True
+    if ctx.guild:
+        if globvars.state_manager.state == State.pregame:
+            if ctx.author in globvars.state_manager.pregame.hosts:
+                return True
+        else:
+            if ctx.author in globvars.state_manager.game.hosts:
+                return True
     raise NotHost()
 
 def check_if_is_admin(ctx):
-    admin_role = globvars.client.get_guild(SERVER_ID).get_role(ADMIN_ROLE_ID)
+    if ctx.guild:
+        admin_role = globvars.client.get_guild(SERVER_ID).get_role(ADMIN_ROLE_ID)
 
-    if admin_role in ctx.author.roles:
-        return True
+        if admin_role in ctx.author.roles:
+            return True
     raise NotAdmin()
 
 def check_if_is_host_or_admin(ctx):
-    admin_role = globvars.client.get_guild(SERVER_ID).get_role(ADMIN_ROLE_ID)
+    if ctx.guild:
+        admin_role = globvars.client.get_guild(SERVER_ID).get_role(ADMIN_ROLE_ID)
 
-    if globvars.state_manager.state == State.pregame:
-        if ctx.author in globvars.state_manager.pregame.hosts:
+        if globvars.state_manager.state == State.pregame:
+            if ctx.author in globvars.state_manager.pregame.hosts:
+                return True
+        else:
+            if ctx.author in globvars.state_manager.game.hosts:
+                return True
+        if admin_role in ctx.author.roles:
             return True
-    else:
-        if ctx.author in globvars.state_manager.game.hosts:
-            return True
-    if admin_role in ctx.author.roles:
-        return True
     raise NotHost()
 
 def check_if_can_host(ctx):
-    mod_role = globvars.client.get_guild(SERVER_ID).get_role(MOD_ROLE_ID)
+    if ctx.guild:
+        mod_role = globvars.client.get_guild(SERVER_ID).get_role(MOD_ROLE_ID)
 
-    if mod_role in ctx.author.roles:
-        return True
+        if mod_role in ctx.author.roles:
+            return True
     raise CannotHost()
 
 def check_if_is_player(ctx):
