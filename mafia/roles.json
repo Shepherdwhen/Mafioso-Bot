@@ -118,7 +118,7 @@
         "town_oracle": {
             "name": "Town Oracle",
             "description": [
-                "The Oracle may choose a person each night and look into their crystal ball, if the oracle dies that night they will reveal the role of their last target, the Oracle is not affected by masks but is affected by redirections, if the Oracle is cleaned it will not reveal the role. The Oracle wins when all threats to the Town are dead."
+                "The Oracle may choose a person each night and look into their crystal ball, if the oracle dies that night they will reveal the role of their last target, the Oracle is affected by role masks and redirections, if the Oracle is cleaned it will not reveal the role. The Oracle wins when all threats to the Town are dead."
             ],
             "alignment": "Town",
             "power": "Unpowered",
@@ -274,7 +274,7 @@
         "town_mortician": {
             "name": "Town Mortician",
             "description": [
-                "Once per game the Mortician may choose a dead player during the day and learn the player that killed them, however not that player's role or alignment, the Mortician are not affected by any masks. The Mortician wins when all threats to the Town are dead."
+                "Once per game the Mortician may choose a dead player during the day and learn the player that killed them, however not that player's role or alignment, the Mortician is not affected by any masks. The Mortician wins when all threats to the Town are dead."
             ],
             "alignment": "Town",
             "power": "Investigative",
@@ -900,7 +900,7 @@
         "greedy_wolf": {
             "name": "Greedy Wolf",
             "description": [
-                "The Greedy Wolf targets a player each night, if they are an investigative role then they will be redirected to investigate the Greedy Wolf but think they are investigating their target, the Greedy Wolf is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Banker wins when all who oppose the Wolves are dead."
+                "The Greedy Wolf targets a player each night, if they are an investigative role then they will be redirected to investigate the Greedy Wolf but think they are investigating their target, the Greedy Wolf is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Greedy Wolf wins when all who oppose the Wolves are dead."
             ],
             "alignment": "Wolf",
             "power": "Powered",
@@ -977,7 +977,7 @@
         "mystic_wolf": {
             "name": "Mystic Wolf",
             "description": [
-                "Each night the Mystic may check a player and learn their role, but not their alignment (i.e would get the result archangel but not wolf or town), the Mystic is affected by all Role and Redirective masks, the Mystic is part of the Wolfpack and has access to the Wolfpackchannel and the factional kill. The Mystic wins when all who oppose the Wolves are dead."
+                "Each night the Mystic may check a player and learn their role, but not their alignment (i.e would get the result archangel but not wolf or town), the Mystic is affected by all Role and Redirective masks, the Mystic is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Mystic wins when all who oppose the Wolves are dead."
             ],
             "alignment": "Wolf",
             "power": "Investigative",
@@ -1054,7 +1054,7 @@
         "cult_leader": {
             "name": "Cult leader",
             "description": [
-                "Every other night the Cult Leader may target a player and attempt to recruit them to the Cult and they become Cultist and are added to the sanctum, certain roles cannot be recruited (Stonemasons, Paranormal Investigators & Alarmists) and certain roles will convert but work against the cult (Demon Wolves & Double Agents), if the last Cult Leader dies then all Cultists suicide and the Cult loses. The Cult Leader wins when the Cult has more votes than other players and there are no external kills left."
+                "Every night the Cult Leader may target a player, if the protected player is attacked they will die and be resurrected as a member of the Cult, the cult leader cannot target the same player two nights in a row, converted players become a Cultist and are added to the sanctum, certain roles cannot be recruited (Stonemasons, Paranormal Investigators & Alarmists) and certain roles will convert but work against the cult (Demon Wolves & Double Agents), if the last Cult Leader dies then all Cultists suicide and the Cult loses. The Cult Leader wins when the Cult has 2 more votes than other players."
             ],
             "alignment": "3rd Party",
             "power": "Solo Chaotic",
@@ -1065,7 +1065,7 @@
         "cultist": {
             "name": "Cultist",
             "description": [
-                "The Cultist isn’t a role the game begins with but comes from when a player is converted to the Cult, when a player becomes a Cultist they are added to the sanctum and can talk with other Cult members. The Cultist wins when the Cult has more votes than other players and there are no external kills left."
+                "The Cultist isn’t a role the game begins with but comes from when a player is converted to the Cult, when a player becomes a Cultist they are added to the sanctum and can talk with other Cult members. The Cultist wins when the Cult has 2 more votes than other players."
             ],
             "alignment": "3rd Party",
             "power": "Solo Chaotic"
@@ -1073,7 +1073,7 @@
         "cult_atheist": {
             "name": "Cult Atheist",
             "description": [
-                "The Athiest registers as Town in an alignment check and will become the Cult Leader is the previous Cult Leader ever dies, as a member of the Cult the Athiest can speak to other Cult Members in the sanctum. The Athiest wins when the Cult has more votes than other players and there are no external kills left."
+                "The Athiest registers as Town in an alignment check and will become the Cult Leader is the previous Cult Leader ever dies, as a member of the Cult the Athiest can speak to other Cult Members in the sanctum. The Cult Atheist wins when the Cult has 2 more votes than other players."
             ],
             "alignment": "3rd Party",
             "power": "Solo Chaotic",
