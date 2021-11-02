@@ -256,7 +256,7 @@ class Game:
         mod_role = guild.get_role(MOD_ROLE_ID)
         dead_role = guild.get_role(DEAD_ROLE_ID)
 
-        async def create_individual_channel(channel, member):
+        async def create_individual_channel(channel, member, *, send_description=True):
             created_channel = await guild.create_text_channel(
                 name=channel['name'],
                 category=target_category,
@@ -279,10 +279,11 @@ class Game:
             self.managed_channels.add(created_channel)
             self.player_to_private_channel[member] = created_channel
 
-            description = '\n'.join(self.roles[member]['description'])
+            if send_description:
+                description = '\n'.join(self.roles[member]['description'])
 
-            msg = await created_channel.send(f"`{self.roles[member]['name']}`\n\n{description}")
-            await msg.pin()
+                msg = await created_channel.send(f"`{self.roles[member]['name']}`\n\n{description}")
+                await msg.pin()
 
         async def create_multi_channel(channel, members):
             dead_role = guild.get_role(DEAD_ROLE_ID)
@@ -323,14 +324,24 @@ class Game:
 
                 if members:
                     await create_multi_channel(channel, members)
+            elif channel['type'] == 'single':
+                players = []
+                for player in self.players:
+                    if self.roles[player]['id'] in channel['members']:
+                        players.append(player)
+
+                for player in players:
+                    await create_individual_channel({
+                        'name': channel['name']
+                    }, player, send_description=False)
 
             else:
-                raise MafiaException(f"Channels must be of type 'multi', not {channel['type']!r}")
+                raise MafiaException(f"Channels must be of type 'multi' or 'single', not {channel['type']!r}")
 
         for player in self.players:
             await create_individual_channel({
                 'name': self.roles[player]['name']
-            }, player)
+            }, player, send_description=True)
 
         self._push_to_db()
 
