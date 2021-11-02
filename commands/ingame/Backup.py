@@ -58,8 +58,9 @@ class Backup(commands.Cog):
 
         # Swap roles
 
-        game.roles[swap] = game.roles[target]
-        del game.roles[target]
+        if swap in game.roles:
+            game.roles[swap] = game.roles[target]
+            del game.roles[target]
 
         # Swap channels
 
