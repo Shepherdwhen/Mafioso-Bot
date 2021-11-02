@@ -1,4 +1,5 @@
 import sqlite3
+from discord.errors import HTTPException
 
 from discord.ext import commands
 
@@ -92,12 +93,14 @@ Current Kill queue:
         dead_role = guild.get_role(DEAD_ROLE_ID)
 
         for player in globvars.state_manager.game.kill_queue:
-
-            if guild.get_member(player.id):
+            try:
+                await guild.fetch_member(player.id)
                 if alive_role in player.roles:
                     await player.remove_roles(alive_role)
                 if dead_role not in player.roles:
                     await player.add_roles(dead_role)
+            except HTTPException:
+                pass
 
             if player in globvars.state_manager.game.alive_players:
                 globvars.state_manager.game.alive_players.remove(player)
@@ -133,11 +136,15 @@ Current Kill queue:
         dead_role = guild.get_role(DEAD_ROLE_ID)
 
         for player in targets:
-            if guild.get_member(player.id):
+            try:
+                await guild.fetch_member(player.id)
+
                 if alive_role in player.roles:
                     await player.remove_roles(alive_role)
                 if dead_role not in player.roles:
                     await player.add_roles(dead_role)
+            except HTTPException:
+                pass
 
             if player in globvars.state_manager.game.alive_players:
                 globvars.state_manager.game.alive_players.remove(player)
@@ -162,11 +169,14 @@ Current Kill queue:
         dead_role = guild.get_role(DEAD_ROLE_ID)
 
         for player in targets:
-            if guild.get_member(player.id):
+            try:
+                await guild.fetch_member(player.id)
                 if alive_role not in player.roles:
                     await player.add_roles(alive_role)
                 if dead_role in player.roles:
                     await player.remove_roles(dead_role)
+            except HTTPException:
+                pass
 
             if player not in globvars.state_manager.game.alive_players:
                 globvars.state_manager.game.alive_players.add(player)
