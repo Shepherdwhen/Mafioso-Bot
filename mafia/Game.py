@@ -62,18 +62,24 @@ class Game:
             if id:
                 self.dead_players.add(await guild.fetch_member(id))
 
-        for (id, role) in map(lambda s: s.split(':'), data.get('game.roles', ':').split(',')):
-            if id:
-                self.roles[await guild.fetch_member(id)] = roles[role]
+        try:
+            for (id, role) in map(lambda s: s.split(':'), data.get('game.roles', ':').split(',')):
+                if id:
+                    self.roles[await guild.fetch_member(id)] = roles[role]
+        except ValueError:
+            pass
 
         for id in data.get('game.kill_queue', '').split(','):
             if id:
                 self.kill_queue.add(await guild.fetch_member(id))
 
-        for (member_id, channel_id) in map(lambda s: s.split(':'), data.get('game.private_channels', ':').split(',')):
-            if member_id:
-                self.player_to_private_channel[await guild.fetch_member(member_id)] = await globvars.client.fetch_channel(channel_id)
-
+        try:
+            for (member_id, channel_id) in map(lambda s: s.split(':'), data.get('game.private_channels', ':').split(',')):
+                if member_id:
+                    self.player_to_private_channel[await guild.fetch_member(member_id)] = await globvars.client.fetch_channel(channel_id)
+        except ValueError:
+            pass
+        
         for ch_data in data.get('game.multi_channels', '').split(','):
             member_split = ch_data.split(':')
             member_id = member_split[0]
@@ -83,6 +89,7 @@ class Game:
 
                 channels = [await globvars.client.fetch_channel(channel_id) for channel_id in channel_ids]
                 self.player_to_multi_channels[await guild.fetch_member(member_id)] = set(channels)
+
         
         for channel in self.player_to_private_channel.values():
             self.managed_channels.add(channel)
