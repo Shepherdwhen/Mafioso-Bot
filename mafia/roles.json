@@ -742,6 +742,17 @@
                 "mst"
             ]
         },
+        "mafia_taylor": {
+            "name": "Mafia Taylor",
+            "description": [
+                "The Taylor can target a player and choose a role, making the targeted player them register as the chosen role in a role check, the Taylor can't target the same person twice in a row, the Taylor is part of the Family and has access to the Mafia channel and the factional kill. The Taylor wins when all who oppose the Mafia are dead."
+            ],
+            "alignment": "Mafia",
+            "power": "Powered",
+            "aliases": [
+                "ty"
+            ]
+        },
         "alpha_wolf": {
             "name": "Alpha Wolf",
             "description": [
@@ -985,6 +996,17 @@
                 "tw"
             ]
         },
+        "tanner_wolf": {
+            "name": "Tanner Wolf",
+            "description": [
+                "The Tanner can target a player and choose a role, making the targeted player them register as the chosen role in a role check, the Tanner can't target the same person twice in a row, the Tanner is part of the Wolfpack and has access to the Wolfpack channel and the factional kill. The Tanner wins when all who oppose the Wolves are dead."
+            ],
+            "alignment": "Wolf",
+            "power": "Powered",
+            "aliases": [
+                "tan"
+            ]
+        },
         "serial_killer": {
             "name": "Serial Killer",
             "description": [
@@ -1103,6 +1125,7 @@
                 "dw"
             ]
         },
+        
         "hell-raiser": {
             "name": "Hell-Raiser",
             "description": [
