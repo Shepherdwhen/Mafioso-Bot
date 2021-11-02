@@ -23,6 +23,11 @@ class Channel(commands.Cog):
     async def channel_add(self, ctx, channel: 'TextChannelConverter', player: 'PlayerConverter'):
         if channel in globvars.state_manager.game.managed_channels:
             await channel.set_permissions(player, overwrite=PermissionOverwrite(read_messages=True))
+            
+            if player not in globvars.state_manager.game.player_to_multi_channels:
+                globvars.state_manager.game.player_to_multi_channels[player] = set()
+
+            globvars.state_manager.game.player_to_multi_channels[player].add(channel)
 
             await ctx.send(f'✅ Added **{player.display_name}** to channel!')
         else:
@@ -38,6 +43,14 @@ class Channel(commands.Cog):
     async def channel_remove(self, ctx, channel: TextChannelConverter, player: PlayerConverter):
         if channel in globvars.state_manager.game.managed_channels:
             await channel.set_permissions(player, overwrite=PermissionOverwrite(read_messages=False))
+
+            if player not in globvars.state_manager.game.player_to_multi_channels:
+                globvars.state_manager.game.player_to_multi_channels[player] = set()
+
+            try:
+                globvars.state_manager.game.player_to_multi_channels[player].remove(channel)
+            except KeyError:
+                pass
 
             await ctx.send(f'✅ Removed **{player.display_name}** from channel!')
         else:

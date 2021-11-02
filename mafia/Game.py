@@ -331,9 +331,9 @@ class Game:
                         players.append(player)
 
                 for player in players:
-                    await create_individual_channel({
+                    await create_multi_channel({
                         'name': channel['name']
-                    }, player, send_description=False)
+                    }, [player])
 
             else:
                 raise MafiaException(f"Channels must be of type 'multi' or 'single', not {channel['type']!r}")
