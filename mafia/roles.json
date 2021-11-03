@@ -1073,7 +1073,7 @@
         "cult_atheist": {
             "name": "Cult Atheist",
             "description": [
-                "The Athiest registers as Town in an alignment check and will become the Cult Leader is the previous Cult Leader ever dies, as a member of the Cult the Athiest can speak to other Cult Members in the sanctum. The Cult Atheist wins when the Cult has 2 more votes than other players."
+                "The Atheist registers as Town in an alignment check and will become the Cult Leader if the previous Cult Leader ever dies, as a member of the Cult the Atheist can speak to other Cult Members in the sanctum. The Atheist wins when the Cult has 2 more votes than other players."
             ],
             "alignment": "3rd Party",
             "power": "Solo Chaotic",
