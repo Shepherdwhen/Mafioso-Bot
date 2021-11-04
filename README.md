@@ -74,6 +74,8 @@ The `spectate` command can be used by any non-joined player or host to spectate 
 
 Hosts can use the `channelvis` command to hide or show private and/or group channels from spectators and dead players. Use `channelvis true` to show channels and `channelvis false` to hide them.
 
+Admins can use the `purge` command to wipe a channel of all non-bot messages.
+
 ### Command quick reference
 
 Pregame :
@@ -112,3 +114,4 @@ Global :
 - `promote`/`demote` (admin, mod) : Switch between ingame and active admin and mod roles.
 - `spectate`/`unspectate` : Become a spectator or stop being a spectator.
 - `channelvis <visibility>` (host) : Configure private and group channel visibility.
+- `purge` (admin) : Delete all non-bot messages in a channel.

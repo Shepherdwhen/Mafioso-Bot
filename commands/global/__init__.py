@@ -6,6 +6,7 @@ from .Promote import Promote
 from .Roles import Roles
 from .Spectate import Spectate
 from .ChannelVis import ChannelVis
+from .Clean import Clean
 
 
 def setup(bot):
@@ -17,3 +18,4 @@ def setup(bot):
     bot.add_cog(Promote(bot))
     bot.add_cog(Roles(bot))
     bot.add_cog(ChannelVis(bot))
+    bot.add_cog(Clean(bot))
